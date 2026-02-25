@@ -14,9 +14,14 @@ https://templatemo.com/tm-592-glossy-touch
 
 -->
     <style>
+        .logo {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
         .navbar-logo {
-            width: 55px;
-            height: 55px;
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
             object-fit: cover;
         }
@@ -38,10 +43,8 @@ https://templatemo.com/tm-592-glossy-touch
             <nav class="glass">
                 <div class="logo" onclick="showPage('home')">
                     <div class="logo-icon">
-                        <img src="images/astro-logo1.png" alt="Astro Cultivators Logo"> 
+                        <img src="images/astro-logo1.png" alt="Astro Cultivators Logo" class="navbar-logo"> 
                     </div>
-                    <span>Astro Cultivators</span>
-                </div>
                 <div class="nav-links">
                     <a href="#" onclick="showPage('home')" class="active">Home</a>
                     <a href="#" onclick="showPage('about')">About</a>
@@ -434,5 +437,6 @@ https://templatemo.com/tm-592-glossy-touch
 </body>
 
 </html>
+
 
 
