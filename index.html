@@ -14,18 +14,26 @@ https://templatemo.com/tm-592-glossy-touch
 
 -->
     <style>
-        .logo {
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-        }
-        .navbar-logo {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-    </style>
+.logo {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.logo-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar-logo {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+}
+</style>
 </head>
 <body>
     <div class="bg-shapes">
@@ -41,17 +49,19 @@ https://templatemo.com/tm-592-glossy-touch
     <header>
         <div class="container">
             <nav class="glass">
-                <div class="logo" onclick="showPage('home')">
-                    <div class="logo-icon">
-                        <img src="images/astro-logo1.png" alt="Astro Cultivators Logo" class="navbar-logo"> 
-                    </div>
-                <div class="nav-links">
-                    <a href="#" onclick="showPage('home')" class="active">Home</a>
-                    <a href="#" onclick="showPage('about')">About</a>
-                    <a href="#" onclick="showPage('services')">Services</a>
-                    <a href="#" onclick="showPage('contact')">Contact</a>
-                </div>
-            </nav>
+    <div class="logo" onclick="showPage('home')">
+        <div class="logo-icon">
+            <img src="images/astro-logo1.png" alt="Astro Cultivators Logo" class="navbar-logo">
+        </div>
+    </div>
+
+    <div class="nav-links">
+        <a href="#" onclick="showPage('home')" class="active">Home</a>
+        <a href="#" onclick="showPage('about')">About</a>
+        <a href="#" onclick="showPage('services')">Services</a>
+        <a href="#" onclick="showPage('contact')">Contact</a>
+    </div>
+</nav>
         </div>
     </header>
 
@@ -437,6 +447,7 @@ https://templatemo.com/tm-592-glossy-touch
 </body>
 
 </html>
+
 
 
 
