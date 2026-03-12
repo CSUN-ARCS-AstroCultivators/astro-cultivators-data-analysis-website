@@ -18,6 +18,9 @@ let currentPage = 'home';
             });
             
             currentPage = pageId;
+
+            // Update URL hash so refresh keeps you on the same page
+            window.location.hash = pageId;
             
             // Move footer to the active page
             const footer = document.getElementById('footer');
@@ -28,11 +31,22 @@ let currentPage = 'home';
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Initialize footer position
+        // Initialize: check hash to restore page on refresh
         window.addEventListener('DOMContentLoaded', () => {
-            const footer = document.getElementById('footer');
-            const homePage = document.getElementById('home');
-            homePage.appendChild(footer);
+            const hash = window.location.hash.replace('#', '');
+            const validPages = ['home', 'about', 'services', 'contact'];
+            const startPage = validPages.includes(hash) ? hash : 'home';
+
+            showPage(startPage);
+        });
+
+        // Handle browser back/forward buttons
+        window.addEventListener('hashchange', () => {
+            const hash = window.location.hash.replace('#', '');
+            const validPages = ['home', 'about', 'services', 'contact'];
+            if (validPages.includes(hash) && hash !== currentPage) {
+                showPage(hash);
+            }
         });
 
         // Add interactive parallax effect to background shapes
