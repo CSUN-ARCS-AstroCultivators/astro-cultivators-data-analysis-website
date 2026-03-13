@@ -120,8 +120,7 @@ body {
 }
 /* Only clickable boxes get hover effects */
 .feature-card.glass:hover,
-.service-card.glass:hover,
-.team-member.glass:hover {
+.service-card.glass:hover {
     background: rgba(255, 255, 255, 0.2);
     transform: translateY(-5px);
     box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15);
@@ -361,7 +360,7 @@ button[type="submit"] {
     transition: all 0.3s ease;
 }
 .team-member:hover {
-    transform: translateY(-10px);
+    transform: none;
 }
 .team-avatar {
     width: 120px;
@@ -378,9 +377,9 @@ button[type="submit"] {
     transition: all 0.3s ease;
 }
 .team-member:hover .team-avatar {
-    border-color: rgba(255, 255, 255, 0.5);
-    transform: scale(1.05);
-    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: none;
+    background: rgba(255, 255, 255, 0.2);
 }
 .team-member h3 {
     font-size: 1.4rem;
