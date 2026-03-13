@@ -727,3 +727,21 @@ button[type="submit"] {
         font-size: 22px;
     }
 }
+
+/* Mobile fixes for top bar and nav */
+@media (max-width: 768px) {
+    .csun-top-bar .container {
+        flex-direction: column;
+        text-align: center;
+        gap: 6px;
+    }
+    .csun-left {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .csun-social {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
+}
