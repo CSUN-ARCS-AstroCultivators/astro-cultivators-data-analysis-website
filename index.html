@@ -1,725 +1,590 @@
-@charset "utf-8";
-/*
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astro Cultivators Data Analysis Team</title>
+    <link rel="icon" type="image/png" href="images/icon.png">
+    
+    <link rel="stylesheet" href="templatemo-glossy-touch.css">
+<!--
 
 TemplateMo 592 glossy touch
 
 https://templatemo.com/tm-592-glossy-touch
 
-*/
+-->
+    <style>
+.logo {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    button[type="submit"] {
-        font-family: inherit;
-        font-size: 16px;
-    }
-}
-body {
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(
-        135deg,
-        #0c0c0c 0%,
-        #1a1a2e 15%,
-        #16213e 35%,
-        #0f3460 50%,
-        #533a7d 70%,
-        #8b5a8c 85%,
-        #a0616a 100%
-    );
-    min-height: 100vh;
-    overflow-x: hidden;
-}
-/* Animated background elements - soybean leaves */
-.bg-shapes {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
+.logo-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
+    border-radius: 50%;
 }
-.shape {
-    position: absolute;
-    background: rgba(255, 255, 255, 0.06);
-    animation: float 6s ease-in-out infinite;
-    box-shadow: 0 8px 32px rgba(255, 255, 255, 0.05);
-    border-radius: 80% 0 80% 0;
+
+.navbar-logo {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
 }
-.shape:nth-child(1) {
-    width: 60px;
-    height: 100px;
-    top: 20%;
-    left: 10%;
-    animation-delay: 0s;
-    transform: rotate(15deg);
-}
-.shape:nth-child(2) {
-    width: 45px;
-    height: 80px;
-    top: 60%;
-    right: 15%;
-    animation-delay: 2s;
-    transform: rotate(-20deg);
-}
-.shape:nth-child(3) {
-    width: 50px;
-    height: 90px;
-    bottom: 20%;
-    left: 20%;
-    animation-delay: 4s;
-    transform: rotate(25deg);
-}
-.shape:nth-child(4) {
-    width: 40px;
-    height: 70px;
-    top: 10%;
-    right: 30%;
-    animation-delay: 1s;
-    transform: rotate(-10deg);
-}
-.shape:nth-child(5) {
-    width: 55px;
-    height: 95px;
-    bottom: 40%;
-    right: 20%;
-    animation-delay: 3s;
-    transform: rotate(30deg);
-}
-.shape:nth-child(6) {
-    width: 48px;
-    height: 85px;
-    top: 40%;
-    left: 5%;
-    animation-delay: 5s;
-    transform: rotate(-15deg);
-}
-@keyframes float {
-    0%,
-    100% {
-        transform: translateY(0px) rotate(var(--start-rotation, 0deg));
-    }
-    50% {
-        transform: translateY(-20px)
-            rotate(calc(var(--start-rotation, 0deg) + 180deg));
-    }
-}
-/* Glass container styles */
-.glass {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 20px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+
+/* ── CSUN Top Bar ── */
+.csun-top-bar {
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 8px 0;
+    font-size: 13px;
     position: relative;
-    overflow: hidden;
+    z-index: 1000;
 }
-.glass:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateY(-5px);
-    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15);
-}
-/* Header styles */
-header {
-    padding: 20px;
-}
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-/* Navigation styles */
-nav {
+.csun-top-bar .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 30px 45px;
+    flex-wrap: wrap;
+    gap: 8px;
 }
-.logo {
-    font-size: 32px;
-    font-weight: bold;
-    color: white;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    cursor: pointer;
-}
-.logo-icon {
-    width: 64px;
-    height: 64px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.logo-icon svg {
-    width: 100%;
-    height: 100%;
-    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
-    transition: all 0.3s ease;
-}
-.logo:hover .logo-icon svg {
-    transform: scale(1.1) translateY(-2px);
-    filter: drop-shadow(0 4px 12px rgba(255, 255, 255, 0.4));
-}
-.nav-links {
-    display: flex;
-    gap: 30px;
-}
-.nav-links a {
-    color: rgba(255, 255, 255, 0.9);
+.csun-top-bar a {
+    color: rgba(255,255,255,0.8);
     text-decoration: none;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    padding: 12px 24px 13px 24px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 16px;
-	border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+    transition: color 0.2s;
 }
-.nav-links a:hover,
-.nav-links a.active {
-    color: white;
-    background: rgba(255, 255, 255, 0.1);
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+.csun-top-bar a:hover {
+    color: #fff;
 }
-/* Page system */
-.page {
-    display: none;
-    min-height: 100vh;
-    padding: 40px 20px 20px;
-}
-.page.active {
-    display: block;
-}
-/* Content wrapper to contain page content */
-.content-wrapper {
-    min-height: calc(100vh - 300px);
-}
-/* Home page styles */
-.hero {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    align-items: center;
-    padding: 60px 40px;
-    margin-bottom: 40px;
-}
-.hero-image {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.hero-image img {
-    width: 100%;
-    max-width: 440px;
-    height: auto;
-    border-radius: 20px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-}
-.hero-content {
-    text-align: left;
-}
-.hero h1 {
-    font-size: 2.8rem;
-    color: white;
-    margin-bottom: 20px;
-    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    line-height: 1.2;
-}
-.hero p {
-    font-size: 1.2rem;
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 30px;
-    line-height: 1.6;
-}
-.cta-button {
-    display: inline-block;
-    padding: 15px 40px;
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-    text-decoration: none;
-    border-radius: 50px;
-    font-weight: 600;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    transition: all 0.3s ease;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    cursor: pointer;
-}
-.cta-button:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-}
-button[type="submit"] {
-    font-family: inherit;
-    font-size: 16px;
-}
-.features {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    margin-bottom: 40px;
-}
-.feature-card {
-    padding: 40px 30px;
-    text-align: center;
-    color: white;
-}
-.feature-icon {
-    width: 60px;
-    height: 60px;
-    margin: 0 auto 20px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
+.csun-left {
     display: flex;
     align-items: center;
-    justify-content: center;
-    font-size: 24px;
+    gap: 8px;
 }
-.feature-card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-    color: white;
+.csun-left img {
+    height: 20px;
+    filter: brightness(0) invert(1);
 }
-.feature-card p {
-    color: rgba(255, 255, 255, 0.8);
-    line-height: 1.6;
-}
-/* About page styles */
-.about-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    margin-bottom: 40px;
-    align-items: center;
-}
-.about-text {
-    padding: 40px;
-    color: white;
-}
-.about-text h2 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-}
-.about-text p {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 20px;
-}
-.stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 30px;
-    margin-bottom: 60px;
-}
-.stat-card {
-    text-align: center;
-    padding: 30px;
-    color: white;
-}
-.stat-number {
-    font-size: 3rem;
-    font-weight: bold;
-    color: white;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-}
-.stat-label {
-    font-size: 1.1rem;
-    color: rgba(255, 255, 255, 0.8);
-    margin-top: 10px;
-}
-/* Team section styles */
-.team-section {
-    margin-bottom: 60px;
-}
-.team-section h2 {
-    font-size: 2.5rem;
-    color: white;
-    text-align: center;
-    margin-bottom: 50px;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-}
-.team-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-}
-.team-member {
-    padding: 40px 30px;
-    text-align: center;
-    color: white;
-    transition: all 0.3s ease;
-}
-.team-member:hover {
-    transform: translateY(-10px);
-}
-.team-avatar {
-    width: 120px;
-    height: 120px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    margin: 0 auto 20px;
+.csun-social {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 48px;
-    backdrop-filter: blur(10px);
-    border: 3px solid rgba(255, 255, 255, 0.3);
-    transition: all 0.3s ease;
+    gap: 14px;
 }
-.team-member:hover .team-avatar {
-    border-color: rgba(255, 255, 255, 0.5);
-    transform: scale(1.05);
-    background: rgba(255, 255, 255, 0.25);
-}
-.team-member h3 {
-    font-size: 1.4rem;
-    margin-bottom: 8px;
-    color: white;
-}
-.team-member .role {
-    font-size: 1rem;
-    color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 15px;
-}
-.team-member .bio {
-    font-size: 0.9rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.8);
-    margin-bottom: 20px;
-}
-.team-social {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-}
-.team-social a {
-    width: 36px;
-    height: 36px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-.team-social a:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateY(-3px);
-    color: white;
-}
-/* Services page styles */
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 30px;
-    margin-bottom: 40px;
-}
-.service-card {
-    padding: 40px 30px;
-    color: white;
-    text-align: left;
-}
-.service-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-}
-.service-icon {
-    width: 50px;
-    height: 50px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    margin-right: 15px;
-}
-.service-card h3 {
-    font-size: 1.4rem;
-    color: white;
-}
-.service-card p {
-    color: rgba(255, 255, 255, 0.8);
-    line-height: 1.6;
-    margin-bottom: 20px;
-}
-.service-features {
-    list-style: none;
-}
-.service-features li {
-    color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 8px;
-    padding-left: 20px;
-    position: relative;
-}
-.service-features li:before {
-    content: "✓";
-    position: absolute;
-    left: 0;
-    color: rgba(255, 255, 255, 0.9);
-}
-/* Contact page styles */
-.contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    margin-bottom: 40px;
-}
-.contact-map-section {
+
+/* ── Skills cloud ── */
+.skills-section-wrapper {
     margin-top: 40px;
 }
-.contact-form {
-    padding: 40px;
-}
-.contact-form h2 {
-    color: white;
-    font-size: 2rem;
-    margin-bottom: 30px;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-}
-.form-group {
-    margin-bottom: 20px;
-}
-.form-group label {
-    display: block;
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 8px;
-    font-weight: 500;
-}
-.form-group input,
-.form-group textarea {
-    width: 100%;
-    padding: 15px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
-    color: white;
-    font-size: 16px;
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-}
-.form-group input:focus,
-.form-group textarea:focus {
-    outline: none;
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.4);
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-}
-.form-group input::placeholder,
-.form-group textarea::placeholder {
-    color: rgba(255, 255, 255, 0.6);
-}
-.form-group textarea {
-    height: 120px;
-    resize: vertical;
-    line-height: 1.5;
-}
-.contact-info {
-    padding: 40px;
-    color: white;
-}
-.contact-info h2 {
-    font-size: 2rem;
-    margin-bottom: 30px;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-}
-.contact-item {
+.skills-cloud {
     display: flex;
-    align-items: center;
-    margin-bottom: 25px;
-}
-.contact-item-icon {
-    width: 40px;
-    height: 40px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 15px;
-    font-size: 18px;
-}
-.contact-item-text h4 {
-    color: white;
-    margin-bottom: 5px;
-}
-.contact-item-text p {
-    color: rgba(255, 255, 255, 0.8);
-}
-.contact-map {
-    padding: 40px;
-    color: white;
-    width: 100%;
-}
-.contact-map h2 {
-    font-size: 2rem;
-    margin-bottom: 30px;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    text-align: center;
-}
-.map-container {
-    width: 100%;
-    height: 500px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    overflow: hidden;
-    position: relative;
-    backdrop-filter: blur(10px);
-}
-.map-placeholder {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    color: rgba(255, 255, 255, 0.8);
-    text-align: center;
-}
-.map-placeholder-icon {
-    font-size: 64px;
-    margin-bottom: 20px;
-    opacity: 0.7;
-}
-.map-placeholder p {
-    margin: 8px 0;
-    font-size: 16px;
-}
-.map-placeholder .address {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 20px;
-}
-.map-placeholder .integration-note {
-    font-size: 14px;
-    opacity: 0.6;
-    margin-top: 20px;
-}
-/* Footer styles */
-#footer {
-    margin-top: 60px;
-    padding: 30px 0;
-}
-.footer-content {
-    padding: 30px;
-    text-align: center;
-    color: rgba(255, 255, 255, 0.8);
-}
-.footer-links {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin-bottom: 20px;
     flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    padding: 10px 0;
 }
-.footer-links a {
-    color: rgba(255, 255, 255, 0.7);
+.skill-tag {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 8px 20px;
+    border-radius: 100px;
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.85);
+    transition: all 0.3s;
+    cursor: default;
+}
+.skill-tag:hover {
+    background: rgba(255,255,255,0.15);
+    transform: translateY(-2px);
+}
+
+/* ── Footer CSUN section ── */
+.footer-csun-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: 13px;
+}
+.footer-csun-row img {
+    height: 22px;
+    filter: brightness(0) invert(1);
+}
+.footer-csun-row a {
+    color: rgba(255,255,255,0.7) !important;
     text-decoration: none;
-    font-size: 14px;
-    transition: color 0.3s ease;
-    padding: 5px 10px;
 }
-.footer-links a:hover {
-    color: white;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+.footer-csun-row a:hover {
+    color: #fff !important;
 }
-.copyright {
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.6);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 20px;
+.footer-social-links {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    margin-top: 8px;
 }
-.copyright a {
-	color: rgba(255, 255, 255, 0.6);
-	text-decoration: none;
+.footer-social-links a {
+    color: rgba(255,255,255,0.6) !important;
+    text-decoration: none;
+    font-size: 13px;
 }
-/* Responsive design */
-@media (max-width: 1024px) {
-    .team-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+.footer-social-links a:hover {
+    color: #fff !important;
 }
-@media (max-width: 768px) {
-    /* Adjust padding for mobile */
-    .page {
-        padding: 30px 20px 20px;
-    }
-    .content-wrapper {
-        min-height: auto;
-    }
-    .hero {
-        grid-template-columns: 1fr;
-        text-align: center;
-        gap: 20px;
-    }
-    .hero-content {
-        text-align: center;
-    }
-    .hero h1 {
-        font-size: 2.5rem;
-    }
-    nav {
-        flex-direction: column;
-        gap: 20px;
-        padding: 20px 30px;
-    }
-    .nav-links {
-        gap: 15px;
-        justify-content: center;
-        flex-direction: column;
-        align-items: center;
-    }
-    .nav-links a {
-        display: block;
-        text-align: center;
-        width: 100%;
-        max-width: 200px;
-        font-size: 14px;
-        padding: 10px 20px;
-    }
-    .about-content,
-    .contact-grid {
-        grid-template-columns: 1fr;
-    }
-    .services-grid {
-        grid-template-columns: 1fr;
-    }
-    .team-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-    .footer-links {
-        gap: 15px;
-        flex-direction: column;
-    }
-    .footer-links a {
-        display: block;
-        text-align: center;
-    }
-    button[type="submit"] {
-        width: 100%;
-    }
-    .map-container {
-        height: 350px;
-    }
-    .logo-icon {
-        width: 40px;
-        height: 40px;
-    }
-    .logo {
-        font-size: 22px;
-    }
+
+/* ── Team member photos ── */
+.team-avatar img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
 }
+.team-avatar img[alt="Lia Yaghobi"] { object-position: center top; }
+.team-avatar img[alt="Samar Kimiagar"] { object-position: center top; }
+.team-avatar img[alt="Odelia Sheelo"] { object-position: center 20%; }
+.team-avatar img[alt="Bargavi Sivaraman"] { object-position: center 15%; }
+.team-avatar img[alt="Rene Barseghian"] { object-position: center 20%; }
+
+/* ── Social link icons ── */
+.team-social a img {
+    width: 24px;
+    height: 24px;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+    vertical-align: middle;
+}
+.team-social a:hover img {
+    opacity: 1;
+}
+
+/* ── CSUN Seal in footer ── */
+.csun-seal {
+    height: 40px;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+/* ── Navbar logo zoom ── */
+.navbar-logo {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transform: scale(1.4);
+    overflow: hidden;
+}
+
+/* ── Homepage background image ── */
+.hero-bg {
+    position: relative;
+}
+.hero-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('images/Gemini_Generated_Image_v1tpyv1tpyv1tpyv (1).jpg') center/cover no-repeat;
+    opacity: 0.25;
+    border-radius: inherit;
+    z-index: 0;
+    pointer-events: none;
+}
+.hero-bg > * {
+    position: relative;
+    z-index: 1;
+}
+</style>
+</head>
+<body>
+    <div class="bg-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <!-- TOP BAR: CSUN info + Nav links -->
+    <div class="csun-top-bar">
+        <div class="container">
+            <div class="csun-left">
+                <img src="https://www.csun.edu/sites/default/files/CSUN-Reverse.png" alt="CSUN Logo"
+                     onerror="this.style.display='none'">
+                <a href="https://www.csun.edu" target="_blank">California State University, Northridge</a>
+                <span style="opacity:0.4; color:#fff;">|</span>
+                <a href="https://www.csun.edu/~xjiang/SeniorDesign/" target="_blank">Senior Design Projects</a>
+            </div>
+            <div class="csun-social">
+                <a href="javascript:void(0)" onclick="showPage('home')">Home</a>
+                <a href="javascript:void(0)" onclick="showPage('about')">About</a>
+                <a href="javascript:void(0)" onclick="showPage('services')">Technologies &amp; Skills</a>
+                <span style="opacity:0.3; color:#fff;">|</span>
+                <a href="https://www.facebook.com/calstatenorthridge" target="_blank">Facebook</a>
+                <a href="https://twitter.com/csaboredge" target="_blank">Twitter</a>
+                <a href="https://www.linkedin.com/school/california-state-university-northridge/" target="_blank">LinkedIn</a>
+                <a href="https://www.instagram.com/csaboredge/" target="_blank">Instagram</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAVIGATION HEADER: Icon + Title -->
+    <header>
+        <div class="container">
+            <nav class="glass" style="justify-content: center; gap: 20px;">
+    <div class="logo" onclick="showPage('home')">
+        <div class="logo-icon">
+            <img src="images/icon.png" alt="Astro Cultivators Logo" class="navbar-logo">
+        </div>
+    </div>
+    <div style="color: white; text-align: center;">
+        <h1 style="font-size: 2rem; margin: 0; text-shadow: 0 2px 10px rgba(0,0,0,0.3);">ASTRO CULTIVATORS</h1>
+        <p style="font-size: 0.95rem; color: rgba(255,255,255,0.8); margin-top: 4px;">Early Prediction and Temporal Analysis of Growth and Stress for Soybean in Controlled Environments</p>
+    </div>
+</nav>
+        </div>
+    </header>
+
+    <!-- HOME PAGE -->
+    <div id="home" class="page active">
+        <div class="container">
+            <div class="content-wrapper">
+                <section class="hero glass" style="display: block; padding: 0; overflow: hidden;">
+                    <div class="hero-image" style="width: 100%;">
+                        <img src="images/21d3339e-5e74-46be-bd4a-6343b642f6ea.png" alt="Astro Cultivators soybean research" style="width: 100%; max-width: 100%; border-radius: 20px; display: block;" />
+                    </div>
+                </section>
+
+                <section class="features">
+                    <a href="dataset.html" style="text-decoration:none; color:inherit;">
+                        <div class="feature-card glass">
+                            <div class="feature-icon">📂</div>
+                            <h3>Dataset</h3>
+                            <p>Imaging data sources, data organization, and how the data is collected and stored.</p>
+                        </div>
+                    </a>
+                    
+                    <a href="preprocessing.html" style="text-decoration:none; color:inherit;">
+                        <div class="feature-card glass">
+                            <div class="feature-icon">🧹</div>
+                            <h3>Data Preprocessing</h3>
+                            <p>Removing noise, fixing errors, normalizing values, and preparing images for modeling.</p>
+                        </div>
+                    </a>
+                    
+                    <a href="feature%20engineering.html" style="text-decoration:none; color:inherit;">
+                        <div class="feature-card glass">
+                            <div class="feature-icon">🧬</div>
+                            <h3>Feature Engineering</h3>
+                            <p>Extracting meaningful plant traits and vegetation indices from imaging data.</p>
+                        </div>
+                    </a>
+
+                    <a href="predictive%20modeling.html" style="text-decoration:none; color:inherit;">
+                        <div class="feature-card glass">
+                            <div class="feature-icon">🤖</div>
+                            <h3>Predictive Modeling</h3>
+                            <p>Building machine learning models to detect plant stress and predict growth traits.</p>
+                        </div>
+                    </a>
+
+                    <a href="temporal%20growth.html" style="text-decoration:none; color:inherit;">
+                        <div class="feature-card glass">
+                            <div class="feature-icon">📈</div>
+                            <h3>Temporal Growth Analysis</h3>
+                            <p>Analyzing plant growth patterns over time to identify early changes and stress signals.</p>
+                        </div>
+                    </a>
+
+                    <a href="output%20visualization.html" style="text-decoration:none; color:inherit;">
+                        <div class="feature-card glass">
+                            <div class="feature-icon">📊</div>
+                            <h3>Output and Visualization</h3>
+                            <p>Generating graphs, overlays, reports, and summaries of experimental results.</p>
+                        </div>
+                    </a>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- ABOUT PAGE -->
+    <div id="about" class="page">
+        <div class="container">
+            <div class="content-wrapper">
+                <section class="about-content">
+                    <div class="about-text glass">
+                        <h2>About This Project</h2>
+                        <p>Astro Cultivators is a collaborative project between the Computer Science, Biology, and Mechanical Engineering departments at California State University, Northridge, under the <strong>ARCS (Autonomy Research Center for STEAHM)</strong> initiative.</p>
+                        <p>Our data analysis team builds the imaging and analytics pipeline that detects early drought stress in soybean seedlings and links visual features to measurable growth traits. Williams 82 soybean plants are grown in a controlled growth chamber where drought stress is applied by skipping scheduled waterings. Using hyperspectral, RGB, and depth cameras capturing images every 30 minutes, we collect multi-modal data that tracks subtle changes in plant health, often before they become visible to the human eye.</p>
+                        <p>Our pipeline spans six stages: dataset management, data cleaning and preprocessing, feature engineering, predictive modeling, temporal growth analysis, and output visualization. The goal is to enable biologists to identify stressed plants early and make data-driven decisions about crop management, prioritizing high recall so that every stressed plant is caught, even at the cost of some false alarms.</p>
+                    </div>
+                    <div class="stats">
+                        <div class="stat-card glass">
+                            <div class="stat-number">3</div>
+                            <div class="stat-label">Camera Types</div>
+                        </div>
+                        <div class="stat-card glass">
+                            <div class="stat-number">600+</div>
+                            <div class="stat-label">Images Collected</div>
+                        </div>
+                        <div class="stat-card glass">
+                            <div class="stat-number">7+</div>
+                            <div class="stat-label">Plant Traits Tracked</div>
+                        </div>
+                        <div class="stat-card glass">
+                            <div class="stat-number">30m</div>
+                            <div class="stat-label">Capture Interval</div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="team-section">
+                    <h2>Meet Our Team</h2>
+                    <div class="team-grid">
+
+                        <div class="team-member glass">
+                            <div class="team-avatar"><img src="images/Headshot.webp" alt="Lia Yaghobi"></div>
+                            <h3>Lia Yaghobi</h3>
+                            <p class="role">Graduate Researcher, Temporal Growth Analysis</p>
+                            <p class="bio">M.S. Computer Science candidate at CSUN and ARCS Research Associate. In Astro Cultivators, she leads temporal growth analysis and serves as the liaison between the biology and data science teams, with thesis research on full life-cycle soybean monitoring under drought stress.</p>
+                            <div class="team-social">
+                                <a href="https://www.linkedin.com/in/lia-yaghobi/" title="LinkedIn" target="_blank"><img src="images/linkedin.png" alt="LinkedIn"></a>
+                                <a href="https://github.com/liaYaghobi" title="GitHub" target="_blank"><img src="images/github.png" alt="GitHub"></a>
+                            </div>
+                        </div>
+
+                        <div class="team-member glass">
+                            <div class="team-avatar"><img src="images/1772077974126.jpeg" alt="Samar Kimiagar"></div>
+                            <h3>Samar Kimiagar</h3>
+                            <p class="role">Team Lead, Machine Learning</p>
+                            <p class="bio">B.S. Computer Science senior at CSUN, NSF Research Assistant, ARCS Associate, Dean's List honoree, and IEEE-HKN member. In Astro Cultivators, she serves as Research Assistant and Team Lead, coordinating the project and contributing across the full pipeline, from data preprocessing and feature engineering to deep learning model design, evaluation, and visualization.</p>
+                            <div class="team-social">
+                                <a href="https://www.linkedin.com/in/samar-kimiagar" title="LinkedIn" target="_blank"><img src="images/linkedin.png" alt="LinkedIn"></a>
+                                <a href="https://github.com/SamarKim" title="GitHub" target="_blank"><img src="images/github.png" alt="GitHub"></a>
+                            </div>
+                        </div>
+
+                        <div class="team-member glass">
+                            <div class="team-avatar"><img src="images/odelia 2.jpg" alt="Odelia Sheelo"></div>
+                            <h3>Odelia Sheelo</h3>
+                            <p class="role">Data Cleaning &amp; Preprocessing</p>
+                            <p class="bio">B.S. Computer Science senior with a Mathematics minor at CSUN, ARCS Associate, published writer, fitness instructor, piano teacher, and math tutor. In Astro Cultivators, she focuses on data cleaning, preprocessing, and organizing multi-sensor imaging data, ensuring quality, consistency, and structure across all datasets for reliable downstream model development, evaluation, and analysis.</p>
+                            <div class="team-social">
+                                <a href="https://www.linkedin.com/in/odelia-s-941301203/" title="LinkedIn" target="_blank"><img src="images/linkedin.png" alt="LinkedIn"></a>
+                                <a href="https://github.com/odeliasheelo1" title="GitHub" target="_blank"><img src="images/github.png" alt="GitHub"></a>
+                            </div>
+                        </div>
+
+                        <div class="team-member glass">
+                            <div class="team-avatar"><img src="images/baru.jpg" alt="Bargavi Sivaraman"></div>
+                            <h3>Bargavi Sivaraman</h3>
+                            <p class="role">Feature Engineering</p>
+                            <p class="bio">B.S. Computer Science senior at CSUN, ARCS Associate, Technical Operations Intern and Scrum Master at CSUN Associated Students, and Product and Systems Manager at ETHIX. In Astro Cultivators, she designs and implements end-to-end feature engineering workflows to extract meaningful plant traits from multi-modal imaging data, supporting stress classification, growth analysis, and model development.</p>
+                            <div class="team-social">
+                                <a href="https://www.linkedin.com/in/bargavisivaraman" title="LinkedIn" target="_blank"><img src="images/linkedin.png" alt="LinkedIn"></a>
+                                <a href="https://github.com/Bargavisivaraman" title="GitHub" target="_blank"><img src="images/github.png" alt="GitHub"></a>
+                            </div>
+                        </div>
+
+                        <div class="team-member glass">
+                            <div class="team-avatar"><img src="images/rene.jpg" alt="Rene Barseghian"></div>
+                            <h3>Rene Barseghian</h3>
+                            <p class="role">Output &amp; Visualization</p>
+                            <p class="bio">B.S. Computer Science senior at CSUN, ARCS Associate, and software developer driven by building user-centered digital experiences with expertise in JavaScript, React, Python, Node.js, and cloud infrastructure. In Astro Cultivators, he focuses on output, visualization, and Digital Twin integration, bridging the data analysis pipeline to the Digital Twin system for real-time plant monitoring.</p>
+                            <div class="team-social">
+                                <a href="https://github.com/renebars" title="GitHub" target="_blank"><img src="images/github.png" alt="GitHub"></a>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- TECHNOLOGIES & SKILLS PAGE (keeps id="services" so showPage still works) -->
+    <div id="services" class="page">
+        <div class="container">
+            <div class="content-wrapper">
+                <section class="hero glass">
+                    <h1>Technologies &amp; Skills</h1>
+                    <p>The tools, frameworks, and expertise powering our plant stress detection pipeline.</p>
+                </section>
+
+                <section class="services-grid">
+                    <a href="https://www.python.org/" target="_blank" style="text-decoration:none; color:inherit;">
+                        <div class="service-card glass">
+                            <div class="service-header">
+                                <div class="service-icon">🐍</div>
+                                <h3>Python</h3>
+                            </div>
+                            <p>Core language for data processing, analysis, and model development across the entire pipeline.</p>
+                        </div>
+                    </a>
+
+                    <a href="https://pytorch.org/" target="_blank" style="text-decoration:none; color:inherit;">
+                        <div class="service-card glass">
+                            <div class="service-header">
+                                <div class="service-icon">🔥</div>
+                                <h3>PyTorch</h3>
+                            </div>
+                            <p>Deep learning framework used for training stress detection and trait prediction models.</p>
+                        </div>
+                    </a>
+
+                    <a href="https://docs.ultralytics.com/" target="_blank" style="text-decoration:none; color:inherit;">
+                        <div class="service-card glass">
+                            <div class="service-header">
+                                <div class="service-icon">👁️</div>
+                                <h3>YOLOv11</h3>
+                            </div>
+                            <p>Object detection model for identifying plant organs such as leaves, pods, and flowers in imaging data.</p>
+                        </div>
+                    </a>
+
+                    <a href="https://opencv.org/" target="_blank" style="text-decoration:none; color:inherit;">
+                        <div class="service-card glass">
+                            <div class="service-header">
+                                <div class="service-icon">📷</div>
+                                <h3>OpenCV</h3>
+                            </div>
+                            <p>Image processing and computer vision library for preprocessing, segmentation, and feature extraction.</p>
+                        </div>
+                    </a>
+
+                    <a href="https://numpy.org/" target="_blank" style="text-decoration:none; color:inherit;">
+                        <div class="service-card glass">
+                            <div class="service-header">
+                                <div class="service-icon">🔢</div>
+                                <h3>NumPy &amp; Pandas</h3>
+                            </div>
+                            <p>Data manipulation, numerical computing, and structured analysis of plant trait measurements.</p>
+                        </div>
+                    </a>
+
+                    <a href="https://matplotlib.org/" target="_blank" style="text-decoration:none; color:inherit;">
+                        <div class="service-card glass">
+                            <div class="service-header">
+                                <div class="service-icon">📊</div>
+                                <h3>Matplotlib</h3>
+                            </div>
+                            <p>Visualization library for generating growth curves, stress graphs, and analytical charts.</p>
+                        </div>
+                    </a>
+
+                    <a href="https://jupyter.org/" target="_blank" style="text-decoration:none; color:inherit;">
+                        <div class="service-card glass">
+                            <div class="service-header">
+                                <div class="service-icon">📓</div>
+                                <h3>Jupyter Notebook</h3>
+                            </div>
+                            <p>Interactive environment for exploratory analysis, prototyping, and documenting experiments.</p>
+                        </div>
+                    </a>
+
+                    <a href="https://github.com/CSUN-ARCS-AstroCultivators" target="_blank" style="text-decoration:none; color:inherit;">
+                        <div class="service-card glass">
+                            <div class="service-header">
+                                <div class="service-icon">🔀</div>
+                                <h3>Git &amp; GitHub</h3>
+                            </div>
+                            <p>Version control and team collaboration with branching workflows and pull request reviews.</p>
+                        </div>
+                    </a>
+
+                    <a href="https://github.com/IntelRealSense/librealsense" target="_blank" style="text-decoration:none; color:inherit;">
+                        <div class="service-card glass">
+                            <div class="service-header">
+                                <div class="service-icon">📹</div>
+                                <h3>Intel RealSense</h3>
+                            </div>
+                            <p>RGB and depth camera system for capturing 3D plant structure and height measurements.</p>
+                        </div>
+                    </a>
+
+                    <a href="https://www.anaconda.com/" target="_blank" style="text-decoration:none; color:inherit;">
+                        <div class="service-card glass">
+                            <div class="service-header">
+                                <div class="service-icon">📦</div>
+                                <h3>Conda / Anaconda</h3>
+                            </div>
+                            <p>Environment and package management for reproducible data science workflows.</p>
+                        </div>
+                    </a>
+                </section>
+
+                <!-- Skills cloud section -->
+                <section class="skills-section-wrapper">
+                    <div class="hero glass">
+                        <h2>Skills</h2>
+                        <div class="skills-cloud">
+                            <span class="skill-tag">Machine Learning</span>
+                            <span class="skill-tag">Computer Vision</span>
+                            <span class="skill-tag">Image Classification</span>
+                            <span class="skill-tag">Hyperspectral Image Analysis</span>
+                            <span class="skill-tag">Data Preprocessing</span>
+                            <span class="skill-tag">Feature Engineering</span>
+                            <span class="skill-tag">Object Detection (YOLO)</span>
+                            <span class="skill-tag">Deep Learning (PyTorch)</span>
+                            <span class="skill-tag">Time-Series Analysis</span>
+                            <span class="skill-tag">Data Visualization</span>
+                            <span class="skill-tag">Statistical Analysis</span>
+                            <span class="skill-tag">Python Programming</span>
+                            <span class="skill-tag">Version Control (Git)</span>
+                            <span class="skill-tag">Agile Workflow</span>
+                            <span class="skill-tag">Technical Documentation</span>
+                            <span class="skill-tag">Cross-Team Collaboration</span>
+                            <span class="skill-tag">Research &amp; Literature Review</span>
+                            <span class="skill-tag">Vegetation Index Computation</span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- SINGLE FOOTER -->
+    <div id="footer">
+        <div class="container">
+            <footer class="glass">
+                <div class="footer-content">
+                    <div class="footer-links">
+                        <a href="javascript:void(0)" onclick="showPage('about')">About</a>
+                        <a href="javascript:void(0)" onclick="showPage('services')">Technologies &amp; Skills</a>
+                        <a href="https://github.com/CSUN-ARCS-AstroCultivators" target="_blank">GitHub</a>
+                        <a href="https://www.csun.edu/~xjiang/SeniorDesign/" target="_blank">&#8592; Senior Design Course</a>
+                    </div>
+                    <div class="copyright">
+                        <img src="images/CSUN_Seal.png" alt="CSUN Seal" class="csun-seal">
+                        Copyright &copy; California State University, Northridge
+                    </div>
+                    <div class="footer-csun-row">
+                        <a href="https://www.csun.edu" target="_blank">CSUN Website</a>
+                        <span style="opacity:0.3; color:#fff;">|</span>
+                        <a href="https://www.csun.edu/~xjiang/SeniorDesign/" target="_blank">Senior Design Projects</a>
+                    </div>
+                    <div class="footer-social-links">
+                        <a href="https://www.facebook.com/calstatenorthridge" target="_blank">Facebook</a>
+                        <a href="https://twitter.com/csaboredge" target="_blank">Twitter</a>
+                        <a href="https://www.linkedin.com/school/california-state-university-northridge/" target="_blank">LinkedIn</a>
+                        <a href="https://www.instagram.com/csaboredge/" target="_blank">Instagram</a>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+<script src="templatemo-glossy-touch.js"></script>
+</body>
+
+</html>
