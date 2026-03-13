@@ -20,13 +20,14 @@ body {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(
         135deg,
-        #0c0c0c 0%,
-        #1a1a2e 15%,
-        #16213e 35%,
-        #0f3460 50%,
-        #533a7d 70%,
-        #8b5a8c 85%,
-        #a0616a 100%
+        #0a0f0a 0%,
+        #1a2e1a 15%,
+        #1e3e2e 35%,
+        #2d5a3d 50%,
+        #3d6b4a 65%,
+        #4a7a55 75%,
+        #5c8a5e 85%,
+        #6b8c5a 100%
     );
     min-height: 100vh;
     overflow-x: hidden;
