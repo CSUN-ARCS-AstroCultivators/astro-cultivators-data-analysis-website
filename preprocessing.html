@@ -51,14 +51,6 @@
     padding: 22px;
 }
 
-.process-list {
-    margin-top: 18px;
-}
-
-.process-list li {
-    margin-bottom: 10px;
-}
-
 .output-box {
     background: rgba(255,255,255,0.08);
     border-left: 4px solid rgba(255,255,255,0.35);
@@ -77,10 +69,6 @@
     border-radius: 999px;
     margin-top: 8px;
 }
-
-.back-link:hover {
-    background: rgba(255,255,255,0.18);
-}
 </style>
 </head>
 
@@ -97,124 +85,105 @@
     <div class="container page-wrap">
         <section class="glass page-header">
             <h1>Data Cleaning and Preprocessing</h1>
-            <p>This stage prepares raw hyperspectral, RGB, and depth images so the data can be used for feature extraction, visualization, and modeling preparation.</p>
+            <p>This stage prepares raw hyperspectral, RGB, and depth images for segmentation, feature extraction, modeling, and visualization.</p>
         </section>
 
         <section class="glass content-card">
             <h2>Preprocessing Goal</h2>
-            <p>The main goal of preprocessing was to turn raw image folders into clean, structured datasets. This included removing invalid samples, keeping usable imaging conditions, isolating plant regions, and creating CSV files that could be used later in feature engineering and analysis.</p>
+            <p>The goal was to turn raw image folders into clean and structured data. This included validating hyperspectral cubes, filtering unusable RGB and depth frames, keeping lights on captures, removing corrupted images, and preparing plant masks.</p>
         </section>
 
         <section class="glass content-card">
-            <h2>Hyperspectral Calibration Cycle Preprocessing</h2>
-            <p>The calibration cycle preprocessing work focused on raw hyperspectral TIFF files. The pipeline extracted the image files, built a dataset index, sorted images by date and sequence, and checked whether each cube had the expected 51 bands.</p>
+            <h2>Hyperspectral Preprocessing</h2>
+            <p>The hyperspectral preprocessing work cleaned raw TIFF files and created image metadata for later feature engineering.</p>
 
             <div class="step-grid">
                 <div class="step-card">
-                    <h3>File Extraction</h3>
-                    <p>Raw zipped hyperspectral files were extracted into working folders so each TIFF image could be processed individually.</p>
-                </div>
-
-                <div class="step-card">
-                    <h3>Index Creation</h3>
-                    <p>The notebook created CSV index files to track filenames, dates, sequence order, and valid image lists.</p>
+                    <h3>Filename Parsing</h3>
+                    <p>Messy filenames were parsed to extract dates and sequence numbers.</p>
                 </div>
 
                 <div class="step-card">
                     <h3>Band Validation</h3>
-                    <p>Only valid 51 band hyperspectral cubes were kept. Non 51 band files were removed from the clean dataset.</p>
+                    <p>Each image was checked for 51 spectral bands across the expected wavelength range.</p>
                 </div>
 
                 <div class="step-card">
-                    <h3>NDVI Masking</h3>
-                    <p>NDVI based thresholding was used to separate plant pixels from background pixels and create plant masks.</p>
+                    <h3>NDVI Computation</h3>
+                    <p>NDVI was computed from red and near infrared bands to help isolate plant pixels.</p>
+                </div>
+
+                <div class="step-card">
+                    <h3>Vegetation Masking</h3>
+                    <p>NDVI thresholding and morphological cleanup were used to create clean plant masks.</p>
                 </div>
             </div>
 
             <div class="output-box">
-                <p>The calibration cycle notebook started with 643 TIFF files, kept 492 valid 51 band images, and removed 151 files that did not match the expected band count.</p>
+                <p>Key outputs included cleaned dataset indexes, verified 51 band images, mask ratio, mean NDVI, median NDVI, and other metadata CSV files.</p>
             </div>
         </section>
 
         <section class="glass content-card">
-            <h2>Hyperspectral Quality Control Exploration</h2>
-            <p>A separate exploration notebook checked a larger hyperspectral folder to understand image quality and filtering needs before feature extraction. This helped identify which images were actually usable under grow light conditions.</p>
+            <h2>HS Feature Pipeline Filtering</h2>
+            <p>For the January Set 1 feature workflow, hyperspectral frames were filtered to make sure each record was useful for feature computation.</p>
 
-            <ul class="process-list">
-                <li>Loaded 5,829 hyperspectral TIFF images for inspection.</li>
-                <li>Separated usable light on cubes from lights off images.</li>
-                <li>Identified CAI or index cubes, bad cubes, and unknown cube types.</li>
-                <li>Checked duplicate captures from the same date and hour.</li>
-                <li>Validated cube types such as reflectance, reflectance percent, and radiance or intensity.</li>
-                <li>Trimmed unstable edge bands and tested spectral smoothing.</li>
-                <li>Confirmed that plant masks matched the spatial dimensions of the cleaned cubes.</li>
+            <ul>
+                <li>Images were filtered to the 6 AM to 1 PM lights on window.</li>
+                <li>Quality checks included signal to noise ratio, coverage, and mean NDVI.</li>
+                <li>Plant pixels were segmented with NDVI thresholding.</li>
+                <li>The final HS feature output included 204 timestamped records across 21 days.</li>
             </ul>
-        </section>
-
-        <section class="glass content-card">
-            <h2>Full Plant Cycle Hyperspectral Preprocessing</h2>
-            <p>The January drought cycle pipeline filtered images by date and time, loaded 51 band TIFF cubes, calculated quality metrics, and removed frames that were outside the grow light window or did not pass quality checks.</p>
-
-            <ul class="process-list">
-                <li>Date range was filtered from January 10 to January 30.</li>
-                <li>The main processing window was 6 AM to 1 PM to match the grow light schedule.</li>
-                <li>Signal to noise ratio was calculated for quality control.</li>
-                <li>Plant coverage was calculated from the NDVI mask.</li>
-                <li>Corrupted frames and unstable frames were filtered out.</li>
-            </ul>
-
-            <div class="output-box">
-                <p>This workflow checked 293 TIFF files, processed 204 frames, kept 195 valid frames, filtered out 89 frames, and marked 9 frames as corrupted.</p>
-            </div>
         </section>
 
         <section class="glass content-card">
             <h2>RealSense RGB and Depth Preprocessing</h2>
-            <p>The RealSense notebook prepared RGB and depth image pairs for visible growth analysis. The first step was separating files into useful image types and removing dud images.</p>
+            <p>The RealSense preprocessing work used Intel RealSense D435 RGB and 16 bit raw depth data. The pipeline cleaned frames before segmentation and feature extraction.</p>
 
             <div class="step-grid">
                 <div class="step-card">
-                    <h3>Image Type Separation</h3>
-                    <p>Files were sorted into true RGB images, raw depth images, colorized depth images, dud images, and other files.</p>
+                    <h3>Lights On Filtering</h3>
+                    <p>Frames were filtered to the 6 AM to 1 PM lights on window for more consistent imaging.</p>
                 </div>
 
                 <div class="step-card">
-                    <h3>Timestamp Matching</h3>
-                    <p>RGB and raw depth files were matched by year, month, day, hour, and minute so each pair represented the same capture time.</p>
+                    <h3>Brightness Check</h3>
+                    <p>Dim or corrupted frames were rejected when mean RGB brightness was below 50.</p>
                 </div>
 
                 <div class="step-card">
-                    <h3>Set Separation</h3>
-                    <p>The RealSense data was split into Set 1 and Set 2. Set 2 was used because it had cleaner data for feature extraction.</p>
+                    <h3>Depth Selection</h3>
+                    <p>The pipeline used the 16 bit raw depth file and discarded the 8 bit depth visualization.</p>
                 </div>
 
                 <div class="step-card">
-                    <h3>Background Modeling</h3>
-                    <p>A median background image was built from RGB frames so plant regions could be separated from the chamber background.</p>
+                    <h3>Quality Filtering</h3>
+                    <p>Quality filtering helped remove blur, bad detections, and unusable frames before modeling.</p>
                 </div>
             </div>
         </section>
 
         <section class="glass content-card">
-            <h2>Plant Masking</h2>
-            <p>Plant masks were created differently for each sensor type. Hyperspectral images used NDVI based masks. RealSense RGB images used background comparison, pot detection, plant region separation, and largest component filtering.</p>
+            <h2>Grounded SAM 2 Plant Segmentation</h2>
+            <p>Grounded SAM 2 was used for zero shot segmentation with the text prompt soybean plant. This allowed plant level segmentation without training a custom segmentation model.</p>
 
-            <ul class="process-list">
-                <li>Hyperspectral masks isolated plant pixels using NDVI thresholds.</li>
-                <li>Morphological cleaning improved mask quality by removing small noisy regions.</li>
-                <li>RealSense masks detected the two pot regions and split the image into Plant A and Plant B.</li>
-                <li>Mask debugging plots compared the original image, binary mask, overlay, and masked plant image.</li>
+            <ul>
+                <li>Grounded SAM 2 detected soybean plants from the RGB image.</li>
+                <li>SAM 2.1 generated the plant mask from each detected box.</li>
+                <li>Control plants were assigned to the left side and drought plants to the right side by detection box center.</li>
+                <li>HSV color filtering was used as a backup refinement to remove pots and clean leaf edges.</li>
+                <li>The final pipeline kept 265 usable per plant frames after filtering.</li>
             </ul>
         </section>
 
         <section class="glass content-card">
             <h2>Preprocessing Outputs</h2>
-            <ul class="process-list">
-                <li>Cleaned hyperspectral image folder with valid 51 band TIFF files.</li>
-                <li>Dataset index CSV files sorted by date and sequence.</li>
-                <li>Metadata CSV files with basic NDVI and mask statistics.</li>
-                <li>Matched RGB and depth image pairs for RealSense analysis.</li>
-                <li>Clean plant masks for later feature extraction.</li>
+            <ul>
+                <li>Cleaned hyperspectral image indexes and metadata files.</li>
+                <li>Verified HS images with valid 51 band structure.</li>
+                <li>RealSense RGB and raw depth frames filtered by light and image quality.</li>
+                <li>Plant masks from Grounded SAM 2 and SAM 2.1.</li>
+                <li>Separated control and drought plant regions for feature extraction.</li>
             </ul>
 
             <a class="back-link" href="index.html">← Back to Home</a>
