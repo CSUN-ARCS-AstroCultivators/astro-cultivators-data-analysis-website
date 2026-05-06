@@ -5,15 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Astro Cultivators Data Analysis Team</title>
     <link rel="icon" type="image/png" href="images/icon3-modified.png">
-    
     <link rel="stylesheet" href="templatemo-glossy-touch.css">
-<!--
 
-TemplateMo 592 glossy touch
-
-https://templatemo.com/tm-592-glossy-touch
-
--->
     <style>
 .logo {
     display: flex;
@@ -35,7 +28,6 @@ https://templatemo.com/tm-592-glossy-touch
     display: block;
 }
 
-/* ── CSUN Top Bar ── */
 .csun-top-bar {
     background: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(10px);
@@ -45,6 +37,7 @@ https://templatemo.com/tm-592-glossy-touch
     position: relative;
     z-index: 1000;
 }
+
 .csun-top-bar .container {
     display: flex;
     justify-content: space-between;
@@ -52,55 +45,79 @@ https://templatemo.com/tm-592-glossy-touch
     flex-wrap: wrap;
     gap: 8px;
 }
+
 .csun-top-bar a {
     color: rgba(255,255,255,0.8);
     text-decoration: none;
     transition: color 0.2s;
 }
+
 .csun-top-bar a:hover {
     color: #fff;
 }
+
 .csun-left {
     display: flex;
     align-items: center;
     gap: 8px;
 }
+
 .csun-left img {
     height: 20px;
     filter: brightness(0) invert(1);
 }
+
 .csun-social {
     display: flex;
     gap: 14px;
 }
 
-/* ── Skills cloud ── */
-.skills-section-wrapper {
-    margin-top: 40px;
+.project-overview {
+    margin-top: 30px;
 }
+
+.project-overview h2,
+.project-overview p {
+    color: white;
+}
+
+.skills-section-wrapper {
+    margin-top: 20px;
+}
+
+#services .skills-section-wrapper .hero.glass {
+    padding: 24px 30px;
+}
+
+#services .skills-section-wrapper h2,
+#services .skills-section-wrapper .skill-tag {
+    color: white;
+}
+
 .skills-cloud {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     justify-content: center;
-    padding: 10px 0;
+    padding: 4px 0;
 }
+
 .skill-tag {
     background: rgba(255,255,255,0.08);
     border: 1px solid rgba(255,255,255,0.15);
     padding: 8px 20px;
     border-radius: 100px;
     font-size: 0.9rem;
-    color: rgba(255,255,255,0.85);
+    color: white;
     transition: all 0.3s;
     cursor: default;
 }
+
 .skill-tag:hover {
     background: rgba(255,255,255,0.15);
     transform: translateY(-2px);
 }
 
-/* ── Footer CSUN section ── */
 .footer-csun-row {
     display: flex;
     align-items: center;
@@ -112,33 +129,38 @@ https://templatemo.com/tm-592-glossy-touch
     border-top: 1px solid rgba(255,255,255,0.1);
     font-size: 13px;
 }
+
 .footer-csun-row img {
     height: 22px;
     filter: brightness(0) invert(1);
 }
+
 .footer-csun-row a {
     color: rgba(255,255,255,0.7) !important;
     text-decoration: none;
 }
+
 .footer-csun-row a:hover {
     color: #fff !important;
 }
+
 .footer-social-links {
     display: flex;
     gap: 14px;
     justify-content: center;
     margin-top: 8px;
 }
+
 .footer-social-links a {
     color: rgba(255,255,255,0.6) !important;
     text-decoration: none;
     font-size: 13px;
 }
+
 .footer-social-links a:hover {
     color: #fff !important;
 }
 
-/* ── Team member photos ── */
 .team-avatar img {
     width: 150px;
     height: 150px;
@@ -146,13 +168,13 @@ https://templatemo.com/tm-592-glossy-touch
     object-fit: cover;
     aspect-ratio: 1 / 1;
 }
+
 .team-avatar img[alt="Lia Yaghobi"] { object-position: center top; }
 .team-avatar img[alt="Samar Kimiagar"] { object-position: center top; }
 .team-avatar img[alt="Odelia Sheelo"] { object-position: center 20%; }
 .team-avatar img[alt="Bargavi Sivaraman"] { object-position: center 15%; }
 .team-avatar img[alt="Rene Barseghian"] { object-position: center 20%; }
 
-/* ── Social link icons ── */
 .team-social a img {
     width: 24px;
     height: 24px;
@@ -160,21 +182,21 @@ https://templatemo.com/tm-592-glossy-touch
     transition: opacity 0.2s;
     vertical-align: middle;
 }
+
 .team-social a:hover img {
     opacity: 1;
 }
 
-/* ── CSUN Seal in footer ── */
 .csun-seal {
     height: 40px;
     margin-right: 8px;
     vertical-align: middle;
 }
 
-/* ── Homepage background image ── */
 .hero-bg {
     position: relative;
 }
+
 .hero-bg::before {
     content: '';
     position: absolute;
@@ -185,12 +207,14 @@ https://templatemo.com/tm-592-glossy-touch
     z-index: 0;
     pointer-events: none;
 }
+
 .hero-bg > * {
     position: relative;
     z-index: 1;
 }
 </style>
 </head>
+
 <body>
     <div class="bg-shapes">
         <div class="shape"></div>
@@ -201,7 +225,6 @@ https://templatemo.com/tm-592-glossy-touch
         <div class="shape"></div>
     </div>
 
-    <!-- TOP BAR: CSUN info + Nav links -->
     <div class="csun-top-bar">
         <div class="container">
             <div class="csun-left">
@@ -211,6 +234,7 @@ https://templatemo.com/tm-592-glossy-touch
                 <span style="opacity:0.4; color:#fff;">|</span>
                 <a href="https://www.csun.edu/~xjiang/SeniorDesign/" target="_blank">Senior Design Projects</a>
             </div>
+
             <div class="csun-social">
                 <a href="javascript:void(0)" onclick="showPage('home')">Home</a>
                 <a href="javascript:void(0)" onclick="showPage('about')">About</a>
@@ -224,24 +248,23 @@ https://templatemo.com/tm-592-glossy-touch
         </div>
     </div>
 
-    <!-- NAVIGATION HEADER: Icon + Title -->
     <header>
         <div class="container">
             <nav class="glass" style="justify-content: center; gap: 20px; flex-wrap: wrap;">
-    <div class="logo" onclick="showPage('home')">
-        <div class="logo-icon">
-            <img src="images/icon3-modified.png" alt="Astro Cultivators Logo" class="navbar-logo">
-        </div>
-    </div>
-    <div style="color: white; text-align: center; min-width: 0;">
-        <h1 style="font-size: clamp(1.2rem, 4vw, 2rem); margin: 0; text-shadow: 0 2px 10px rgba(0,0,0,0.3);">ASTRO CULTIVATORS</h1>
-        <p style="font-size: clamp(0.7rem, 2vw, 0.95rem); color: rgba(255,255,255,0.8); margin-top: 4px;">Early Prediction and Temporal Analysis of Growth and Stress for Soybean in Controlled Environments</p>
-    </div>
-</nav>
+                <div class="logo" onclick="showPage('home')">
+                    <div class="logo-icon">
+                        <img src="images/icon3-modified.png" alt="Astro Cultivators Logo" class="navbar-logo">
+                    </div>
+                </div>
+
+                <div style="color: white; text-align: center; min-width: 0;">
+                    <h1 style="font-size: clamp(1.2rem, 4vw, 2rem); margin: 0; text-shadow: 0 2px 10px rgba(0,0,0,0.3);">ASTRO CULTIVATORS</h1>
+                    <p style="font-size: clamp(0.7rem, 2vw, 0.95rem); color: rgba(255,255,255,0.8); margin-top: 4px;">Early Prediction and Temporal Analysis of Growth and Stress for Soybean in Controlled Environments</p>
+                </div>
+            </nav>
         </div>
     </header>
 
-    <!-- HOME PAGE -->
     <div id="home" class="page active">
         <div class="container">
             <div class="content-wrapper">
@@ -249,6 +272,13 @@ https://templatemo.com/tm-592-glossy-touch
                     <div style="width: 100%;">
                         <img src="images/fianal.png" alt="Astro Cultivators soybean research" style="width: 100%; border-radius: 20px; display: block;" />
                     </div>
+                </section>
+
+                <section class="about-text glass project-overview">
+                    <h2>About This Project</h2>
+                    <p>Astro Cultivators is a collaborative project between the Computer Science, Biology, and Mechanical Engineering departments at California State University, Northridge, under the <strong>ARCS (Autonomy Research Center for STEAHM)</strong> initiative.</p>
+                    <p>Our data science team builds the imaging and analytics pipeline that detects early drought stress in soybean seedlings and links visual features to measurable growth traits. Williams 82 soybean plants are grown in a controlled growth chamber where drought stress is applied by skipping scheduled waterings. Using hyperspectral, RGB, and depth cameras capturing images every 30 minutes, we collect multi-modal data that tracks subtle changes in plant health, often before they become visible to the human eye.</p>
+                    <p>Our pipeline spans six stages: dataset management, data cleaning and preprocessing, feature engineering, predictive modeling, temporal growth analysis, and output visualization. The goal is to enable biologists to identify stressed plants early and make data-driven decisions about crop management.</p>
                 </section>
 
                 <section class="features">
@@ -259,7 +289,7 @@ https://templatemo.com/tm-592-glossy-touch
                             <p>Imaging data sources, data organization, and how the data is collected and stored.</p>
                         </div>
                     </a>
-                    
+
                     <a href="preprocessing.html" style="text-decoration:none; color:inherit;">
                         <div class="feature-card glass">
                             <div class="feature-icon">🧹</div>
@@ -267,7 +297,7 @@ https://templatemo.com/tm-592-glossy-touch
                             <p>Removing noise, fixing errors, normalizing values, and preparing images for modeling.</p>
                         </div>
                     </a>
-                    
+
                     <a href="feature%20engineering.html" style="text-decoration:none; color:inherit;">
                         <div class="feature-card glass">
                             <div class="feature-icon">🧬</div>
@@ -304,41 +334,13 @@ https://templatemo.com/tm-592-glossy-touch
         </div>
     </div>
 
-    <!-- ABOUT PAGE -->
     <div id="about" class="page">
         <div class="container">
             <div class="content-wrapper">
-                <section class="about-content">
-                    <div class="about-text glass">
-                        <h2>About This Project</h2>
-                        <p>Astro Cultivators is a collaborative project between the Computer Science, Biology, and Mechanical Engineering departments at California State University, Northridge, under the <strong>ARCS (Autonomy Research Center for STEAHM)</strong> initiative.</p>
-                        <p>Our data science team builds the imaging and analytics pipeline that detects early drought stress in soybean seedlings and links visual features to measurable growth traits. Williams 82 soybean plants are grown in a controlled growth chamber where drought stress is applied by skipping scheduled waterings. Using hyperspectral, RGB, and depth cameras capturing images every 30 minutes, we collect multi-modal data that tracks subtle changes in plant health, often before they become visible to the human eye.</p>
-                        <p>Our pipeline spans six stages: dataset management, data cleaning and preprocessing, feature engineering, predictive modeling, temporal growth analysis, and output visualization. The goal is to enable biologists to identify stressed plants early and make data-driven decisions about crop management.</p>
-                    </div>
-                    <div class="stats">
-                        <div class="stat-card glass">
-                            <div class="stat-number">3</div>
-                            <div class="stat-label">Camera Types</div>
-                        </div>
-                        <div class="stat-card glass">
-                            <div class="stat-number">600+</div>
-                            <div class="stat-label">Images Collected</div>
-                        </div>
-                        <div class="stat-card glass">
-                            <div class="stat-number">7+</div>
-                            <div class="stat-label">Plant Traits Tracked</div>
-                        </div>
-                        <div class="stat-card glass">
-                            <div class="stat-number">30m</div>
-                            <div class="stat-label">Capture Interval</div>
-                        </div>
-                    </div>
-                </section>
-
                 <section class="team-section">
                     <h2>Meet Our Team</h2>
-                    <div class="team-grid">
 
+                    <div class="team-grid">
                         <div class="team-member glass">
                             <div class="team-avatar"><img src="images/Headshot.webp" alt="Lia Yaghobi"></div>
                             <h3>Lia Yaghobi</h3>
@@ -392,14 +394,12 @@ https://templatemo.com/tm-592-glossy-touch
                                 <a href="https://github.com/renebars" title="GitHub" target="_blank"><img src="images/github.png" alt="GitHub"></a>
                             </div>
                         </div>
-
                     </div>
                 </section>
             </div>
         </div>
     </div>
 
-    <!-- TECHNOLOGIES & SKILLS PAGE (keeps id="services" so showPage still works) -->
     <div id="services" class="page">
         <div class="container">
             <div class="content-wrapper">
@@ -510,7 +510,6 @@ https://templatemo.com/tm-592-glossy-touch
                     </a>
                 </section>
 
-                <!-- Skills cloud section -->
                 <section class="skills-section-wrapper">
                     <div class="hero glass">
                         <h2>Skills</h2>
@@ -540,7 +539,6 @@ https://templatemo.com/tm-592-glossy-touch
         </div>
     </div>
 
-    <!-- SINGLE FOOTER -->
     <div id="footer">
         <div class="container">
             <footer class="glass">
@@ -550,15 +548,18 @@ https://templatemo.com/tm-592-glossy-touch
                         <a href="javascript:void(0)" onclick="showPage('services')">Technologies &amp; Skills</a>
                         <a href="https://github.com/CSUN-ARCS-AstroCultivators" target="_blank">GitHub</a>
                     </div>
+
                     <div class="copyright">
                         <img src="images/CSUN_Seal.png" alt="CSUN Seal" class="csun-seal">
                         Copyright &copy; California State University, Northridge
                     </div>
+
                     <div class="footer-csun-row">
                         <a href="https://www.csun.edu" target="_blank">CSUN Website</a>
                         <span style="opacity:0.3; color:#fff;">|</span>
                         <a href="https://www.csun.edu/~xjiang/SeniorDesign/" target="_blank">Senior Design Projects</a>
                     </div>
+
                     <div class="footer-social-links">
                         <a href="https://www.facebook.com/calstatenorthridge" target="_blank">Facebook</a>
                         <a href="https://x.com/csunorthridge" target="_blank">X</a>
@@ -569,7 +570,7 @@ https://templatemo.com/tm-592-glossy-touch
             </footer>
         </div>
     </div>
+
 <script src="templatemo-glossy-touch.js"></script>
 </body>
-
 </html>
