@@ -1,40 +1,185 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Astro Cultivators | Predictive Modeling</title>
-  <link rel="stylesheet" href="templatemo-glossy-touch.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astro Cultivators | Predictive Modeling</title>
+    <link rel="icon" type="image/png" href="images/icon3-modified.png">
+    <link rel="stylesheet" href="templatemo-glossy-touch.css">
+
+    <style>
+.page-wrap {
+    margin-top: 90px;
+    padding-bottom: 50px;
+}
+
+.page-header,
+.content-card {
+    padding: 34px;
+    margin-bottom: 24px;
+}
+
+.page-header {
+    text-align: center;
+}
+
+.page-header h1,
+.content-card h2,
+.model-card h3 {
+    color: white;
+}
+
+.page-header p,
+.content-card p,
+.content-card li,
+.model-card p {
+    color: rgba(255,255,255,0.84);
+    line-height: 1.7;
+}
+
+.model-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
+    margin-top: 18px;
+}
+
+.model-card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 18px;
+    padding: 22px;
+}
+
+.note-box {
+    background: rgba(255,255,255,0.08);
+    border-left: 4px solid rgba(255,255,255,0.35);
+    border-radius: 14px;
+    padding: 18px;
+    margin-top: 18px;
+}
+
+.back-link {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    background: rgba(255,255,255,0.10);
+    border: 1px solid rgba(255,255,255,0.18);
+    padding: 12px 18px;
+    border-radius: 999px;
+    margin-top: 8px;
+}
+
+.back-link:hover {
+    background: rgba(255,255,255,0.18);
+}
+</style>
 </head>
+
 <body>
+    <div class="bg-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
 
-  <div class="container" style="margin-top: 120px;">
+    <div class="container page-wrap">
+        <section class="glass page-header">
+            <h1>Predictive Modeling</h1>
+            <p>This page describes how the extracted features prepare the project for plant stress classification and growth trait prediction.</p>
+        </section>
 
-    <section class="glass" style="padding: 32px; margin-bottom: 24px;">
-      <h1>Predictive Modeling</h1>
-    </section>
+        <section class="glass content-card">
+            <h2>Modeling Status</h2>
+            <p>The notebooks currently focus mainly on data preprocessing, feature engineering, temporal analysis, and visualization. The modeling stage is prepared around the feature tables created from hyperspectral and RealSense data. Final model performance metrics should be added after the model training notebooks are completed and reviewed.</p>
 
-    <section class="glass" style="padding: 32px; margin-bottom: 24px;">
-      <h2>Stress Classification</h2>
-    </section>
+            <div class="note-box">
+                <p>This page does not claim final accuracy, F1 score, or prediction results yet. It explains the modeling inputs and planned modeling direction based on the current pipeline.</p>
+            </div>
+        </section>
 
-    <section class="glass" style="padding: 32px; margin-bottom: 24px;">
-      <h2>Trait Regression</h2>
-    </section>
+        <section class="glass content-card">
+            <h2>Modeling Inputs</h2>
+            <p>The project creates structured feature tables that can be used as model inputs. These tables are easier to train on than raw images because each row summarizes plant information at one image time point.</p>
 
-    <section class="glass" style="padding: 32px; margin-bottom: 24px;">
-      <h2>Evaluation Metrics</h2>
-    </section>
+            <div class="model-grid">
+                <div class="model-card">
+                    <h3>Hyperspectral Features</h3>
+                    <p>NDVI, GNDVI, red edge NDVI, chlorophyll red edge, simple ratio, SIPI, PRI, coverage, and SNR can be used as spectral plant health features.</p>
+                </div>
 
-    <section class="glass" style="padding: 32px;">
-      <h2>Outputs</h2>
-      <p style="margin-top: 24px;">
-        <a href="index.html">← Back to Home</a>
-      </p>
-    </section>
+                <div class="model-card">
+                    <h3>RealSense Features</h3>
+                    <p>Area, VARI median, and height related features can be used to model visible plant growth and stress related changes.</p>
+                </div>
 
-  </div>
+                <div class="model-card">
+                    <h3>Temporal Features</h3>
+                    <p>Date, time, daily averages, and feature changes over time can help models learn growth patterns instead of only single image values.</p>
+                </div>
+            </div>
+        </section>
 
+        <section class="glass content-card">
+            <h2>Stress Classification</h2>
+            <p>The main classification goal is to predict plant stress condition, such as control versus drought, using extracted features. For RealSense Set 2, Plant A and Plant B can be tracked separately, which supports comparison between plant groups across time.</p>
+
+            <ul>
+                <li>Possible input features include vegetation indices, VARI, area, and height.</li>
+                <li>Possible labels include control and drought treatment labels from the experiment design.</li>
+                <li>Models can start with simple classifiers before moving to deeper models.</li>
+                <li>Feature based models are useful as a baseline before raw image deep learning.</li>
+            </ul>
+        </section>
+
+        <section class="glass content-card">
+            <h2>Trait Regression</h2>
+            <p>Besides classification, the project can also use regression models to predict continuous plant traits. These traits may include growth measurements such as plant area, height, or vegetation index trends.</p>
+
+            <div class="model-grid">
+                <div class="model-card">
+                    <h3>Area Prediction</h3>
+                    <p>Plant mask area can be predicted or tracked as a growth trait.</p>
+                </div>
+
+                <div class="model-card">
+                    <h3>Height Prediction</h3>
+                    <p>Depth based height is still noisy, but it can become a useful regression target after refinement.</p>
+                </div>
+
+                <div class="model-card">
+                    <h3>Vegetation Index Trends</h3>
+                    <p>Models can predict or compare NDVI, GNDVI, PRI, and VARI changes over time.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="glass content-card">
+            <h2>Evaluation Metrics</h2>
+            <p>Once the modeling notebooks are finalized, the project can evaluate stress classification and regression tasks with standard metrics.</p>
+
+            <ul>
+                <li>Classification metrics: accuracy, precision, recall, F1 score, and confusion matrix.</li>
+                <li>Regression metrics: MAE, RMSE, and R squared.</li>
+                <li>Temporal evaluation: trend consistency, early stress detection timing, and comparison between control and drought plants.</li>
+            </ul>
+        </section>
+
+        <section class="glass content-card">
+            <h2>Expected Outputs</h2>
+            <ul>
+                <li>Clean model input CSV files.</li>
+                <li>Baseline stress classification models.</li>
+                <li>Regression models for growth traits.</li>
+                <li>Model evaluation tables and plots.</li>
+                <li>Visual comparison between predicted and observed plant trends.</li>
+            </ul>
+
+            <a class="back-link" href="index.html">← Back to Home</a>
+        </section>
+    </div>
 </body>
 </html>
