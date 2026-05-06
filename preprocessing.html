@@ -1,27 +1,224 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Astro Cultivators | Data Cleaning and Preprocessing</title>
-  <link rel="stylesheet" href="templatemo-glossy-touch.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astro Cultivators | Data Cleaning and Preprocessing</title>
+    <link rel="icon" type="image/png" href="images/icon3-modified.png">
+    <link rel="stylesheet" href="templatemo-glossy-touch.css">
+
+    <style>
+.page-wrap {
+    margin-top: 90px;
+    padding-bottom: 50px;
+}
+
+.page-header,
+.content-card {
+    padding: 34px;
+    margin-bottom: 24px;
+}
+
+.page-header {
+    text-align: center;
+}
+
+.page-header h1,
+.content-card h2,
+.step-card h3 {
+    color: white;
+}
+
+.page-header p,
+.content-card p,
+.content-card li,
+.step-card p {
+    color: rgba(255,255,255,0.84);
+    line-height: 1.7;
+}
+
+.step-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
+    margin-top: 18px;
+}
+
+.step-card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 18px;
+    padding: 22px;
+}
+
+.process-list {
+    margin-top: 18px;
+}
+
+.process-list li {
+    margin-bottom: 10px;
+}
+
+.output-box {
+    background: rgba(255,255,255,0.08);
+    border-left: 4px solid rgba(255,255,255,0.35);
+    border-radius: 14px;
+    padding: 18px;
+    margin-top: 18px;
+}
+
+.back-link {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    background: rgba(255,255,255,0.10);
+    border: 1px solid rgba(255,255,255,0.18);
+    padding: 12px 18px;
+    border-radius: 999px;
+    margin-top: 8px;
+}
+
+.back-link:hover {
+    background: rgba(255,255,255,0.18);
+}
+</style>
 </head>
+
 <body>
+    <div class="bg-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
 
-  <div class="container" style="margin-top: 120px;">
-    <section class="glass" style="padding: 32px;">
-      <h1>Data Cleaning and Preprocessing</h1>
+    <div class="container page-wrap">
+        <section class="glass page-header">
+            <h1>Data Cleaning and Preprocessing</h1>
+            <p>This stage prepares raw hyperspectral, RGB, and depth images so the data can be used for feature extraction, visualization, and modeling preparation.</p>
+        </section>
 
-      <div style="margin-top: 24px;">
-        Content will be added here.
-      </div>
+        <section class="glass content-card">
+            <h2>Preprocessing Goal</h2>
+            <p>The main goal of preprocessing was to turn raw image folders into clean, structured datasets. This included removing invalid samples, keeping usable imaging conditions, isolating plant regions, and creating CSV files that could be used later in feature engineering and analysis.</p>
+        </section>
 
-      <p style="margin-top: 40px;">
-        <a href="index.html">← Back to Home</a>
-      </p>
-    </section>
-  </div>
+        <section class="glass content-card">
+            <h2>Hyperspectral Calibration Cycle Preprocessing</h2>
+            <p>The calibration cycle preprocessing work focused on raw hyperspectral TIFF files. The pipeline extracted the image files, built a dataset index, sorted images by date and sequence, and checked whether each cube had the expected 51 bands.</p>
 
+            <div class="step-grid">
+                <div class="step-card">
+                    <h3>File Extraction</h3>
+                    <p>Raw zipped hyperspectral files were extracted into working folders so each TIFF image could be processed individually.</p>
+                </div>
+
+                <div class="step-card">
+                    <h3>Index Creation</h3>
+                    <p>The notebook created CSV index files to track filenames, dates, sequence order, and valid image lists.</p>
+                </div>
+
+                <div class="step-card">
+                    <h3>Band Validation</h3>
+                    <p>Only valid 51 band hyperspectral cubes were kept. Non 51 band files were removed from the clean dataset.</p>
+                </div>
+
+                <div class="step-card">
+                    <h3>NDVI Masking</h3>
+                    <p>NDVI based thresholding was used to separate plant pixels from background pixels and create plant masks.</p>
+                </div>
+            </div>
+
+            <div class="output-box">
+                <p>The calibration cycle notebook started with 643 TIFF files, kept 492 valid 51 band images, and removed 151 files that did not match the expected band count.</p>
+            </div>
+        </section>
+
+        <section class="glass content-card">
+            <h2>Hyperspectral Quality Control Exploration</h2>
+            <p>A separate exploration notebook checked a larger hyperspectral folder to understand image quality and filtering needs before feature extraction. This helped identify which images were actually usable under grow light conditions.</p>
+
+            <ul class="process-list">
+                <li>Loaded 5,829 hyperspectral TIFF images for inspection.</li>
+                <li>Separated usable light on cubes from lights off images.</li>
+                <li>Identified CAI or index cubes, bad cubes, and unknown cube types.</li>
+                <li>Checked duplicate captures from the same date and hour.</li>
+                <li>Validated cube types such as reflectance, reflectance percent, and radiance or intensity.</li>
+                <li>Trimmed unstable edge bands and tested spectral smoothing.</li>
+                <li>Confirmed that plant masks matched the spatial dimensions of the cleaned cubes.</li>
+            </ul>
+        </section>
+
+        <section class="glass content-card">
+            <h2>Full Plant Cycle Hyperspectral Preprocessing</h2>
+            <p>The January drought cycle pipeline filtered images by date and time, loaded 51 band TIFF cubes, calculated quality metrics, and removed frames that were outside the grow light window or did not pass quality checks.</p>
+
+            <ul class="process-list">
+                <li>Date range was filtered from January 10 to January 30.</li>
+                <li>The main processing window was 6 AM to 1 PM to match the grow light schedule.</li>
+                <li>Signal to noise ratio was calculated for quality control.</li>
+                <li>Plant coverage was calculated from the NDVI mask.</li>
+                <li>Corrupted frames and unstable frames were filtered out.</li>
+            </ul>
+
+            <div class="output-box">
+                <p>This workflow checked 293 TIFF files, processed 204 frames, kept 195 valid frames, filtered out 89 frames, and marked 9 frames as corrupted.</p>
+            </div>
+        </section>
+
+        <section class="glass content-card">
+            <h2>RealSense RGB and Depth Preprocessing</h2>
+            <p>The RealSense notebook prepared RGB and depth image pairs for visible growth analysis. The first step was separating files into useful image types and removing dud images.</p>
+
+            <div class="step-grid">
+                <div class="step-card">
+                    <h3>Image Type Separation</h3>
+                    <p>Files were sorted into true RGB images, raw depth images, colorized depth images, dud images, and other files.</p>
+                </div>
+
+                <div class="step-card">
+                    <h3>Timestamp Matching</h3>
+                    <p>RGB and raw depth files were matched by year, month, day, hour, and minute so each pair represented the same capture time.</p>
+                </div>
+
+                <div class="step-card">
+                    <h3>Set Separation</h3>
+                    <p>The RealSense data was split into Set 1 and Set 2. Set 2 was used because it had cleaner data for feature extraction.</p>
+                </div>
+
+                <div class="step-card">
+                    <h3>Background Modeling</h3>
+                    <p>A median background image was built from RGB frames so plant regions could be separated from the chamber background.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="glass content-card">
+            <h2>Plant Masking</h2>
+            <p>Plant masks were created differently for each sensor type. Hyperspectral images used NDVI based masks. RealSense RGB images used background comparison, pot detection, plant region separation, and largest component filtering.</p>
+
+            <ul class="process-list">
+                <li>Hyperspectral masks isolated plant pixels using NDVI thresholds.</li>
+                <li>Morphological cleaning improved mask quality by removing small noisy regions.</li>
+                <li>RealSense masks detected the two pot regions and split the image into Plant A and Plant B.</li>
+                <li>Mask debugging plots compared the original image, binary mask, overlay, and masked plant image.</li>
+            </ul>
+        </section>
+
+        <section class="glass content-card">
+            <h2>Preprocessing Outputs</h2>
+            <ul class="process-list">
+                <li>Cleaned hyperspectral image folder with valid 51 band TIFF files.</li>
+                <li>Dataset index CSV files sorted by date and sequence.</li>
+                <li>Metadata CSV files with basic NDVI and mask statistics.</li>
+                <li>Matched RGB and depth image pairs for RealSense analysis.</li>
+                <li>Clean plant masks for later feature extraction.</li>
+            </ul>
+
+            <a class="back-link" href="index.html">← Back to Home</a>
+        </section>
+    </div>
 </body>
 </html>
