@@ -25,30 +25,41 @@
 
 .page-header h1,
 .content-card h2,
-.timeline-card h3 {
+.timeline-card h3,
+.metric-card h3 {
     color: white;
 }
 
 .page-header p,
 .content-card p,
 .content-card li,
-.timeline-card p {
+.timeline-card p,
+.metric-card p {
     color: rgba(255,255,255,0.84);
     line-height: 1.7;
 }
 
-.timeline-grid {
+.timeline-grid,
+.metric-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 18px;
     margin-top: 18px;
 }
 
-.timeline-card {
+.timeline-card,
+.metric-card {
     background: rgba(255,255,255,0.08);
     border: 1px solid rgba(255,255,255,0.14);
     border-radius: 18px;
     padding: 22px;
+}
+
+.metric-value {
+    color: white;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 8px;
 }
 
 .note-box {
@@ -69,10 +80,6 @@
     border-radius: 999px;
     margin-top: 8px;
 }
-
-.back-link:hover {
-    background: rgba(255,255,255,0.18);
-}
 </style>
 </head>
 
@@ -89,89 +96,84 @@
     <div class="container page-wrap">
         <section class="glass page-header">
             <h1>Temporal Growth Analysis</h1>
-            <p>This stage studies how plant features change over time so early stress patterns can be detected before they become visually obvious.</p>
+            <p>This stage tracks plant traits over time to compare control and drought trends and identify early stress onset.</p>
         </section>
 
         <section class="glass content-card">
-            <h2>Temporal Analysis Goal</h2>
-            <p>Instead of only looking at one image at a time, temporal growth analysis tracks plant measurements across days and image captures. This helps compare growth patterns between plant sets, identify data gaps, and detect possible stress signals earlier.</p>
+            <h2>Temporal Goal</h2>
+            <p>The temporal analysis looks at how plant traits change across days instead of only studying one image at a time. This helps detect whether drought plants begin changing earlier than visible symptoms suggest.</p>
         </section>
 
         <section class="glass content-card">
-            <h2>Hyperspectral Time Series</h2>
-            <p>The hyperspectral pipeline keeps timestamp, date, and time with each feature row. This makes it possible to plot vegetation indices over time and compare spectral changes across the growth cycle.</p>
+            <h2>RealSense Daily Trends</h2>
+            <p>RealSense frame level features were aggregated by date and treatment. The final analysis focused on daily trends for VARI, area, height, and normalized change features.</p>
 
             <div class="timeline-grid">
                 <div class="timeline-card">
-                    <h3>NDVI Over Time</h3>
-                    <p>NDVI trends show how plant greenness and vegetation response change during the imaging period.</p>
+                    <h3>VARI Trend</h3>
+                    <p>Tracks visible greenness over time for control and drought plants.</p>
                 </div>
 
                 <div class="timeline-card">
-                    <h3>GNDVI Over Time</h3>
-                    <p>GNDVI trends help track chlorophyll related response using green and near infrared wavelengths.</p>
+                    <h3>Area Trend</h3>
+                    <p>Tracks plant mask area and growth difference between treatments.</p>
                 </div>
 
                 <div class="timeline-card">
-                    <h3>Coverage Over Time</h3>
-                    <p>Coverage estimates how much plant region appears in each frame, which can reflect visible growth or segmentation quality.</p>
+                    <h3>Height Trend</h3>
+                    <p>Tracks plant vertical span after baseline normalization.</p>
+                </div>
+
+                <div class="timeline-card">
+                    <h3>Depth Trend</h3>
+                    <p>Tracks canopy volume, surface roughness, and depth variation for plant structure analysis.</p>
                 </div>
             </div>
         </section>
 
         <section class="glass content-card">
-            <h2>RealSense Growth Trends</h2>
-            <p>The RealSense notebook extracted features from Set 2 and grouped them by day and plant. This allowed daily trend plots for visible growth features.</p>
+            <h2>Stress Onset Detection</h2>
+            <p>The notebook used daily statistical testing to detect when drought plants first became significantly different from control plants. The main onset test used VARI change with a weighted t test and Benjamini Hochberg correction.</p>
 
-            <div class="timeline-grid">
-                <div class="timeline-card">
-                    <h3>Daily Average VARI</h3>
-                    <p>VARI was plotted over time for Plant A and Plant B to compare visible greenness trends.</p>
+            <div class="metric-grid">
+                <div class="metric-card">
+                    <div class="metric-value">Day 2</div>
+                    <h3>Detected Onset</h3>
+                    <p>First significant day where drought VARI was lower than control.</p>
                 </div>
 
-                <div class="timeline-card">
-                    <h3>Daily Average Height</h3>
-                    <p>Height was plotted over time using depth related measurements, but the notebook notes that height still had noise.</p>
+                <div class="metric-card">
+                    <div class="metric-value">0.031</div>
+                    <h3>Corrected p Value</h3>
+                    <p>Benjamini Hochberg corrected result for stress onset.</p>
                 </div>
 
-                <div class="timeline-card">
-                    <h3>Plant A and Plant B</h3>
-                    <p>The image was split into two plant regions so each plant could be tracked separately across the same timeline.</p>
+                <div class="metric-card">
+                    <div class="metric-value">20</div>
+                    <h3>Daily Rows</h3>
+                    <p>Daily aggregated RealSense rows used for analysis.</p>
                 </div>
             </div>
         </section>
 
         <section class="glass content-card">
-            <h2>Data Gaps and Set Selection</h2>
-            <p>The RealSense workflow checked how many matched RGB and depth pairs were available per day and searched for missing dates. This matters because temporal analysis depends on consistent captures across the plant cycle.</p>
+            <h2>Hyperspectral Temporal Features</h2>
+            <p>The HS feature workflow also supports temporal analysis because each feature row keeps its timestamp. HS outputs include daily vegetation index trends for NDVI, GNDVI, red edge NDVI, chlorophyll red edge, and simple ratio.</p>
 
             <ul>
-                <li>RGB and depth images were matched by timestamp.</li>
-                <li>Images outside the main grow light window were removed.</li>
-                <li>Matched pairs were counted by day.</li>
-                <li>Set 1 and Set 2 were separated by date.</li>
-                <li>Set 2 was chosen for cleaner feature extraction.</li>
+                <li>HS Set 1 covered January 10 to January 30, 2026.</li>
+                <li>The HS feature workflow produced 204 timestamped records across 21 days.</li>
+                <li>Future work can fuse HS vegetation indices with RealSense model features.</li>
             </ul>
         </section>
 
         <section class="glass content-card">
-            <h2>Stress Pattern Interpretation</h2>
-            <p>The main purpose of temporal analysis is to look for differences between healthy growth and stress affected growth. A stress signal may appear as a drop or shift in vegetation indices, slower area growth, lower visible greenness, or abnormal height trends.</p>
+            <h2>Interpretation</h2>
+            <p>The temporal results show that feature trends can reveal stress earlier than simple visual inspection. In the final model analysis, stress was detected at day 2 before clear visible symptoms.</p>
 
             <div class="note-box">
-                <p>The current notebooks show temporal feature extraction and plotting. Final biological interpretation should be reviewed with the biology team before being treated as a final research conclusion.</p>
+                <p>The current limitation is that Set 2 contained only 2 plant pairs and one temperature condition, so the onset result should be validated on additional experiments.</p>
             </div>
-        </section>
-
-        <section class="glass content-card">
-            <h2>Temporal Outputs</h2>
-            <ul>
-                <li>Daily average VARI plots from RealSense RGB images.</li>
-                <li>Daily average height plots from RealSense depth exploration.</li>
-                <li>Hyperspectral vegetation index trends across image dates.</li>
-                <li>Image count summaries by day and month.</li>
-                <li>Gap checks for missing capture dates.</li>
-            </ul>
 
             <a class="back-link" href="index.html">← Back to Home</a>
         </section>
