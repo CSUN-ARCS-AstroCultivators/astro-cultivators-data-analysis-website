@@ -1,26 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Astro Cultivators | Output and Visualization</title>
-  <link rel="stylesheet" href="templatemo-glossy-touch.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astro Cultivators | Output and Visualization</title>
+    <link rel="icon" type="image/png" href="images/icon3-modified.png">
+    <link rel="stylesheet" href="templatemo-glossy-touch.css">
+
+    <style>
+.page-wrap {
+    margin-top: 90px;
+    padding-bottom: 50px;
+}
+
+.page-header,
+.content-card {
+    padding: 34px;
+    margin-bottom: 24px;
+}
+
+.page-header {
+    text-align: center;
+}
+
+.page-header h1,
+.content-card h2,
+.visual-card h3 {
+    color: white;
+}
+
+.page-header p,
+.content-card p,
+.content-card li,
+.visual-card p {
+    color: rgba(255,255,255,0.84);
+    line-height: 1.7;
+}
+
+.visual-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
+    margin-top: 18px;
+}
+
+.visual-card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 18px;
+    padding: 22px;
+}
+
+.output-box {
+    background: rgba(255,255,255,0.08);
+    border-left: 4px solid rgba(255,255,255,0.35);
+    border-radius: 14px;
+    padding: 18px;
+    margin-top: 18px;
+}
+
+.back-link {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    background: rgba(255,255,255,0.10);
+    border: 1px solid rgba(255,255,255,0.18);
+    padding: 12px 18px;
+    border-radius: 999px;
+    margin-top: 8px;
+}
+
+.back-link:hover {
+    background: rgba(255,255,255,0.18);
+}
+</style>
 </head>
+
 <body>
+    <div class="bg-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
 
-  <div class="container" style="margin-top: 120px;">
-    <section class="glass" style="padding: 32px;">
-      <h1>Output and Visualization</h1>
+    <div class="container page-wrap">
+        <section class="glass page-header">
+            <h1>Output and Visualization</h1>
+            <p>This page summarizes the visual outputs created from the hyperspectral and RealSense pipelines.</p>
+        </section>
 
-      <div style="margin-top: 24px;">
-        Content will be added here.
-      </div>
+        <section class="glass content-card">
+            <h2>Visualization Goal</h2>
+            <p>Visualization helps confirm that preprocessing and feature extraction are working correctly. It also makes the results easier to explain to biology collaborators, project reviewers, and future team members.</p>
+        </section>
 
-      <p style="margin-top: 40px;">
-        <a href="index.html">← Back to Home</a>
-      </p>
-    </section>
-  </div>
+        <section class="glass content-card">
+            <h2>Hyperspectral Visualizations</h2>
+            <p>The hyperspectral notebook created a set of visual outputs using reconstructed color images, NDVI maps, plant masks, spectral plots, temporal patterns, and feature summaries.</p>
 
+            <div class="visual-grid">
+                <div class="visual-card">
+                    <h3>RGB Reconstruction</h3>
+                    <p>Selected hyperspectral bands were combined to create an RGB like view of the plant image.</p>
+                </div>
+
+                <div class="visual-card">
+                    <h3>NDVI Map</h3>
+                    <p>NDVI values were displayed as heatmaps to show vegetation response across the image.</p>
+                </div>
+
+                <div class="visual-card">
+                    <h3>Segmentation Overlay</h3>
+                    <p>Plant masks were overlaid on images to check whether the plant region was isolated correctly.</p>
+                </div>
+
+                <div class="visual-card">
+                    <h3>False Color Composite</h3>
+                    <p>False color images helped highlight spectral differences that are not visible in normal RGB images.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="glass content-card">
+            <h2>Spectral and Feature Plots</h2>
+            <p>The notebooks also created plots that summarize spectral values and vegetation features. These plots are useful for checking whether features follow reasonable patterns.</p>
+
+            <div class="visual-grid">
+                <div class="visual-card">
+                    <h3>Spectral Signatures</h3>
+                    <p>Average reflectance curves were plotted for plant pixels and background pixels to compare spectral behavior.</p>
+                </div>
+
+                <div class="visual-card">
+                    <h3>Temporal Heatmaps</h3>
+                    <p>Feature values were visualized across dates to highlight changes over the plant cycle.</p>
+                </div>
+
+                <div class="visual-card">
+                    <h3>Trend Lines</h3>
+                    <p>Vegetation index trends were plotted to show how features changed over time.</p>
+                </div>
+
+                <div class="visual-card">
+                    <h3>Correlation Matrix</h3>
+                    <p>Feature relationships were visualized to understand which vegetation indices moved together.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="glass content-card">
+            <h2>RealSense Visualizations</h2>
+            <p>The RealSense notebook included visualization tools for debugging plant masks and checking visible growth trends. These outputs helped verify that Plant A and Plant B were separated correctly.</p>
+
+            <div class="visual-grid">
+                <div class="visual-card">
+                    <h3>Median Background</h3>
+                    <p>A median background image was visualized to confirm that the background model represented the empty chamber scene.</p>
+                </div>
+
+                <div class="visual-card">
+                    <h3>Mask Debugging</h3>
+                    <p>The notebook displayed the original RGB image, binary mask, green overlay, and masked only plant image.</p>
+                </div>
+
+                <div class="visual-card">
+                    <h3>VARI Over Time</h3>
+                    <p>Daily average VARI was plotted for each plant to compare visible greenness trends.</p>
+                </div>
+
+                <div class="visual-card">
+                    <h3>Height Over Time</h3>
+                    <p>Daily average height was plotted from depth exploration, with the note that height values were still noisy.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="glass content-card">
+            <h2>Final Output Files</h2>
+            <p>The visual outputs support the CSV feature files and help explain what the numbers mean. The main output files from the notebooks include vegetation index CSV files, RealSense feature CSV files, metadata files, and plots for presentation or project documentation.</p>
+
+            <div class="output-box">
+                <p>Important outputs include vegetation_indices_HS.csv, vegetation_indices_mean.csv, features_set2.csv, metadata_basic.csv, images_perday.csv, and images_permonth.csv.</p>
+            </div>
+        </section>
+
+        <section class="glass content-card">
+            <h2>Why Visualization Matters</h2>
+            <ul>
+                <li>It confirms that masks are selecting plant pixels instead of background.</li>
+                <li>It shows whether vegetation indices are changing across time.</li>
+                <li>It helps explain the dataset to non technical collaborators.</li>
+                <li>It supports future model evaluation by connecting predictions back to visual plant changes.</li>
+            </ul>
+
+            <a class="back-link" href="index.html">← Back to Home</a>
+        </section>
+    </div>
 </body>
 </html>
