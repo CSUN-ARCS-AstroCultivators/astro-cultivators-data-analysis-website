@@ -25,30 +25,41 @@
 
 .page-header h1,
 .content-card h2,
-.model-card h3 {
+.model-card h3,
+.metric-card h3 {
     color: white;
 }
 
 .page-header p,
 .content-card p,
 .content-card li,
-.model-card p {
+.model-card p,
+.metric-card p {
     color: rgba(255,255,255,0.84);
     line-height: 1.7;
 }
 
-.model-grid {
+.model-grid,
+.metric-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 18px;
     margin-top: 18px;
 }
 
-.model-card {
+.model-card,
+.metric-card {
     background: rgba(255,255,255,0.08);
     border: 1px solid rgba(255,255,255,0.14);
     border-radius: 18px;
     padding: 22px;
+}
+
+.metric-value {
+    color: white;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 8px;
 }
 
 .note-box {
@@ -89,93 +100,159 @@
     <div class="container page-wrap">
         <section class="glass page-header">
             <h1>Predictive Modeling</h1>
-            <p>This page describes how the extracted features prepare the project for plant stress classification and growth trait prediction.</p>
+            <p>This stage uses RealSense RGB and depth features to classify soybean plants as control or drought stressed.</p>
         </section>
 
         <section class="glass content-card">
-            <h2>Modeling Status</h2>
-            <p>The notebooks currently focus mainly on data preprocessing, feature engineering, temporal analysis, and visualization. The modeling stage is prepared around the feature tables created from hyperspectral and RealSense data. Final model performance metrics should be added after the model training notebooks are completed and reviewed.</p>
+            <h2>Modeling Goal</h2>
+            <p>The modeling goal was to detect drought stress before visible symptoms were obvious. The input data came from RealSense Set 2, using extracted plant traits from RGB masks and 16 bit raw depth images.</p>
 
             <div class="note-box">
-                <p>This page does not claim final accuracy, F1 score, or prediction results yet. It explains the modeling inputs and planned modeling direction based on the current pipeline.</p>
+                <p>This page is based on the final RealSense pipeline, where the team benchmarked multiple classifiers and selected an MLP model for stress classification.</p>
             </div>
         </section>
 
         <section class="glass content-card">
-            <h2>Modeling Inputs</h2>
-            <p>The project creates structured feature tables that can be used as model inputs. These tables are easier to train on than raw images because each row summarizes plant information at one image time point.</p>
+            <h2>Modeling Dataset</h2>
+            <p>The model used Set 2 Williams 82 soybean data collected under controlled chamber conditions. The experiment used a 28°C and 26°C day night temperature setting with a 7 hour photoperiod.</p>
+
+            <div class="metric-grid">
+                <div class="metric-card">
+                    <div class="metric-value">265</div>
+                    <h3>Frames</h3>
+                    <p>Usable per plant frames after filtering and segmentation.</p>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-value">20</div>
+                    <h3>Daily Rows</h3>
+                    <p>Per frame features were aggregated into daily treatment level rows.</p>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-value">4</div>
+                    <h3>Input Features</h3>
+                    <p>VARI change, VARI standard deviation, area change, and height change.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="glass content-card">
+            <h2>Input Features</h2>
+            <p>The model used baseline normalized change features so control and drought plants could be compared more fairly across time.</p>
 
             <div class="model-grid">
                 <div class="model-card">
-                    <h3>Hyperspectral Features</h3>
-                    <p>NDVI, GNDVI, red edge NDVI, chlorophyll red edge, simple ratio, SIPI, PRI, coverage, and SNR can be used as spectral plant health features.</p>
+                    <h3>VARI Change</h3>
+                    <p>VARI mean after subtracting the day 1 median for each treatment.</p>
                 </div>
 
                 <div class="model-card">
-                    <h3>RealSense Features</h3>
-                    <p>Area, VARI median, and height related features can be used to model visible plant growth and stress related changes.</p>
+                    <h3>VARI Standard Deviation</h3>
+                    <p>Variation in pixel level greenness within the plant mask.</p>
                 </div>
 
                 <div class="model-card">
-                    <h3>Temporal Features</h3>
-                    <p>Date, time, daily averages, and feature changes over time can help models learn growth patterns instead of only single image values.</p>
+                    <h3>Area Change</h3>
+                    <p>Plant mask area after subtracting the day 1 median for each treatment.</p>
+                </div>
+
+                <div class="model-card">
+                    <h3>Height Change</h3>
+                    <p>Mask row span after subtracting the day 1 median for each treatment.</p>
                 </div>
             </div>
         </section>
 
         <section class="glass content-card">
-            <h2>Stress Classification</h2>
-            <p>The main classification goal is to predict plant stress condition, such as control versus drought, using extracted features. For RealSense Set 2, Plant A and Plant B can be tracked separately, which supports comparison between plant groups across time.</p>
+            <h2>Models Tested</h2>
+            <p>The modeling notebook benchmarked 12 classifiers using leave one day out cross validation. Each fold held out one date as the test set, which made the evaluation more strict for temporal data.</p>
 
             <ul>
-                <li>Possible input features include vegetation indices, VARI, area, and height.</li>
-                <li>Possible labels include control and drought treatment labels from the experiment design.</li>
-                <li>Models can start with simple classifiers before moving to deeper models.</li>
-                <li>Feature based models are useful as a baseline before raw image deep learning.</li>
+                <li>Logistic Regression</li>
+                <li>KNN</li>
+                <li>SVM</li>
+                <li>Random Forest</li>
+                <li>Gradient Boosting</li>
+                <li>XGBoost</li>
+                <li>CatBoost</li>
+                <li>LightGBM</li>
+                <li>Extra Trees</li>
+                <li>Stacking Ensemble</li>
+                <li>FT Transformer</li>
+                <li>MLP Neural Network</li>
             </ul>
         </section>
 
         <section class="glass content-card">
-            <h2>Trait Regression</h2>
-            <p>Besides classification, the project can also use regression models to predict continuous plant traits. These traits may include growth measurements such as plant area, height, or vegetation index trends.</p>
+            <h2>Final MLP Model</h2>
+            <p>The final reported model was an MLP with two hidden layers. The four input features were scaled using StandardScaler inside each cross validation fold.</p>
 
             <div class="model-grid">
                 <div class="model-card">
-                    <h3>Area Prediction</h3>
-                    <p>Plant mask area can be predicted or tracked as a growth trait.</p>
+                    <h3>Architecture</h3>
+                    <p>Input layer with 4 features, then 64 neurons, then 32 neurons, then a binary output.</p>
                 </div>
 
                 <div class="model-card">
-                    <h3>Height Prediction</h3>
-                    <p>Depth based height is still noisy, but it can become a useful regression target after refinement.</p>
+                    <h3>Training Setup</h3>
+                    <p>scikit learn MLPClassifier with max iteration set to 1000.</p>
                 </div>
 
                 <div class="model-card">
-                    <h3>Vegetation Index Trends</h3>
-                    <p>Models can predict or compare NDVI, GNDVI, PRI, and VARI changes over time.</p>
+                    <h3>Validation</h3>
+                    <p>Leave one day out cross validation, where each day was held out once as the test set.</p>
                 </div>
             </div>
         </section>
 
         <section class="glass content-card">
-            <h2>Evaluation Metrics</h2>
-            <p>Once the modeling notebooks are finalized, the project can evaluate stress classification and regression tasks with standard metrics.</p>
+            <h2>Results</h2>
+            <p>The MLP classifier performed strongly on Set 2. The model missed 2 out of 265 frames and detected stress onset at day 2.</p>
 
-            <ul>
-                <li>Classification metrics: accuracy, precision, recall, F1 score, and confusion matrix.</li>
-                <li>Regression metrics: MAE, RMSE, and R squared.</li>
-                <li>Temporal evaluation: trend consistency, early stress detection timing, and comparison between control and drought plants.</li>
-            </ul>
+            <div class="metric-grid">
+                <div class="metric-card">
+                    <div class="metric-value">96.4%</div>
+                    <h3>Accuracy</h3>
+                    <p>Overall classification accuracy for control versus drought.</p>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-value">0.994</div>
+                    <h3>AUC</h3>
+                    <p>Area under the ROC curve.</p>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-value">0.930</div>
+                    <h3>MCC</h3>
+                    <p>Matthews correlation coefficient.</p>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-value">Day 2</div>
+                    <h3>Stress Onset</h3>
+                    <p>First significant stress day based on corrected statistical testing.</p>
+                </div>
+            </div>
         </section>
 
         <section class="glass content-card">
-            <h2>Expected Outputs</h2>
+            <h2>Feature Importance and Onset Detection</h2>
+            <p>SHAP analysis was used to understand feature importance. Area change dominated across the full timeline, while VARI standard deviation was most useful in the earliest days. Onset detection used per day weighted t tests on VARI change with Benjamini Hochberg correction.</p>
+
+            <div class="note-box">
+                <p>The onset rule was the first significant day where drought VARI dropped below control. The final result showed stress onset at day 2 with corrected p value of 0.031.</p>
+            </div>
+        </section>
+
+        <section class="glass content-card">
+            <h2>Limitations</h2>
             <ul>
-                <li>Clean model input CSV files.</li>
-                <li>Baseline stress classification models.</li>
-                <li>Regression models for growth traits.</li>
-                <li>Model evaluation tables and plots.</li>
-                <li>Visual comparison between predicted and observed plant trends.</li>
+                <li>The final model was tested on 2 plant pairs only.</li>
+                <li>Only one temperature condition was tested.</li>
+                <li>Future work should validate the model on more plant sets, light settings, and temperature conditions.</li>
+                <li>Hyperspectral features were not fully fused into the final classifier yet.</li>
             </ul>
 
             <a class="back-link" href="index.html">← Back to Home</a>
