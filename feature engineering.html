@@ -51,31 +51,6 @@
     padding: 22px;
 }
 
-.table-wrap {
-    overflow-x: auto;
-    margin-top: 18px;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    color: rgba(255,255,255,0.86);
-    min-width: 720px;
-}
-
-th,
-td {
-    padding: 14px;
-    border-bottom: 1px solid rgba(255,255,255,0.14);
-    text-align: left;
-    vertical-align: top;
-}
-
-th {
-    color: white;
-    background: rgba(255,255,255,0.08);
-}
-
 .output-box {
     background: rgba(255,255,255,0.08);
     border-left: 4px solid rgba(255,255,255,0.35);
@@ -94,10 +69,6 @@ th {
     border-radius: 999px;
     margin-top: 8px;
 }
-
-.back-link:hover {
-    background: rgba(255,255,255,0.18);
-}
 </style>
 </head>
 
@@ -114,153 +85,132 @@ th {
     <div class="container page-wrap">
         <section class="glass page-header">
             <h1>Feature Engineering</h1>
-            <p>This stage converts cleaned plant images into measurable features that describe plant health, color, structure, and growth over time.</p>
+            <p>This stage converts segmented plant images into measurable features for growth analysis, stress detection, and visualization.</p>
         </section>
 
         <section class="glass content-card">
             <h2>Feature Engineering Goal</h2>
-            <p>After preprocessing, the cleaned images were used to extract numerical features. These features make the image data easier to compare across time and easier to use for future machine learning models.</p>
+            <p>The goal was to summarize each plant image using numerical traits. These features are easier to compare over time and can be used as inputs for machine learning models.</p>
         </section>
 
         <section class="glass content-card">
-            <h2>Hyperspectral Vegetation Features</h2>
-            <p>The hyperspectral feature engineering notebooks calculated vegetation indices from wavelength bands. These indices summarize plant reflectance patterns and help show possible stress related changes.</p>
-
-            <div class="table-wrap">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Feature</th>
-                            <th>Meaning</th>
-                            <th>Why It Helps</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>NDVI</td>
-                            <td>Normalized Difference Vegetation Index</td>
-                            <td>Measures green vegetation strength using red and near infrared bands.</td>
-                        </tr>
-                        <tr>
-                            <td>GNDVI</td>
-                            <td>Green Normalized Difference Vegetation Index</td>
-                            <td>Uses green and near infrared bands to capture plant greenness and chlorophyll related response.</td>
-                        </tr>
-                        <tr>
-                            <td>RE NDVI</td>
-                            <td>Red Edge NDVI</td>
-                            <td>Uses red edge information, which can be useful for detecting plant stress and chlorophyll changes.</td>
-                        </tr>
-                        <tr>
-                            <td>CHL RE</td>
-                            <td>Chlorophyll Red Edge</td>
-                            <td>Estimates chlorophyll related response from red edge wavelengths.</td>
-                        </tr>
-                        <tr>
-                            <td>SR</td>
-                            <td>Simple Ratio</td>
-                            <td>Compares near infrared and red response as a simple vegetation strength feature.</td>
-                        </tr>
-                        <tr>
-                            <td>SIPI</td>
-                            <td>Structure Insensitive Pigment Index</td>
-                            <td>Summarizes pigment related changes that may connect to stress response.</td>
-                        </tr>
-                        <tr>
-                            <td>PRI</td>
-                            <td>Photochemical Reflectance Index</td>
-                            <td>Captures light use and photosynthetic related changes from selected wavelength bands.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <section class="glass content-card">
-            <h2>Calibration Cycle HS Feature Work</h2>
-            <p>The calibration cycle feature notebook used 51 band hyperspectral images mapped from about 450 to 850 nm. Key bands were selected for red, green, blue, near infrared, and PRI wavelengths.</p>
+            <h2>Hyperspectral Features</h2>
+            <p>The HS pipeline calculated vegetation indices from masked plant pixels. These features describe spectral plant response and can support future fusion with RGB and depth features.</p>
 
             <div class="feature-grid">
                 <div class="feature-card">
-                    <h3>Band Mapping</h3>
-                    <p>Target wavelengths were matched to the closest available hyperspectral band so each vegetation index could be computed consistently.</p>
+                    <h3>NDVI</h3>
+                    <p>Computed from near infrared and red bands to measure vegetation strength.</p>
                 </div>
 
                 <div class="feature-card">
-                    <h3>Image Level Aggregation</h3>
-                    <p>Vegetation index images were summarized into mean feature values for each image.</p>
+                    <h3>GNDVI</h3>
+                    <p>Computed from near infrared and green bands to capture greenness and chlorophyll related response.</p>
                 </div>
 
                 <div class="feature-card">
-                    <h3>CSV Output</h3>
-                    <p>The output feature table was saved as vegetation_indices_mean.csv with one row per processed image.</p>
+                    <h3>RE NDVI</h3>
+                    <p>Uses red edge wavelengths to capture stress and chlorophyll related changes.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3>CHL RE</h3>
+                    <p>Uses near infrared and red edge bands to estimate chlorophyll related response.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3>SR</h3>
+                    <p>Simple ratio of near infrared to red reflectance.</p>
                 </div>
             </div>
 
             <div class="output-box">
-                <p>This feature engineering step found 281 TIFF files, processed 280 valid images, and skipped one corrupted image.</p>
+                <p>The HS Set 1 feature workflow generated 204 timestamped records across 21 days from January 10 to January 30, 2026.</p>
             </div>
         </section>
 
         <section class="glass content-card">
-            <h2>January HS Feature Work</h2>
-            <p>The January hyperspectral pipeline calculated five main vegetation indices and additional quality features. The output CSV included timestamp, date, time, NDVI, GNDVI, red edge NDVI, chlorophyll red edge, simple ratio, coverage, and signal to noise ratio.</p>
-
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <h3>Coverage</h3>
-                    <p>Coverage estimates how much of the image is identified as plant region after segmentation.</p>
-                </div>
-
-                <div class="feature-card">
-                    <h3>SNR</h3>
-                    <p>Signal to noise ratio was used as a quality feature to help filter unstable frames.</p>
-                </div>
-
-                <div class="feature-card">
-                    <h3>Time Features</h3>
-                    <p>Date and time were kept with each feature row so trends could be analyzed later.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="glass content-card">
-            <h2>RealSense RGB and Depth Features</h2>
-            <p>The RealSense notebook extracted plant level features from Set 2, which was selected because it was cleaner. The image was separated into Plant A and Plant B so each plant could be tracked separately.</p>
+            <h2>RealSense RGB Mask Features</h2>
+            <p>For each segmented plant, the RealSense pipeline extracted visible plant traits from the RGB image and plant mask.</p>
 
             <div class="feature-grid">
                 <div class="feature-card">
                     <h3>Area</h3>
-                    <p>Area was calculated from the number of plant mask pixels and used as a visible growth measurement.</p>
+                    <p>Area was calculated as the number of plant mask pixels.</p>
                 </div>
 
                 <div class="feature-card">
-                    <h3>VARI Median</h3>
-                    <p>VARI was calculated from RGB channels to estimate visible greenness while reducing some lighting effects.</p>
+                    <h3>Height</h3>
+                    <p>Height was estimated from the vertical span of the plant mask.</p>
                 </div>
 
                 <div class="feature-card">
-                    <h3>Height Pixels</h3>
-                    <p>Depth data was explored to estimate plant height in pixels, but the notebook notes that the height values were still noisy.</p>
+                    <h3>VARI Mean</h3>
+                    <p>VARI was computed per plant pixel and clipped to the range from negative 1 to positive 1.</p>
                 </div>
 
                 <div class="feature-card">
-                    <h3>Plant Label</h3>
-                    <p>Each feature row kept the plant label so Plant A and Plant B could be compared across time.</p>
+                    <h3>VARI Standard Deviation</h3>
+                    <p>VARI standard deviation measured variation in visible greenness within each plant mask.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3>Compactness</h3>
+                    <p>Compactness was computed from plant area and bounding box shape.</p>
                 </div>
             </div>
+        </section>
+
+        <section class="glass content-card">
+            <h2>RealSense Depth Features</h2>
+            <p>The RealSense depth pipeline used the 16 bit raw depth image inside the plant mask to extract structure based features.</p>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>Depth Standard Deviation</h3>
+                    <p>Measures depth variation inside the plant mask and represents 3D structure complexity.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3>Surface Roughness</h3>
+                    <p>Uses depth gradients to estimate plant surface texture and structure.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3>Canopy Volume</h3>
+                    <p>Uses depth values as a proxy for canopy structure and volume.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3>Vertical Spread</h3>
+                    <p>Measures how much the plant region spreads vertically in the frame.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="glass content-card">
+            <h2>Baseline Normalization and Daily Aggregation</h2>
+            <p>After extracting frame level features, the notebook performed baseline normalization and daily aggregation. This made the features more useful for comparing control and drought plants over time.</p>
+
+            <ul>
+                <li>area_change = area_px minus the day 1 median for that treatment.</li>
+                <li>height_change = height_px minus the day 1 median for that treatment.</li>
+                <li>vari_change = vari_mean minus the day 1 median for that treatment.</li>
+                <li>Daily aggregation used median, standard deviation, and change features per date.</li>
+            </ul>
 
             <div class="output-box">
-                <p>The RealSense feature output was saved as features_set2.csv and included date, plant label, area, VARI median, and height related measurements.</p>
+                <p>The RealSense pipeline produced 265 per frame rows and aggregated them into 20 daily rows for modeling and temporal analysis.</p>
             </div>
         </section>
 
         <section class="glass content-card">
             <h2>Feature Outputs</h2>
             <ul>
-                <li>vegetation_indices_mean.csv for calibration cycle hyperspectral vegetation index means.</li>
-                <li>vegetation_indices_HS.csv for January hyperspectral vegetation indices, coverage, and SNR.</li>
-                <li>features_set2.csv for RealSense plant area, VARI, and height features.</li>
+                <li>HS vegetation index feature tables.</li>
+                <li>RealSense per frame feature CSVs.</li>
+                <li>Daily trait CSVs with control and drought features.</li>
+                <li>Baseline normalized change features for model training.</li>
             </ul>
 
             <a class="back-link" href="index.html">← Back to Home</a>
