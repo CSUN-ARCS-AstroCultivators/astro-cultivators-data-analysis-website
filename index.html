@@ -139,6 +139,34 @@
 
 #home .features {
     margin-top: 0;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 24px;
+    align-items: stretch;
+}
+
+#home .features a {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+#home .features a:nth-child(1),
+#home .features a:nth-child(2),
+#home .features a:nth-child(3) {
+    grid-column: span 2;
+}
+
+#home .features a:nth-child(4) {
+    grid-column: 2 / span 2;
+}
+
+#home .features a:nth-child(5) {
+    grid-column: 4 / span 2;
+}
+
+#home .feature-card {
+    height: 100%;
 }
 
 .skills-section-wrapper {
@@ -252,6 +280,42 @@
     margin-right: 8px;
     vertical-align: middle;
 }
+
+@media (max-width: 900px) {
+    #home .features {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    #home .features a:nth-child(1),
+    #home .features a:nth-child(2),
+    #home .features a:nth-child(3),
+    #home .features a:nth-child(4),
+    #home .features a:nth-child(5) {
+        grid-column: auto;
+    }
+
+    #home .features a:nth-child(5) {
+        grid-column: 1 / -1;
+        max-width: 480px;
+        width: 100%;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 600px) {
+    .project-overview {
+        padding: 30px 22px;
+    }
+
+    #home .features {
+        grid-template-columns: 1fr;
+    }
+
+    #home .features a:nth-child(5) {
+        grid-column: auto;
+        max-width: none;
+    }
+}
 </style>
 </head>
 
@@ -318,7 +382,7 @@
                     <h2>About This Project</h2>
                     <p>Astro Cultivators is a collaborative data analysis project at California State University, Northridge. The project is part of CSUN ARCS, the Autonomy Research Center for STEAHM. ARCS is a NASA sponsored Center of Excellence at CSUN, and its work connects student research with NASA, JPL, and industry partners.</p>
                     <p>Our team builds the imaging and analytics pipeline for early drought stress detection in soybean seedlings. The plants are grown in controlled chamber conditions, where drought stress is introduced by changing the watering schedule. Using hyperspectral, RGB, and depth imaging, we study plant growth and stress signals that may appear before they are obvious to the human eye.</p>
-                    <p>The pipeline includes dataset organization, preprocessing, feature engineering, predictive modeling preparation, temporal growth analysis, and output visualization. The goal is to help biology researchers understand plant stress earlier and make the data easier to interpret.</p>
+                    <p>The pipeline includes dataset organization, preprocessing, feature engineering, temporal growth analysis, and output visualization. The goal is to help biology researchers understand plant stress earlier and make the data easier to interpret.</p>
 
                     <div class="project-highlight-grid">
                         <div class="project-highlight">
@@ -337,7 +401,7 @@
                 </section>
 
                 <section class="features">
-                    <a href="dataset.html" style="text-decoration:none; color:inherit;">
+                    <a href="dataset.html">
                         <div class="feature-card glass">
                             <div class="feature-icon">📂</div>
                             <h3>Dataset</h3>
@@ -345,7 +409,7 @@
                         </div>
                     </a>
 
-                    <a href="preprocessing.html" style="text-decoration:none; color:inherit;">
+                    <a href="preprocessing.html">
                         <div class="feature-card glass">
                             <div class="feature-icon">🧹</div>
                             <h3>Data Preprocessing</h3>
@@ -353,7 +417,7 @@
                         </div>
                     </a>
 
-                    <a href="feature%20engineering.html" style="text-decoration:none; color:inherit;">
+                    <a href="feature%20engineering.html">
                         <div class="feature-card glass">
                             <div class="feature-icon">🧬</div>
                             <h3>Feature Engineering</h3>
@@ -361,15 +425,7 @@
                         </div>
                     </a>
 
-                    <a href="predictive%20modeling.html" style="text-decoration:none; color:inherit;">
-                        <div class="feature-card glass">
-                            <div class="feature-icon">🤖</div>
-                            <h3>Predictive Modeling</h3>
-                            <p>Preparing feature tables and modeling targets for stress classification and plant trait prediction.</p>
-                        </div>
-                    </a>
-
-                    <a href="temporal%20growth.html" style="text-decoration:none; color:inherit;">
+                    <a href="temporal%20growth.html">
                         <div class="feature-card glass">
                             <div class="feature-icon">📈</div>
                             <h3>Temporal Growth Analysis</h3>
@@ -377,7 +433,7 @@
                         </div>
                     </a>
 
-                    <a href="output%20visualization.html" style="text-decoration:none; color:inherit;">
+                    <a href="output%20visualization.html">
                         <div class="feature-card glass">
                             <div class="feature-icon">📊</div>
                             <h3>Output and Visualization</h3>
@@ -416,7 +472,7 @@
                             <div class="team-avatar"><img src="images/1772077974126.jpeg" alt="Samar Kimiagar"></div>
                             <h3>Samar Kimiagar</h3>
                             <p class="role">Team Lead, Machine Learning</p>
-                            <p class="bio">B.S. Computer Science senior at CSUN, NSF Research Assistant, ARCS Associate, Dean's List honoree, and IEEE HKN member. In Astro Cultivators, she serves as Research Assistant and Team Lead, coordinating the project and contributing across the full pipeline, from data preprocessing and feature engineering to model design, evaluation, and visualization.</p>
+                            <p class="bio">B.S. Computer Science senior at CSUN, NSF Research Assistant, ARCS Associate, Dean's List honoree, and IEEE HKN member. In Astro Cultivators, she serves as Research Assistant and Team Lead, coordinating the project and contributing across the full pipeline, from data preprocessing and feature engineering to analysis and visualization.</p>
                             <div class="team-social">
                                 <a href="https://www.linkedin.com/in/samar-kimiagar" title="LinkedIn" target="_blank"><img src="images/linkedin.png" alt="LinkedIn"></a>
                                 <a href="https://github.com/SamarKim" title="GitHub" target="_blank"><img src="images/github.png" alt="GitHub"></a>
@@ -465,7 +521,7 @@
             <div class="content-wrapper">
                 <section class="hero glass">
                     <h1>Technologies &amp; Skills</h1>
-                    <p>The tools, frameworks, and expertise powering our plant stress detection pipeline.</p>
+                    <p>The tools, frameworks, and expertise powering our plant stress analysis pipeline.</p>
                 </section>
 
                 <section class="services-grid">
@@ -475,27 +531,7 @@
                                 <div class="service-icon">🐍</div>
                                 <h3>Python</h3>
                             </div>
-                            <p>Core language for data processing, analysis, and model development across the entire pipeline.</p>
-                        </div>
-                    </a>
-
-                    <a href="https://pytorch.org/" target="_blank" style="text-decoration:none; color:inherit;">
-                        <div class="service-card glass">
-                            <div class="service-header">
-                                <div class="service-icon">🔥</div>
-                                <h3>PyTorch</h3>
-                            </div>
-                            <p>Deep learning framework planned for stress classification and trait prediction models.</p>
-                        </div>
-                    </a>
-
-                    <a href="https://docs.ultralytics.com/" target="_blank" style="text-decoration:none; color:inherit;">
-                        <div class="service-card glass">
-                            <div class="service-header">
-                                <div class="service-icon">👁️</div>
-                                <h3>YOLOv11</h3>
-                            </div>
-                            <p>Object detection model considered for identifying plant organs and supporting automated visual analysis.</p>
+                            <p>Core language for data processing, analysis, feature extraction, and visualization across the pipeline.</p>
                         </div>
                     </a>
 
@@ -574,14 +610,11 @@
                     <div class="hero glass">
                         <h2>Skills</h2>
                         <div class="skills-cloud">
-                            <span class="skill-tag">Machine Learning</span>
                             <span class="skill-tag">Computer Vision</span>
-                            <span class="skill-tag">Image Classification</span>
+                            <span class="skill-tag">Image Analysis</span>
                             <span class="skill-tag">Hyperspectral Image Analysis</span>
                             <span class="skill-tag">Data Preprocessing</span>
                             <span class="skill-tag">Feature Engineering</span>
-                            <span class="skill-tag">Object Detection</span>
-                            <span class="skill-tag">Deep Learning</span>
                             <span class="skill-tag">Time Series Analysis</span>
                             <span class="skill-tag">Data Visualization</span>
                             <span class="skill-tag">Statistical Analysis</span>
@@ -592,6 +625,7 @@
                             <span class="skill-tag">Cross Team Collaboration</span>
                             <span class="skill-tag">Research Review</span>
                             <span class="skill-tag">Vegetation Index Computation</span>
+                            <span class="skill-tag">RGB Depth Processing</span>
                         </div>
                     </div>
                 </section>
