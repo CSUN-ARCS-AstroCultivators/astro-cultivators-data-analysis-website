@@ -122,7 +122,7 @@
 #home .features {
     margin-top: 0;
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 24px;
     align-items: stretch;
 }
@@ -131,20 +131,6 @@
     display: block;
     text-decoration: none;
     color: inherit;
-}
-
-#home .features a:nth-child(1),
-#home .features a:nth-child(2),
-#home .features a:nth-child(3) {
-    grid-column: span 2;
-}
-
-#home .features a:nth-child(4) {
-    grid-column: 2 / span 2;
-}
-
-#home .features a:nth-child(5) {
-    grid-column: 4 / span 2;
 }
 
 #home .feature-card {
@@ -267,21 +253,6 @@
     #home .features {
         grid-template-columns: repeat(2, 1fr);
     }
-
-    #home .features a:nth-child(1),
-    #home .features a:nth-child(2),
-    #home .features a:nth-child(3),
-    #home .features a:nth-child(4),
-    #home .features a:nth-child(5) {
-        grid-column: auto;
-    }
-
-    #home .features a:nth-child(5) {
-        grid-column: 1 / -1;
-        max-width: 480px;
-        width: 100%;
-        margin: 0 auto;
-    }
 }
 
 @media (max-width: 600px) {
@@ -291,11 +262,6 @@
 
     #home .features {
         grid-template-columns: 1fr;
-    }
-
-    #home .features a:nth-child(5) {
-        grid-column: auto;
-        max-width: none;
     }
 }
 </style>
@@ -363,21 +329,21 @@
                 <section class="about-text glass project-overview">
                     <h2>About This Project</h2>
                     <p>Astro Cultivators is a collaborative data analysis project at California State University, Northridge. The project is part of CSUN ARCS, the Autonomy Research Center for STEAHM. ARCS is a NASA sponsored Center of Excellence at CSUN, and its work connects student research with NASA, JPL, and industry partners.</p>
-                    <p>Our team builds the imaging and analytics pipeline for early drought stress detection in soybean seedlings. The plants are grown in controlled chamber conditions, where drought stress is introduced by changing the watering schedule. Using hyperspectral, RGB, and depth imaging, we study plant growth and stress signals that may appear before they are obvious to the human eye.</p>
-                    <p>The pipeline includes dataset organization, preprocessing, feature engineering, temporal growth analysis, and output visualization. The goal is to help biology researchers understand plant stress earlier and make the data easier to interpret.</p>
+                    <p>Our team built an imaging and analytics pipeline for early drought stress detection in Williams 82 soybean seedlings. The project uses hyperspectral images, RGB images, and 16 bit raw depth images from controlled growth chamber experiments.</p>
+                    <p>The final pipeline includes dataset organization, preprocessing, zero shot plant segmentation, feature engineering, stress classification, temporal onset analysis, and output visualization. The goal is to support non destructive soybean stress monitoring before symptoms are visually obvious.</p>
 
                     <div class="project-highlight-grid">
                         <div class="project-highlight">
                             <h3>Multi Sensor Data</h3>
-                            <p>Hyperspectral, RGB, and depth images are used to capture plant color, spectral response, area, and height.</p>
+                            <p>Hyperspectral, RGB, and depth images are used to capture plant color, spectral response, area, height, and structure.</p>
                         </div>
                         <div class="project-highlight">
-                            <h3>Plant Stress Focus</h3>
-                            <p>The main research goal is to track drought stress and growth differences between control and drought plants.</p>
+                            <h3>Stress Detection</h3>
+                            <p>RealSense features were used with machine learning to classify control versus drought plants.</p>
                         </div>
                         <div class="project-highlight">
-                            <h3>Analysis Outputs</h3>
-                            <p>The notebooks generate masks, vegetation indices, feature tables, trend plots, and visualization summaries.</p>
+                            <h3>Final Outputs</h3>
+                            <p>The project produces feature CSVs, model results, onset detection, segmentation overlays, charts, and dashboard views.</p>
                         </div>
                     </div>
                 </section>
@@ -387,7 +353,7 @@
                         <div class="feature-card glass">
                             <div class="feature-icon">📂</div>
                             <h3>Dataset</h3>
-                            <p>Overview of the hyperspectral, RGB, and depth datasets collected across calibration and drought experiments.</p>
+                            <p>Overview of hyperspectral, RGB, and depth datasets collected across calibration and drought experiments.</p>
                         </div>
                     </a>
 
@@ -395,7 +361,7 @@
                         <div class="feature-card glass">
                             <div class="feature-icon">🧹</div>
                             <h3>Data Preprocessing</h3>
-                            <p>Cleaning raw files, filtering invalid frames, matching RGB and depth pairs, and preparing plant masks.</p>
+                            <p>Cleaning files, validating images, filtering frames, matching raw depth data, and preparing plant masks.</p>
                         </div>
                     </a>
 
@@ -403,7 +369,15 @@
                         <div class="feature-card glass">
                             <div class="feature-icon">🧬</div>
                             <h3>Feature Engineering</h3>
-                            <p>Extracting vegetation indices, plant area, VARI, height, coverage, and other measurable plant traits.</p>
+                            <p>Extracting vegetation indices, VARI, area, height, canopy volume, roughness, and daily change features.</p>
+                        </div>
+                    </a>
+
+                    <a href="predictive%20modeling.html">
+                        <div class="feature-card glass">
+                            <div class="feature-icon">🤖</div>
+                            <h3>Predictive Modeling</h3>
+                            <p>Benchmarking 12 classifiers and using an MLP model for control versus drought stress classification.</p>
                         </div>
                     </a>
 
@@ -411,7 +385,7 @@
                         <div class="feature-card glass">
                             <div class="feature-icon">📈</div>
                             <h3>Temporal Growth Analysis</h3>
-                            <p>Tracking vegetation indices, area, VARI, and height across time to identify growth and stress patterns.</p>
+                            <p>Tracking daily feature changes and detecting stress onset before clear visual symptoms appear.</p>
                         </div>
                     </a>
 
@@ -419,7 +393,7 @@
                         <div class="feature-card glass">
                             <div class="feature-icon">📊</div>
                             <h3>Output and Visualization</h3>
-                            <p>Visualizing NDVI maps, segmentation masks, spectral signatures, time series plots, and plant overlays.</p>
+                            <p>Visualizing masks, model outputs, time series charts, control versus drought comparisons, and dashboards.</p>
                         </div>
                     </a>
                 </section>
@@ -437,8 +411,8 @@
                         <div class="team-member glass">
                             <div class="team-avatar"><img src="images/Headshot.webp" alt="Lia Yaghobi"></div>
                             <h3>Lia Yaghobi</h3>
-                            <p class="role">Graduate Researcher, Temporal Growth Analysis</p>
-                            <p class="bio">M.S. Computer Science candidate at CSUN and ARCS Research Associate. In Astro Cultivators, she leads temporal growth analysis and serves as the liaison between the biology and data science teams, with thesis research on full life cycle soybean monitoring under drought stress.</p>
+                            <p class="role">Graduate Researcher, Research Guidance</p>
+                            <p class="bio">M.S. Computer Science candidate at CSUN and ARCS Research Associate. In Astro Cultivators, she supported the team through research guidance, data analysis support, and coordination between the biology and data science work.</p>
                             <div class="team-social">
                                 <a href="https://www.linkedin.com/in/lia-yaghobi/" title="LinkedIn" target="_blank"><img src="images/linkedin.png" alt="LinkedIn"></a>
                                 <a href="https://github.com/liaYaghobi" title="GitHub" target="_blank"><img src="images/github.png" alt="GitHub"></a>
@@ -448,8 +422,8 @@
                         <div class="team-member glass">
                             <div class="team-avatar"><img src="images/1772077974126.jpeg" alt="Samar Kimiagar"></div>
                             <h3>Samar Kimiagar</h3>
-                            <p class="role">Team Lead, Machine Learning</p>
-                            <p class="bio">B.S. Computer Science senior at CSUN, NSF Research Assistant, ARCS Associate, Dean's List honoree, and IEEE HKN member. In Astro Cultivators, she serves as Research Assistant and Team Lead, coordinating the project and contributing across the full pipeline, from data preprocessing and feature engineering to analysis and visualization.</p>
+                            <p class="role">Team Lead, RGB and Depth Pipeline, Modeling</p>
+                            <p class="bio">B.S. Computer Science senior at CSUN, NSF Research Assistant, ARCS Associate, Dean's List honoree, and IEEE HKN member. In Astro Cultivators, she led the team and built the RealSense RGB and depth pipeline, feature extraction workflow, model benchmarking, MLP stress classifier, and onset analysis.</p>
                             <div class="team-social">
                                 <a href="https://www.linkedin.com/in/samar-kimiagar" title="LinkedIn" target="_blank"><img src="images/linkedin.png" alt="LinkedIn"></a>
                                 <a href="https://github.com/SamarKim" title="GitHub" target="_blank"><img src="images/github.png" alt="GitHub"></a>
@@ -459,8 +433,8 @@
                         <div class="team-member glass">
                             <div class="team-avatar"><img src="images/odelia 2.jpg" alt="Odelia Sheelo"></div>
                             <h3>Odelia Sheelo</h3>
-                            <p class="role">Data Cleaning &amp; Preprocessing</p>
-                            <p class="bio">B.S. Computer Science senior with a Mathematics minor at CSUN, ARCS Associate, published writer, fitness instructor, piano teacher, and math tutor. In Astro Cultivators, she focuses on data cleaning, preprocessing, and organizing multi sensor imaging data for reliable downstream analysis.</p>
+                            <p class="role">HS Cleaning and Preprocessing</p>
+                            <p class="bio">B.S. Computer Science senior with a Mathematics minor at CSUN, ARCS Associate, published writer, fitness instructor, piano teacher, and math tutor. In Astro Cultivators, she focused on hyperspectral data cleaning, preprocessing, band validation, NDVI masking, and metadata generation.</p>
                             <div class="team-social">
                                 <a href="https://www.linkedin.com/in/odelia-s-941301203/" title="LinkedIn" target="_blank"><img src="images/linkedin.png" alt="LinkedIn"></a>
                                 <a href="https://github.com/odeliasheelo1" title="GitHub" target="_blank"><img src="images/github.png" alt="GitHub"></a>
@@ -470,8 +444,8 @@
                         <div class="team-member glass">
                             <div class="team-avatar"><img src="images/baru.jpg" alt="Bargavi Sivaraman"></div>
                             <h3>Bargavi Sivaraman</h3>
-                            <p class="role">Feature Engineering</p>
-                            <p class="bio">B.S. Computer Science senior at CSUN, ARCS Associate, Technical Operations Intern and Scrum Master at CSUN Associated Students, and Product and Systems Manager at ETHIX. In Astro Cultivators, she works on feature engineering workflows to extract meaningful plant traits from hyperspectral and multi modal imaging data.</p>
+                            <p class="role">HS Feature Engineering</p>
+                            <p class="bio">B.S. Computer Science senior at CSUN, ARCS Associate, Technical Operations Intern and Scrum Master at CSUN Associated Students, and Product and Systems Manager at ETHIX. In Astro Cultivators, she worked on hyperspectral preprocessing support, data quality assessment, and vegetation index feature engineering.</p>
                             <div class="team-social">
                                 <a href="https://www.linkedin.com/in/bargavisivaraman" title="LinkedIn" target="_blank"><img src="images/linkedin.png" alt="LinkedIn"></a>
                                 <a href="https://github.com/Bargavisivaraman" title="GitHub" target="_blank"><img src="images/github.png" alt="GitHub"></a>
@@ -481,8 +455,8 @@
                         <div class="team-member glass">
                             <div class="team-avatar"><img src="images/rene.jpg" alt="Rene Barseghian"></div>
                             <h3>Rene Barseghian</h3>
-                            <p class="role">Output &amp; Visualization</p>
-                            <p class="bio">B.S. Computer Science senior at CSUN, ARCS Associate, and software developer with experience in JavaScript, React, Python, Node.js, and cloud infrastructure. In Astro Cultivators, he focuses on output, visualization, and Digital Twin integration for real time plant monitoring.</p>
+                            <p class="role">Output and Visualization</p>
+                            <p class="bio">B.S. Computer Science senior at CSUN, ARCS Associate, and software developer with experience in JavaScript, React, Python, Node.js, and cloud infrastructure. In Astro Cultivators, he built dashboard and visualization components for plant monitoring, charts, summary statistics, and data inspection.</p>
                             <div class="team-social">
                                 <a href="https://github.com/renebars" title="GitHub" target="_blank"><img src="images/github.png" alt="GitHub"></a>
                             </div>
@@ -498,7 +472,7 @@
             <div class="content-wrapper">
                 <section class="hero glass">
                     <h1>Technologies &amp; Skills</h1>
-                    <p>The tools, frameworks, and expertise powering our plant stress analysis pipeline.</p>
+                    <p>The tools, frameworks, and expertise powering our plant stress detection pipeline.</p>
                 </section>
 
                 <section class="services-grid">
@@ -508,7 +482,17 @@
                                 <div class="service-icon">🐍</div>
                                 <h3>Python</h3>
                             </div>
-                            <p>Core language for data processing, analysis, feature extraction, and visualization across the pipeline.</p>
+                            <p>Core language for data preprocessing, feature extraction, machine learning, and visualization.</p>
+                        </div>
+                    </a>
+
+                    <a href="https://pytorch.org/" target="_blank" style="text-decoration:none; color:inherit;">
+                        <div class="service-card glass">
+                            <div class="service-header">
+                                <div class="service-icon">🔥</div>
+                                <h3>PyTorch</h3>
+                            </div>
+                            <p>Used with Grounded SAM 2 and SAM 2.1 for zero shot plant segmentation.</p>
                         </div>
                     </a>
 
@@ -518,7 +502,17 @@
                                 <div class="service-icon">📷</div>
                                 <h3>OpenCV</h3>
                             </div>
-                            <p>Image processing library used for RealSense background subtraction, masking, and feature extraction.</p>
+                            <p>Used for image processing, HSV refinement, mask cleanup, and RealSense feature extraction.</p>
+                        </div>
+                    </a>
+
+                    <a href="https://scikit-learn.org/" target="_blank" style="text-decoration:none; color:inherit;">
+                        <div class="service-card glass">
+                            <div class="service-header">
+                                <div class="service-icon">🤖</div>
+                                <h3>scikit learn</h3>
+                            </div>
+                            <p>Used for classifier benchmarking, StandardScaler, MLPClassifier, and evaluation metrics.</p>
                         </div>
                     </a>
 
@@ -528,7 +522,7 @@
                                 <div class="service-icon">🔢</div>
                                 <h3>NumPy &amp; Pandas</h3>
                             </div>
-                            <p>Data manipulation, numerical computing, feature tables, and structured analysis of plant measurements.</p>
+                            <p>Used for numerical computing, feature tables, daily aggregation, and CSV outputs.</p>
                         </div>
                     </a>
 
@@ -538,7 +532,7 @@
                                 <div class="service-icon">📊</div>
                                 <h3>Matplotlib</h3>
                             </div>
-                            <p>Visualization library used for NDVI maps, spectral plots, growth curves, and trend charts.</p>
+                            <p>Used for NDVI maps, spectral plots, confusion matrices, and growth trend charts.</p>
                         </div>
                     </a>
 
@@ -548,17 +542,7 @@
                                 <div class="service-icon">📓</div>
                                 <h3>Jupyter Notebook</h3>
                             </div>
-                            <p>Interactive environment for exploratory analysis, preprocessing, feature extraction, and documentation.</p>
-                        </div>
-                    </a>
-
-                    <a href="https://github.com/CSUN-ARCS-AstroCultivators" target="_blank" style="text-decoration:none; color:inherit;">
-                        <div class="service-card glass">
-                            <div class="service-header">
-                                <div class="service-icon">🔀</div>
-                                <h3>Git &amp; GitHub</h3>
-                            </div>
-                            <p>Version control, team collaboration, website deployment, and project documentation.</p>
+                            <p>Used for exploratory analysis, preprocessing, feature engineering, and model experiments.</p>
                         </div>
                     </a>
 
@@ -568,17 +552,17 @@
                                 <div class="service-icon">📹</div>
                                 <h3>Intel RealSense</h3>
                             </div>
-                            <p>RGB and depth camera system used to capture visible plant growth and height related structure.</p>
+                            <p>D435 camera system used for RGB and 16 bit raw depth image collection.</p>
                         </div>
                     </a>
 
-                    <a href="https://www.anaconda.com/" target="_blank" style="text-decoration:none; color:inherit;">
+                    <a href="https://react.dev/" target="_blank" style="text-decoration:none; color:inherit;">
                         <div class="service-card glass">
                             <div class="service-header">
-                                <div class="service-icon">📦</div>
-                                <h3>Conda / Anaconda</h3>
+                                <div class="service-icon">⚛️</div>
+                                <h3>React</h3>
                             </div>
-                            <p>Environment and package management for reproducible data science workflows.</p>
+                            <p>Used for interactive dashboard components and plant monitoring visualizations.</p>
                         </div>
                     </a>
                 </section>
@@ -588,21 +572,21 @@
                         <h2>Skills</h2>
                         <div class="skills-cloud">
                             <span class="skill-tag">Computer Vision</span>
-                            <span class="skill-tag">Image Analysis</span>
                             <span class="skill-tag">Hyperspectral Image Analysis</span>
+                            <span class="skill-tag">RGB Depth Processing</span>
                             <span class="skill-tag">Data Preprocessing</span>
                             <span class="skill-tag">Feature Engineering</span>
+                            <span class="skill-tag">Machine Learning</span>
+                            <span class="skill-tag">MLP Classification</span>
                             <span class="skill-tag">Time Series Analysis</span>
+                            <span class="skill-tag">Onset Detection</span>
+                            <span class="skill-tag">SHAP Analysis</span>
                             <span class="skill-tag">Data Visualization</span>
                             <span class="skill-tag">Statistical Analysis</span>
                             <span class="skill-tag">Python Programming</span>
-                            <span class="skill-tag">Version Control</span>
-                            <span class="skill-tag">Agile Workflow</span>
                             <span class="skill-tag">Technical Documentation</span>
                             <span class="skill-tag">Cross Team Collaboration</span>
-                            <span class="skill-tag">Research Review</span>
                             <span class="skill-tag">Vegetation Index Computation</span>
-                            <span class="skill-tag">RGB Depth Processing</span>
                         </div>
                     </div>
                 </section>
