@@ -63,6 +63,43 @@
     margin-bottom: 8px;
 }
 
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 22px;
+}
+
+.image-card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 18px;
+    overflow: hidden;
+}
+
+.image-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+}
+
+.image-caption {
+    padding: 16px;
+    text-align: center;
+}
+
+.image-caption h3 {
+    color: white;
+    margin-bottom: 6px;
+}
+
+.image-caption p {
+    color: rgba(255,255,255,0.82);
+    margin: 0;
+    line-height: 1.5;
+}
+
 .tag-row {
     display: flex;
     flex-wrap: wrap;
@@ -118,6 +155,16 @@ th {
 .back-link:hover {
     background: rgba(255,255,255,0.18);
 }
+
+@media (max-width: 900px) {
+    .image-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .image-card img {
+        height: auto;
+    }
+}
 </style>
 </head>
 
@@ -134,18 +181,18 @@ th {
     <div class="container page-wrap">
         <section class="glass page-header">
             <h1>Dataset</h1>
-            <p>The Astro Cultivators dataset combines hyperspectral, RGB, and depth imaging to monitor soybean growth and drought stress in controlled chamber experiments.</p>
+            <p>The Astro Cultivators dataset combines RGB, depth, and hyperspectral imaging to monitor soybean growth and drought stress in controlled chamber experiments.</p>
         </section>
 
         <section class="glass content-card">
             <h2>Dataset Overview</h2>
-            <p>The project uses multiple imaging sources so plant health can be studied from more than one view. Hyperspectral images capture wavelength based plant response, RGB images capture visible color and shape, and depth images support structure and height related measurements.</p>
+            <p>The project uses multiple imaging sources so plant health can be studied from more than one view. RGB images capture visible color and shape, depth images support structure and height related measurements, and hyperspectral images capture wavelength based plant response.</p>
 
             <div class="grid">
                 <div class="metric-card">
                     <div class="metric-number">3</div>
                     <h3>Image Modalities</h3>
-                    <p>Hyperspectral, RGB, and depth data are used together to support plant stress analysis.</p>
+                    <p>RGB, depth, and hyperspectral data are used together to support plant stress analysis.</p>
                 </div>
 
                 <div class="metric-card">
@@ -157,7 +204,38 @@ th {
                 <div class="metric-card">
                     <div class="metric-number">6 AM to 1 PM</div>
                     <h3>Main Light Window</h3>
-                    <p>Most drought cycle processing focused on the grow light window so images were more consistent.</p>
+                    <p>Most processing focused on the grow light window so image quality and lighting were more consistent.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="glass content-card">
+            <h2>Sample Image Modalities</h2>
+            <p>These examples show the three main types of imaging data used in the project.</p>
+
+            <div class="image-grid">
+                <div class="image-card">
+                    <img src="images/rgbsample.png" alt="RGB sample image of soybean plants">
+                    <div class="image-caption">
+                        <h3>RGB Image</h3>
+                        <p>Used for visible plant color, segmentation, VARI, area, and growth related traits.</p>
+                    </div>
+                </div>
+
+                <div class="image-card">
+                    <img src="images/depth_sample.png" alt="Depth sample image of soybean plants">
+                    <div class="image-caption">
+                        <h3>Depth Image</h3>
+                        <p>Used to support structure based features such as height, depth variation, and canopy shape.</p>
+                    </div>
+                </div>
+
+                <div class="image-card">
+                    <img src="images/hyperspectral_sample.png" alt="Hyperspectral sample image of soybean plants">
+                    <div class="image-caption">
+                        <h3>Hyperspectral Image</h3>
+                        <p>Used to compute vegetation indices and capture plant responses beyond normal RGB color.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -167,18 +245,18 @@ th {
 
             <div class="grid">
                 <div class="info-card">
-                    <h3>Hyperspectral Images</h3>
-                    <p>Hyperspectral TIFF cubes were used to measure plant response across many wavelength bands. These images support vegetation indices such as NDVI, GNDVI, SIPI, PRI, red edge NDVI, chlorophyll red edge, and simple ratio.</p>
-                </div>
-
-                <div class="info-card">
                     <h3>RGB Images</h3>
-                    <p>RGB images from the RealSense camera were used to segment visible plant regions, compare plants against a median background, and compute visible growth features such as area and VARI.</p>
+                    <p>RGB images from the Intel RealSense camera were used to segment visible plant regions and compute visible growth features such as area, height, and VARI.</p>
                 </div>
 
                 <div class="info-card">
                     <h3>Depth Images</h3>
-                    <p>Depth images were matched with RGB frames by timestamp. These images were used to explore height related plant measurements and 3D structure information.</p>
+                    <p>Raw depth data was used to explore plant structure features such as depth standard deviation, surface roughness, canopy volume, and vertical spread.</p>
+                </div>
+
+                <div class="info-card">
+                    <h3>Hyperspectral Images</h3>
+                    <p>Hyperspectral TIFF cubes were used to measure plant response across wavelength bands and compute vegetation indices such as NDVI, GNDVI, red edge NDVI, chlorophyll red edge, and simple ratio.</p>
                 </div>
             </div>
         </section>
@@ -200,32 +278,39 @@ th {
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Plants sown on 9/19/25</td>
+                            <td>Calibration Cycle 1</td>
                             <td>Hyperspectral</td>
-                            <td>6 AM to 2 PM</td>
-                            <td>Calibration</td>
-                            <td>Plants measured with hyperspectral data around 550 to 760 nm.</td>
+                            <td>Night mode setup</td>
+                            <td>Camera setup and calibration</td>
+                            <td>Messy early data with gaps. Not used for stress detection.</td>
                         </tr>
                         <tr>
-                            <td>Plants sown on 11/18/25</td>
+                            <td>Calibration Cycle 2</td>
+                            <td>Hyperspectral</td>
+                            <td>Night mode setup</td>
+                            <td>Cleaner calibration data</td>
+                            <td>Used for hyperspectral preprocessing and vegetation index feature engineering.</td>
+                        </tr>
+                        <tr>
+                            <td>Set 1</td>
+                            <td>Hyperspectral and RealSense</td>
+                            <td>7 hour photoperiod</td>
+                            <td>Drought experiment</td>
+                            <td>Included control and drought plants. RealSense data had timing drift and quality issues.</td>
+                        </tr>
+                        <tr>
+                            <td>Set 2</td>
                             <td>Hyperspectral and RealSense</td>
                             <td>6 AM to 1 PM</td>
-                            <td>Drought and full plant cycle</td>
-                            <td>Drought treatment started around V2. Control watering followed the regular schedule.</td>
+                            <td>Best dataset for final modeling</td>
+                            <td>Included one control plant on the left and one drought plant on the right. Used for final RealSense stress detection modeling.</td>
                         </tr>
                         <tr>
-                            <td>Plants sown on 1/30/26</td>
-                            <td>Hyperspectral and RealSense</td>
-                            <td>6 AM to 1 PM</td>
-                            <td>Drought two week cycle</td>
-                            <td>Control plants were watered regularly while drought plants had water withheld starting around V2.</td>
-                        </tr>
-                        <tr>
-                            <td>Plants sown on 2/27/26</td>
-                            <td>Hyperspectral and RealSense</td>
+                            <td>Set 3</td>
+                            <td>Hyperspectral and RealSense expected</td>
                             <td>6 AM to 4 PM</td>
-                            <td>Terminated</td>
-                            <td>This dataset was limited because the plants were affected by fungal infection and the cycle was stopped.</td>
+                            <td>Current or incomplete</td>
+                            <td>Still needed clarification and complete data before final analysis.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -233,38 +318,69 @@ th {
         </section>
 
         <section class="glass content-card">
+            <h2>Set 2 Dataset</h2>
+            <p>Set 2 was the strongest dataset for final RealSense analysis because it had a cleaner imaging window and clear control versus drought setup.</p>
+
+            <div class="grid">
+                <div class="metric-card">
+                    <div class="metric-number">265</div>
+                    <h3>Usable Frames</h3>
+                    <p>Usable RealSense frames were identified after manual review, filtering, and segmentation checks.</p>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-number">20</div>
+                    <h3>Days</h3>
+                    <p>The final RealSense workflow used daily aggregated data across 20 days.</p>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-number">2</div>
+                    <h3>Treatments</h3>
+                    <p>The left plant was control and the right plant was drought.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="glass content-card">
             <h2>Hyperspectral Dataset Details</h2>
-            <p>The calibration cycle preprocessing notebook started with 643 hyperspectral TIFF files. After checking the cube dimensions, 492 valid 51 band images were kept and 151 non 51 band files were removed. A later feature engineering step processed 280 valid images and skipped one corrupted file.</p>
-            <p>Another exploratory notebook inspected a larger hyperspectral folder with 5,829 TIFF files. That exploration separated usable light on cubes, CAI or index cubes, bad or unknown cubes, and lights off images. This helped the team understand data quality before final feature extraction.</p>
+            <p>The hyperspectral preprocessing work cleaned raw TIFF files, validated 51 band cube structure, removed invalid frames, created NDVI masks, and saved vegetation related metadata.</p>
 
             <div class="tag-row">
                 <span class="tag">TIFF cubes</span>
                 <span class="tag">51 band validation</span>
                 <span class="tag">Grow light filtering</span>
-                <span class="tag">Calibration cycle</span>
-                <span class="tag">Drought cycle</span>
+                <span class="tag">NDVI masking</span>
+                <span class="tag">Vegetation indices</span>
             </div>
         </section>
 
         <section class="glass content-card">
             <h2>RealSense Dataset Details</h2>
-            <p>The RealSense workflow separated image files into true RGB images, raw depth images, colorized depth images, and unusable dud images. RGB and raw depth files were matched by timestamp, then filtered to the grow light window.</p>
-            <p>The RealSense data was also divided into Set 1 and Set 2. Set 1 covered the first growth session ending on January 30, and Set 2 began later on January 30. Set 2 was selected for cleaner feature extraction.</p>
+            <p>The RealSense workflow used RGB and raw depth images from the Intel RealSense D435 camera. RGB images supported segmentation and color based features, while depth images supported structure based plant traits.</p>
+
+            <div class="tag-row">
+                <span class="tag">RGB images</span>
+                <span class="tag">Raw depth images</span>
+                <span class="tag">Grounded SAM 2</span>
+                <span class="tag">Control plant</span>
+                <span class="tag">Drought plant</span>
+            </div>
         </section>
 
         <section class="glass content-card">
             <h2>Dataset Limitations</h2>
             <ul>
-                <li>Some files were removed because they were lights off images, unreadable, corrupted, or not valid 51 band cubes.</li>
-                <li>Some hyperspectral data could not reliably separate control and drought plants by file alone, so those notebooks focused on overall vegetation metrics.</li>
-                <li>RealSense height features were exploratory because the depth based height values were noisy and still needed refinement.</li>
-                <li>Some experiment log dates and notes may need final team review before being treated as final audited metadata.</li>
+                <li>Some images were removed because they were outside the lights on window, corrupted, too dim, or not usable for feature extraction.</li>
+                <li>Some hyperspectral data was useful for preprocessing and feature extraction but was not fully fused into the final RealSense classifier.</li>
+                <li>Set 2 was the strongest dataset, but the final model still needs validation on more plant sets.</li>
+                <li>Intermediate manual measurements such as ruler based height and leaf area were not fully available for all image dates.</li>
             </ul>
         </section>
 
         <section class="glass content-card">
             <h2>Data Infrastructure</h2>
-            <p>The notebooks use Python, NumPy, Pandas, tifffile, OpenCV, Matplotlib, SciPy, and scikit image to organize files, load images, filter invalid data, calculate features, and export CSV outputs for later analysis.</p>
+            <p>The notebooks use Python, NumPy, Pandas, tifffile, OpenCV, Matplotlib, SciPy, scikit image, PyTorch, Grounded SAM 2, SAM 2.1, and scikit learn to organize files, load images, filter invalid data, calculate features, and export CSV outputs.</p>
             <a class="back-link" href="index.html">← Back to Home</a>
         </section>
     </div>
