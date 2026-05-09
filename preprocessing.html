@@ -25,14 +25,16 @@
 
 .page-header h1,
 .content-card h2,
-.step-card h3 {
+.step-card h3,
+.pipeline-step h3 {
     color: white;
 }
 
 .page-header p,
 .content-card p,
 .content-card li,
-.step-card p {
+.step-card p,
+.pipeline-step p {
     color: rgba(255,255,255,0.84);
     line-height: 1.7;
 }
@@ -51,12 +53,48 @@
     padding: 22px;
 }
 
+.pipeline-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+    margin-top: 22px;
+}
+
+.pipeline-step {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 18px;
+    padding: 20px;
+    text-align: center;
+}
+
+.pipeline-icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
 .output-box {
     background: rgba(255,255,255,0.08);
     border-left: 4px solid rgba(255,255,255,0.35);
     border-radius: 14px;
     padding: 18px;
     margin-top: 18px;
+}
+
+.tag-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.tag {
+    color: white;
+    background: rgba(255,255,255,0.09);
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-size: 0.9rem;
 }
 
 .back-link {
@@ -68,6 +106,16 @@
     padding: 12px 18px;
     border-radius: 999px;
     margin-top: 8px;
+}
+
+.back-link:hover {
+    background: rgba(255,255,255,0.18);
+}
+
+@media (max-width: 1000px) {
+    .pipeline-row {
+        grid-template-columns: 1fr;
+    }
 }
 </style>
 </head>
@@ -90,90 +138,149 @@
 
         <section class="glass content-card">
             <h2>Preprocessing Goal</h2>
-            <p>The goal was to turn raw image folders into clean and structured data. This included validating hyperspectral cubes, filtering unusable RGB and depth frames, keeping lights on captures, removing corrupted images, and preparing plant masks.</p>
+            <p>The goal of preprocessing was to turn raw image folders into clean, structured, and usable data. This included validating hyperspectral cubes, removing unusable frames, keeping images from the proper lighting window, separating control and drought plants, and preparing plant masks for feature extraction.</p>
+
+            <div class="pipeline-row">
+                <div class="pipeline-step">
+                    <div class="pipeline-icon">📁</div>
+                    <h3>Raw Data</h3>
+                    <p>Load RGB, depth, and hyperspectral images from experiment folders.</p>
+                </div>
+
+                <div class="pipeline-step">
+                    <div class="pipeline-icon">🔍</div>
+                    <h3>Validation</h3>
+                    <p>Check image quality, timestamps, lighting, and valid band structure.</p>
+                </div>
+
+                <div class="pipeline-step">
+                    <div class="pipeline-icon">🧹</div>
+                    <h3>Filtering</h3>
+                    <p>Remove dim, corrupted, invalid, or unusable frames.</p>
+                </div>
+
+                <div class="pipeline-step">
+                    <div class="pipeline-icon">🌱</div>
+                    <h3>Segmentation</h3>
+                    <p>Create plant masks and separate control and drought plants.</p>
+                </div>
+
+                <div class="pipeline-step">
+                    <div class="pipeline-icon">📊</div>
+                    <h3>Clean Output</h3>
+                    <p>Save cleaned metadata and feature ready data for later analysis.</p>
+                </div>
+            </div>
         </section>
 
         <section class="glass content-card">
             <h2>Hyperspectral Preprocessing</h2>
-            <p>The hyperspectral preprocessing work cleaned raw TIFF files and created image metadata for later feature engineering.</p>
+            <p>The hyperspectral preprocessing work cleaned raw TIFF image cubes before vegetation index extraction. The main purpose was to make sure only valid and usable hyperspectral images moved forward in the pipeline.</p>
 
             <div class="step-grid">
                 <div class="step-card">
                     <h3>Filename Parsing</h3>
-                    <p>Messy filenames were parsed to extract dates and sequence numbers.</p>
+                    <p>Messy filenames were parsed to extract date and sequence information so the images could be sorted and tracked.</p>
                 </div>
 
                 <div class="step-card">
                     <h3>Band Validation</h3>
-                    <p>Each image was checked for 51 spectral bands across the expected wavelength range.</p>
+                    <p>Each hyperspectral image was checked for the expected 51 band cube structure before being included in the cleaned dataset.</p>
                 </div>
 
                 <div class="step-card">
                     <h3>NDVI Computation</h3>
-                    <p>NDVI was computed from red and near infrared bands to help isolate plant pixels.</p>
+                    <p>NDVI was computed from selected spectral bands to help identify plant pixels and separate vegetation from the background.</p>
                 </div>
 
                 <div class="step-card">
                     <h3>Vegetation Masking</h3>
-                    <p>NDVI thresholding and morphological cleanup were used to create clean plant masks.</p>
+                    <p>NDVI thresholding was used to create plant masks, followed by cleanup steps to remove small noisy regions.</p>
                 </div>
             </div>
 
             <div class="output-box">
-                <p>Key outputs included cleaned dataset indexes, verified 51 band images, mask ratio, mean NDVI, median NDVI, and other metadata CSV files.</p>
+                <p>Key outputs included cleaned dataset indexes, verified 51 band images, NDVI based vegetation masks, mask ratio, mean NDVI, median NDVI, and metadata CSV files.</p>
             </div>
         </section>
 
         <section class="glass content-card">
-            <h2>HS Feature Pipeline Filtering</h2>
-            <p>For the January Set 1 feature workflow, hyperspectral frames were filtered to make sure each record was useful for feature computation.</p>
+            <h2>Hyperspectral Quality Filtering</h2>
+            <p>For the Set 1 hyperspectral feature workflow, extra quality checks were used before calculating vegetation indices. This helped reduce noisy or unreliable records.</p>
 
             <ul>
-                <li>Images were filtered to the 6 AM to 1 PM lights on window.</li>
-                <li>Quality checks included signal to noise ratio, coverage, and mean NDVI.</li>
-                <li>Plant pixels were segmented with NDVI thresholding.</li>
-                <li>The final HS feature output included 204 timestamped records across 21 days.</li>
+                <li>Images were filtered to the lights on window.</li>
+                <li>Only valid 51 band TIFF cubes were used.</li>
+                <li>Low quality frames were filtered using signal to noise ratio, coverage, and NDVI checks.</li>
+                <li>Plant pixels were segmented using NDVI based thresholding.</li>
+                <li>The cleaned HS feature workflow produced timestamped vegetation index records.</li>
             </ul>
+
+            <div class="tag-row">
+                <span class="tag">51 band validation</span>
+                <span class="tag">NDVI masking</span>
+                <span class="tag">SNR filtering</span>
+                <span class="tag">Coverage check</span>
+                <span class="tag">Timestamped records</span>
+            </div>
         </section>
 
         <section class="glass content-card">
             <h2>RealSense RGB and Depth Preprocessing</h2>
-            <p>The RealSense preprocessing work used Intel RealSense D435 RGB and 16 bit raw depth data. The pipeline cleaned frames before segmentation and feature extraction.</p>
+            <p>The RealSense preprocessing workflow prepared RGB images and 16 bit raw depth images for plant segmentation and feature extraction. The final RealSense pipeline used the raw depth file for depth based traits and did not use the 8 bit depth visualization for feature extraction.</p>
 
             <div class="step-grid">
                 <div class="step-card">
                     <h3>Lights On Filtering</h3>
-                    <p>Frames were filtered to the 6 AM to 1 PM lights on window for more consistent imaging.</p>
+                    <p>Frames were filtered to the grow light window so the images had more consistent lighting conditions.</p>
                 </div>
 
                 <div class="step-card">
                     <h3>Brightness Check</h3>
-                    <p>Dim or corrupted frames were rejected when mean RGB brightness was below 50.</p>
+                    <p>Dim or corrupted RGB frames were rejected when the mean RGB brightness was too low.</p>
                 </div>
 
                 <div class="step-card">
-                    <h3>Depth Selection</h3>
-                    <p>The pipeline used the 16 bit raw depth file and discarded the 8 bit depth visualization.</p>
+                    <h3>Raw Depth Selection</h3>
+                    <p>The 16 bit raw depth image was used for feature extraction because it keeps the actual depth information.</p>
                 </div>
 
                 <div class="step-card">
-                    <h3>Quality Filtering</h3>
-                    <p>Quality filtering helped remove blur, bad detections, and unusable frames before modeling.</p>
+                    <h3>Frame Filtering</h3>
+                    <p>Unusable frames were removed before segmentation, feature extraction, and modeling.</p>
                 </div>
             </div>
         </section>
 
         <section class="glass content-card">
-            <h2>Grounded SAM 2 Plant Segmentation</h2>
-            <p>Grounded SAM 2 was used for zero shot segmentation with the text prompt soybean plant. This allowed plant level segmentation without training a custom segmentation model.</p>
+            <h2>Plant Segmentation</h2>
+            <p>The RealSense pipeline used Grounded SAM 2 for zero shot segmentation with the prompt “soybean plant.” This allowed plant level segmentation without training a custom segmentation model.</p>
 
-            <ul>
-                <li>Grounded SAM 2 detected soybean plants from the RGB image.</li>
-                <li>SAM 2.1 generated the plant mask from each detected box.</li>
-                <li>Control plants were assigned to the left side and drought plants to the right side by detection box center.</li>
-                <li>HSV color filtering was used as a backup refinement to remove pots and clean leaf edges.</li>
-                <li>The final pipeline kept 265 usable per plant frames after filtering.</li>
-            </ul>
+            <div class="step-grid">
+                <div class="step-card">
+                    <h3>Grounded SAM 2</h3>
+                    <p>The model detected soybean plants from the RGB image using a text prompt.</p>
+                </div>
+
+                <div class="step-card">
+                    <h3>SAM 2.1 Masks</h3>
+                    <p>SAM 2.1 generated plant masks from the detected plant regions.</p>
+                </div>
+
+                <div class="step-card">
+                    <h3>Control vs Drought</h3>
+                    <p>The left plant was treated as control and the right plant was treated as drought based on the detection box center.</p>
+                </div>
+
+                <div class="step-card">
+                    <h3>HSV Refinement</h3>
+                    <p>HSV color filtering was used as a backup refinement step to remove pot regions and clean plant edges.</p>
+                </div>
+            </div>
+
+            <div class="output-box">
+                <p>The final RealSense preprocessing and segmentation workflow kept 265 usable per plant frames after filtering.</p>
+            </div>
         </section>
 
         <section class="glass content-card">
@@ -181,10 +288,17 @@
             <ul>
                 <li>Cleaned hyperspectral image indexes and metadata files.</li>
                 <li>Verified HS images with valid 51 band structure.</li>
-                <li>RealSense RGB and raw depth frames filtered by light and image quality.</li>
+                <li>NDVI based plant masks for hyperspectral data.</li>
+                <li>Filtered RealSense RGB and 16 bit raw depth frames.</li>
                 <li>Plant masks from Grounded SAM 2 and SAM 2.1.</li>
-                <li>Separated control and drought plant regions for feature extraction.</li>
+                <li>Separated control and drought plant regions.</li>
+                <li>Feature ready data for RGB, depth, and hyperspectral analysis.</li>
             </ul>
+        </section>
+
+        <section class="glass content-card">
+            <h2>Why Preprocessing Matters</h2>
+            <p>Preprocessing is one of the most important steps in the project because the final features and model results depend on clean images and reliable plant masks. Removing bad frames, validating hyperspectral cubes, and separating the plants correctly helped make the rest of the pipeline more consistent.</p>
 
             <a class="back-link" href="index.html">← Back to Home</a>
         </section>
