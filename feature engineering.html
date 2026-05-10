@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Astro Cultivators | Feature Engineering</title>
-    <link rel="icon" type="image/png" href="images/icon3-modified.png">
-    <link rel="stylesheet" href="templatemo-glossy-touch.css">
+    <title>Astro Cultivators | Hyperspectral Feature Engineering</title>
+    <link rel="icon" type="image/png" href="./images/icon3-modified.png">
+    <link rel="stylesheet" href="./templatemo-glossy-touch.css">
 
     <style>
 .page-wrap {
@@ -25,30 +25,87 @@
 
 .page-header h1,
 .content-card h2,
-.feature-card h3 {
+.feature-card h3,
+.image-caption h3,
+.metric-card h3 {
     color: white;
 }
 
 .page-header p,
 .content-card p,
 .content-card li,
-.feature-card p {
+.feature-card p,
+.image-caption p,
+.metric-card p {
     color: rgba(255,255,255,0.84);
     line-height: 1.7;
 }
 
-.feature-grid {
+.feature-grid,
+.metric-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 18px;
     margin-top: 18px;
 }
 
-.feature-card {
+.feature-card,
+.metric-card {
     background: rgba(255,255,255,0.08);
     border: 1px solid rgba(255,255,255,0.14);
     border-radius: 18px;
     padding: 22px;
+}
+
+.metric-number {
+    color: white;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.image-card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 18px;
+    overflow: hidden;
+    margin-top: 18px;
+}
+
+.image-card img {
+    width: 100%;
+    display: block;
+    background: rgba(255,255,255,0.05);
+}
+
+.image-caption {
+    padding: 18px 22px;
+    text-align: center;
+}
+
+.image-caption h3 {
+    margin-bottom: 6px;
+}
+
+.image-caption p {
+    margin: 0 auto;
+    max-width: 950px;
+}
+
+.tag-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.tag {
+    color: white;
+    background: rgba(255,255,255,0.09);
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-size: 0.9rem;
 }
 
 .output-box {
@@ -69,6 +126,10 @@
     border-radius: 999px;
     margin-top: 8px;
 }
+
+.back-link:hover {
+    background: rgba(255,255,255,0.18);
+}
 </style>
 </head>
 
@@ -84,137 +145,175 @@
 
     <div class="container page-wrap">
         <section class="glass page-header">
-            <h1>Feature Engineering</h1>
-            <p>This stage converts segmented plant images into measurable features for growth analysis, stress detection, and visualization.</p>
+            <h1>Hyperspectral Feature Engineering</h1>
+            <p>This page explains how hyperspectral image cubes were converted into vegetation indices, spectral features, and structured outputs for plant health analysis.</p>
         </section>
 
         <section class="glass content-card">
             <h2>Feature Engineering Goal</h2>
-            <p>The goal was to summarize each plant image using numerical traits. These features are easier to compare over time and can be used as inputs for machine learning models.</p>
+            <p>The hyperspectral feature engineering workflow uses wavelength information to describe plant condition beyond normal RGB color. Each hyperspectral image contains many spectral bands, so the pipeline extracts vegetation indices and spectral measurements that can help show changes in plant health.</p>
+
+            <div class="metric-grid">
+                <div class="metric-card">
+                    <div class="metric-number">51</div>
+                    <h3>Spectral Bands</h3>
+                    <p>Valid hyperspectral TIFF cubes were checked for the expected 51 band structure before feature extraction.</p>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-number">5</div>
+                    <h3>Vegetation Indices</h3>
+                    <p>The workflow computed NDVI, GNDVI, red edge NDVI, chlorophyll red edge, and simple ratio.</p>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-number">204</div>
+                    <h3>Timestamped Records</h3>
+                    <p>The feature engineering workflow produced structured timestamped records for analysis over time.</p>
+                </div>
+            </div>
         </section>
 
         <section class="glass content-card">
-            <h2>Hyperspectral Features</h2>
-            <p>The HS pipeline calculated vegetation indices from masked plant pixels. These features describe spectral plant response and can support future fusion with RGB and depth features.</p>
+            <h2>Vegetation Index Features</h2>
+            <p>Vegetation indices combine selected wavelength bands to highlight plant traits such as greenness, chlorophyll response, and red edge behavior. These indices help turn hyperspectral images into numerical features that can be analyzed over time.</p>
 
             <div class="feature-grid">
                 <div class="feature-card">
                     <h3>NDVI</h3>
-                    <p>Computed from near infrared and red bands to measure vegetation strength.</p>
+                    <p>Uses red and near infrared response to estimate vegetation strength and plant greenness.</p>
                 </div>
 
                 <div class="feature-card">
                     <h3>GNDVI</h3>
-                    <p>Computed from near infrared and green bands to capture greenness and chlorophyll related response.</p>
+                    <p>Uses green and near infrared bands to capture greenness and chlorophyll related changes.</p>
                 </div>
 
                 <div class="feature-card">
-                    <h3>RE NDVI</h3>
-                    <p>Uses red edge wavelengths to capture stress and chlorophyll related changes.</p>
+                    <h3>Red Edge NDVI</h3>
+                    <p>Uses red edge wavelengths to capture plant changes that may not be clear in RGB images.</p>
                 </div>
 
                 <div class="feature-card">
-                    <h3>CHL RE</h3>
-                    <p>Uses near infrared and red edge bands to estimate chlorophyll related response.</p>
+                    <h3>Chlorophyll Red Edge</h3>
+                    <p>Uses red edge behavior to support chlorophyll related analysis.</p>
                 </div>
 
                 <div class="feature-card">
-                    <h3>SR</h3>
-                    <p>Simple ratio of near infrared to red reflectance.</p>
+                    <h3>Simple Ratio</h3>
+                    <p>Uses a ratio between selected spectral bands to summarize plant reflectance response.</p>
                 </div>
+            </div>
+        </section>
+
+        <section class="glass content-card">
+            <h2>Vegetation Index Maps</h2>
+            <p>This visual shows the main hyperspectral vegetation indices extracted from the image and compares their distributions and mean values.</p>
+
+            <div class="image-card">
+                <img
+                    src="./images/hs_vegetation_index_maps.png"
+                    alt="Hyperspectral vegetation index maps"
+                    data-fallbacks="./images/hs_vegetation_index_maps.jpg,./images/hs_vegetation_index_maps.jpeg,./images/hs_vegetation_index_maps.PNG,./images/hs_vegetation_index_maps.JPG"
+                    onerror="loadImageFallback(this)"
+                >
+                <div class="image-caption">
+                    <h3>Vegetation Indices Analysis</h3>
+                    <p>NDVI, GNDVI, red edge NDVI, chlorophyll red edge, and simple ratio were mapped spatially to show how different spectral features respond across plant pixels.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="glass content-card">
+            <h2>Spectral Band Progression</h2>
+            <p>Hyperspectral imaging captures the same plant across many wavelengths. This visual shows how plant appearance changes as the wavelength increases from lower visible bands toward near infrared bands.</p>
+
+            <div class="image-card">
+                <img
+                    src="./images/hs_spectral_band_progression.png"
+                    alt="Hyperspectral spectral band progression"
+                    data-fallbacks="./images/hs_spectral_band_progression.jpg,./images/hs_spectral_band_progression.jpeg,./images/hs_spectral_band_progression.PNG,./images/hs_spectral_band_progression.JPG"
+                    onerror="loadImageFallback(this)"
+                >
+                <div class="image-caption">
+                    <h3>Spectral Band Progression</h3>
+                    <p>The same plant scene is shown across selected wavelength bands, helping illustrate why hyperspectral data contains more information than a standard RGB image.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="glass content-card">
+            <h2>Plant Spectral Signature</h2>
+            <p>The spectral signature summarizes how plant pixels respond across wavelengths. This helps show which wavelength regions were important for the vegetation indices used in the pipeline.</p>
+
+            <div class="image-card">
+                <img
+                    src="./images/hs_spectral_signature.png"
+                    alt="Plant spectral signature plot"
+                    data-fallbacks="./images/hs_spectral_signature.jpg,./images/hs_spectral_signature.jpeg,./images/hs_spectral_signature.PNG,./images/hs_spectral_signature.JPG"
+                    onerror="loadImageFallback(this)"
+                >
+                <div class="image-caption">
+                    <h3>Plant Spectral Signature</h3>
+                    <p>The mean plant spectrum shows reflectance patterns across wavelength bands, with key regions marked for red, red edge, chlorophyll red edge, and near infrared measurements.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="glass content-card">
+            <h2>Feature Output</h2>
+            <p>The output of the hyperspectral feature engineering workflow is a structured feature table. Each timestamped record contains vegetation index values and related metadata that can be used for analysis, visualization, and future fusion with RGB and depth features.</p>
+
+            <div class="tag-row">
+                <span class="tag">NDVI</span>
+                <span class="tag">GNDVI</span>
+                <span class="tag">Red Edge NDVI</span>
+                <span class="tag">CHL RE</span>
+                <span class="tag">Simple Ratio</span>
+                <span class="tag">Timestamped Records</span>
+                <span class="tag">CSV Outputs</span>
             </div>
 
             <div class="output-box">
-                <p>The HS Set 1 feature workflow generated 204 timestamped records across 21 days from January 10 to January 30, 2026.</p>
+                <p>These features were useful for understanding hyperspectral plant response and can support future model fusion with RealSense RGB and depth features.</p>
             </div>
         </section>
 
         <section class="glass content-card">
-            <h2>RealSense RGB Mask Features</h2>
-            <p>For each segmented plant, the RealSense pipeline extracted visible plant traits from the RGB image and plant mask.</p>
-
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <h3>Area</h3>
-                    <p>Area was calculated as the number of plant mask pixels.</p>
-                </div>
-
-                <div class="feature-card">
-                    <h3>Height</h3>
-                    <p>Height was estimated from the vertical span of the plant mask.</p>
-                </div>
-
-                <div class="feature-card">
-                    <h3>VARI Mean</h3>
-                    <p>VARI was computed per plant pixel and clipped to the range from negative 1 to positive 1.</p>
-                </div>
-
-                <div class="feature-card">
-                    <h3>VARI Standard Deviation</h3>
-                    <p>VARI standard deviation measured variation in visible greenness within each plant mask.</p>
-                </div>
-
-                <div class="feature-card">
-                    <h3>Compactness</h3>
-                    <p>Compactness was computed from plant area and bounding box shape.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="glass content-card">
-            <h2>RealSense Depth Features</h2>
-            <p>The RealSense depth pipeline used the 16 bit raw depth image inside the plant mask to extract structure based features.</p>
-
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <h3>Depth Standard Deviation</h3>
-                    <p>Measures depth variation inside the plant mask and represents 3D structure complexity.</p>
-                </div>
-
-                <div class="feature-card">
-                    <h3>Surface Roughness</h3>
-                    <p>Uses depth gradients to estimate plant surface texture and structure.</p>
-                </div>
-
-                <div class="feature-card">
-                    <h3>Canopy Volume</h3>
-                    <p>Uses depth values as a proxy for canopy structure and volume.</p>
-                </div>
-
-                <div class="feature-card">
-                    <h3>Vertical Spread</h3>
-                    <p>Measures how much the plant region spreads vertically in the frame.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="glass content-card">
-            <h2>Baseline Normalization and Daily Aggregation</h2>
-            <p>After extracting frame level features, the notebook performed baseline normalization and daily aggregation. This made the features more useful for comparing control and drought plants over time.</p>
-
-            <ul>
-                <li>area_change = area_px minus the day 1 median for that treatment.</li>
-                <li>height_change = height_px minus the day 1 median for that treatment.</li>
-                <li>vari_change = vari_mean minus the day 1 median for that treatment.</li>
-                <li>Daily aggregation used median, standard deviation, and change features per date.</li>
-            </ul>
-
-            <div class="output-box">
-                <p>The RealSense pipeline produced 265 per frame rows and aggregated them into 20 daily rows for modeling and temporal analysis.</p>
-            </div>
-        </section>
-
-        <section class="glass content-card">
-            <h2>Feature Outputs</h2>
-            <ul>
-                <li>HS vegetation index feature tables.</li>
-                <li>RealSense per frame feature CSVs.</li>
-                <li>Daily trait CSVs with control and drought features.</li>
-                <li>Baseline normalized change features for model training.</li>
-            </ul>
+            <h2>Why Hyperspectral Features Matter</h2>
+            <p>RGB images only show visible color, but hyperspectral images capture plant response across many wavelengths. This makes hyperspectral features useful for detecting subtle plant changes that may appear before symptoms are obvious in standard images.</p>
 
             <a class="back-link" href="index.html">← Back to Home</a>
         </section>
     </div>
+
+    <script>
+        function loadImageFallback(img) {
+            const fallbackString = img.getAttribute("data-fallbacks");
+
+            if (!fallbackString) {
+                return;
+            }
+
+            const fallbacks = fallbackString.split(",").map(path => path.trim()).filter(Boolean);
+            const currentIndex = Number(img.getAttribute("data-fallback-index") || "0");
+
+            if (currentIndex < fallbacks.length) {
+                img.setAttribute("data-fallback-index", String(currentIndex + 1));
+                img.src = fallbacks[currentIndex];
+            } else {
+                img.onerror = null;
+                img.style.display = "none";
+
+                const warning = document.createElement("p");
+                warning.textContent = "Image not found. Please check that the file is uploaded to the website images folder and that the file name matches the code exactly.";
+                warning.style.color = "rgba(255,255,255,0.85)";
+                warning.style.textAlign = "center";
+                warning.style.padding = "24px";
+
+                img.parentNode.insertBefore(warning, img.nextSibling);
+            }
+        }
+    </script>
 </body>
 </html>
