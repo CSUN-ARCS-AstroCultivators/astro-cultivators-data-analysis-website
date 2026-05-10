@@ -78,6 +78,11 @@
     background: rgba(255,255,255,0.05);
 }
 
+.sample-img {
+    max-height: 520px;
+    object-fit: contain;
+}
+
 .image-caption {
     padding: 18px 22px;
     text-align: center;
@@ -147,6 +152,25 @@
         <section class="glass page-header">
             <h1>Hyperspectral Feature Engineering</h1>
             <p>This page explains how hyperspectral image cubes were converted into vegetation indices, spectral features, and structured outputs for plant health analysis.</p>
+        </section>
+
+        <section class="glass content-card">
+            <h2>Hyperspectral Sample</h2>
+            <p>Hyperspectral imaging captures plant information across many wavelength bands, not just normal visible color. This allows the pipeline to study plant response using spectral patterns that may not be obvious in standard RGB images.</p>
+
+            <div class="image-card">
+                <img
+                    class="sample-img"
+                    src="./images/hyperspectral_sample.jpg"
+                    alt="Hyperspectral sample image"
+                    data-fallbacks="./images/hyperspectral_sample.png,./images/hyperspectral_sample.jpeg,./images/hyperspectral_sample.JPG,./images/hyperspectral_sample.PNG"
+                    onerror="loadImageFallback(this)"
+                >
+                <div class="image-caption">
+                    <h3>Hyperspectral Image Example</h3>
+                    <p>Example hyperspectral image used to analyze plant response across wavelength bands.</p>
+                </div>
+            </div>
         </section>
 
         <section class="glass content-card">
