@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Astro Cultivators | Data Cleaning and Preprocessing</title>
-    <link rel="icon" type="image/png" href="images/icon3-modified.png">
-    <link rel="stylesheet" href="templatemo-glossy-touch.css">
+    <link rel="icon" type="image/png" href="./images/icon3-modified.png">
+    <link rel="stylesheet" href="./templatemo-glossy-touch.css">
 
     <style>
 .page-wrap {
@@ -75,10 +75,6 @@
     margin-bottom: 10px;
 }
 
-.image-section {
-    margin-top: 22px;
-}
-
 .image-card {
     background: rgba(255,255,255,0.08);
     border: 1px solid rgba(255,255,255,0.14);
@@ -90,6 +86,7 @@
 .image-card img {
     width: 100%;
     display: block;
+    background: rgba(255,255,255,0.05);
 }
 
 .image-caption {
@@ -233,7 +230,12 @@
             </div>
 
             <div class="image-card">
-                <img src="images/hs_ndvi_mask.png" alt="Hyperspectral NDVI mask preprocessing example">
+                <img
+                    src="./images/hs_ndvi_mask.png"
+                    alt="Hyperspectral NDVI mask preprocessing example"
+                    data-fallbacks="./images/hs_ndvi_mask.jpg,./images/hs_ndvi_mask.jpeg,./images/hs_ndvi_mask.PNG,./images/hs_ndvi_mask.JPG"
+                    onerror="loadImageFallback(this)"
+                >
                 <div class="image-caption">
                     <h3>Hyperspectral NDVI Masking Example</h3>
                     <p>This visual shows how hyperspectral data was transformed into NDVI based plant masks, helping separate vegetation pixels from the image background before feature extraction.</p>
@@ -320,7 +322,12 @@
             </div>
 
             <div class="image-card">
-                <img src="images/realsense_segmentation_output.png" alt="RealSense plant segmentation output example">
+                <img
+                    src="./images/realsense_segmentation_output.png"
+                    alt="RealSense plant segmentation output example"
+                    data-fallbacks="./images/realsense_segmentation_output.jpg,./images/realsense_segmentation_output.jpeg,./images/realsense_segmentation_output.PNG,./images/realsense_segmentation_output.JPG"
+                    onerror="loadImageFallback(this)"
+                >
                 <div class="image-caption">
                     <h3>RealSense Segmentation Output</h3>
                     <p>This visual shows the RGB frame, plant mask overlay, and segmentation mask used to separate the control and drought soybean plants before extracting features.</p>
@@ -352,5 +359,34 @@
             <a class="back-link" href="index.html">← Back to Home</a>
         </section>
     </div>
+
+    <script>
+        function loadImageFallback(img) {
+            const fallbackString = img.getAttribute("data-fallbacks");
+
+            if (!fallbackString) {
+                return;
+            }
+
+            const fallbacks = fallbackString.split(",").map(path => path.trim()).filter(Boolean);
+            const currentIndex = Number(img.getAttribute("data-fallback-index") || "0");
+
+            if (currentIndex < fallbacks.length) {
+                img.setAttribute("data-fallback-index", String(currentIndex + 1));
+                img.src = fallbacks[currentIndex];
+            } else {
+                img.onerror = null;
+                img.style.display = "none";
+
+                const warning = document.createElement("p");
+                warning.textContent = "Image not found. Please check that the file is uploaded to the website images folder and that the file name matches the code exactly.";
+                warning.style.color = "rgba(255,255,255,0.85)";
+                warning.style.textAlign = "center";
+                warning.style.padding = "24px";
+
+                img.parentNode.insertBefore(warning, img.nextSibling);
+            }
+        }
+    </script>
 </body>
 </html>
