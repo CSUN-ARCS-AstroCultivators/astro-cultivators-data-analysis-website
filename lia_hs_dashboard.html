@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hyperspectral Vegetation Index Tracker</title>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #f7faf7;
+            color: #17351d;
+            font-family: "Courier New", monospace;
+            padding: 28px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+            margin-bottom: 32px;
+            border-bottom: 2px solid #d7e6d8;
+            padding-bottom: 28px;
+        }
+
+        .header h1 {
+            font-family: system-ui, sans-serif;
+            font-size: 34px;
+            margin: 0 0 12px 0;
+            color: #17351d;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            font-size: 20px;
+            color: #586c59;
+            line-height: 1.6;
+        }
+
+        .badge {
+            background: #eaf4ff;
+            color: #1f6fb4;
+            border: 2px solid #bad2ec;
+            border-radius: 7px;
+            padding: 8px 14px;
+            font-size: 18px;
+            white-space: nowrap;
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-bottom: 34px;
+        }
+
+        .metric-card {
+            background: white;
+            border: 2px solid #dcebdd;
+            border-radius: 14px;
+            padding: 28px 30px;
+            box-shadow: 0 2px 8px rgba(25, 60, 30, 0.08);
+        }
+
+        .metric-label {
+            font-size: 18px;
+            color: #5d705f;
+            letter-spacing: 3px;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+        }
+
+        .metric-value {
+            font-size: 44px;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .blue {
+            color: #2474b9;
+        }
+
+        .orange {
+            color: #e97937;
+        }
+
+        .change {
+            margin-top: 16px;
+            font-size: 18px;
+            color: #d93424;
+        }
+
+        .detail {
+            margin-top: 16px;
+            font-size: 18px;
+            color: #586c59;
+        }
+
+        .chart-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+            margin-bottom: 28px;
+        }
+
+        .chart-card {
+            background: white;
+            border: 2px solid #dcebdd;
+            border-radius: 14px;
+            padding: 28px;
+            box-shadow: 0 2px 8px rgba(25, 60, 30, 0.08);
+        }
+
+        .chart-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 8px;
+        }
+
+        .chart-title {
+            font-family: system-ui, sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            color: #17351d;
+            margin: 0;
+        }
+
+        .chart-subtitle {
+            color: #586c59;
+            font-size: 18px;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .chart-tag {
+            border-radius: 7px;
+            padding: 8px 14px;
+            font-size: 17px;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .chart-tag.blue-tag {
+            background: #eaf4ff;
+            color: #1f6fb4;
+            border: 2px solid #bad2ec;
+        }
+
+        .chart-tag.orange-tag {
+            background: #fff2e8;
+            color: #e97937;
+            border: 2px solid #ffd2b8;
+        }
+
+        .chart-box {
+            height: 330px;
+        }
+
+        .footer-note {
+            margin-top: 24px;
+            background: #edf6fb;
+            border: 2px solid #c9dff3;
+            color: #586c59;
+            border-radius: 10px;
+            padding: 18px 24px;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 1000px) {
+            .metric-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .chart-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 650px) {
+            body {
+                padding: 18px;
+            }
+
+            .metric-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 28px;
+            }
+
+            .metric-value {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div>
+            <h1>Hyperspectral Vegetation Index Tracker</h1>
+            <div class="subtitle">Temporal evolution · Williams 82 Soybean · Jan 31 to Feb 13, 2026</div>
+        </div>
+
+        <div class="badge">SET 2 · CUBERT 550 to 760 nm</div>
+    </header>
+
+    <section class="metric-grid">
+        <div class="metric-card">
+            <div class="metric-label">Latest VOG1</div>
+            <div class="metric-value blue">0.8244</div>
+            <div class="change">▼ 16.7% from start</div>
+        </div>
+
+        <div class="metric-card">
+            <div class="metric-label">VOG1 Range</div>
+            <div class="metric-value blue">0.777</div>
+            <div class="detail">min · max 0.989</div>
+        </div>
+
+        <div class="metric-card">
+            <div class="metric-label">Latest NDVI</div>
+            <div class="metric-value orange">0.4343</div>
+            <div class="change">▼ 13.5% from start</div>
+        </div>
+
+        <div class="metric-card">
+            <div class="metric-label">NDVI Range</div>
+            <div class="metric-value orange">0.423</div>
+            <div class="detail">min · max 0.502</div>
+        </div>
+    </section>
+
+    <section class="chart-grid">
+        <div class="chart-card">
+            <div class="chart-title-row">
+                <div>
+                    <h2 class="chart-title">VOG1 Over Time</h2>
+                    <div class="chart-subtitle">Vogelmann Red Edge Index 1</div>
+                </div>
+
+                <div class="chart-tag blue-tag">VOG1</div>
+            </div>
+
+            <div id="vog1Chart" class="chart-box"></div>
+        </div>
+
+        <div class="chart-card">
+            <div class="chart-title-row">
+                <div>
+                    <h2 class="chart-title">NDVI Over Time</h2>
+                    <div class="chart-subtitle">Sensor adapted · 760 nm near red proxy</div>
+                </div>
+
+                <div class="chart-tag orange-tag">NDVI</div>
+            </div>
+
+            <div id="ndviChart" class="chart-box"></div>
+        </div>
+    </section>
+
+    <div class="footer-note">
+        ⓘ Set 2 · Cubert Hyperspectral · 550 to 760 nm · 9 daily aggregated frames
+    </div>
+
+    <script>
+        const labels = ["01/31", "02/01", "02/07", "02/08", "02/09", "02/10", "02/11", "02/12", "02/13"];
+
+        const fullDates = [
+            "2026-01-31",
+            "2026-02-01",
+            "2026-02-07",
+            "2026-02-08",
+            "2026-02-09",
+            "2026-02-10",
+            "2026-02-11",
+            "2026-02-12",
+            "2026-02-13"
+        ];
+
+        const vog1 = [0.9892, 0.9832, 0.9719, 0.9129, 0.9241, 0.9495, 0.7908, 0.7767, 0.8244];
+        const ndvi = [0.5020, 0.4709, 0.4461, 0.4384, 0.4229, 0.4273, 0.4475, 0.4480, 0.4343];
+
+        function makeChart(elementId, values, lineColor, fillColor, yMin, yMax, label) {
+            const trace = {
+                x: labels,
+                y: values,
+                customdata: fullDates,
+                type: "scatter",
+                mode: "lines+markers",
+                name: label,
+                line: {
+                    color: lineColor,
+                    width: 4,
+                    shape: "spline"
+                },
+                marker: {
+                    color: lineColor,
+                    size: 11,
+                    line: {
+                        color: "white",
+                        width: 3
+                    }
+                },
+                fill: "tozeroy",
+                fillcolor: fillColor,
+                hovertemplate: "Date: %{customdata}<br>" + label + ": %{y:.4f}<extra></extra>"
+            };
+
+            const layout = {
+                paper_bgcolor: "rgba(0,0,0,0)",
+                plot_bgcolor: "rgba(0,0,0,0)",
+                margin: {
+                    l: 65,
+                    r: 20,
+                    t: 20,
+                    b: 58
+                },
+                xaxis: {
+                    tickfont: {
+                        color: "#37533b",
+                        size: 15,
+                        family: "Courier New"
+                    },
+                    gridcolor: "rgba(80, 120, 85, 0.16)",
+                    zeroline: false
+                },
+                yaxis: {
+                    range: [yMin, yMax],
+                    tickfont: {
+                        color: "#37533b",
+                        size: 15,
+                        family: "Courier New"
+                    },
+                    gridcolor: "rgba(80, 120, 85, 0.16)",
+                    zeroline: false
+                },
+                showlegend: false,
+                hovermode: "x unified"
+            };
+
+            const config = {
+                responsive: true,
+                displaylogo: false,
+                displayModeBar: true
+            };
+
+            Plotly.newPlot(elementId, [trace], layout, config);
+        }
+
+        makeChart(
+            "vog1Chart",
+            vog1,
+            "#2578bc",
+            "rgba(37, 120, 188, 0.12)",
+            0.68,
+            1.06,
+            "VOG1"
+        );
+
+        makeChart(
+            "ndviChart",
+            ndvi,
+            "#e97937",
+            "rgba(233, 121, 55, 0.12)",
+            0.36,
+            0.56,
+            "NDVI"
+        );
+    </script>
+</body>
+</html>
