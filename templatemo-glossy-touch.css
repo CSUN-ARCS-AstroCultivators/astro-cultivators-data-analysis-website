@@ -11,11 +11,13 @@ https://templatemo.com/tm-592-glossy-touch
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    button[type="submit"] {
-        font-family: inherit;
-        font-size: 16px;
-    }
 }
+
+button[type="submit"] {
+    font-family: inherit;
+    font-size: 16px;
+}
+
 body {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(
@@ -32,6 +34,7 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
 }
+
 /* Animated background elements */
 .bg-shapes {
     position: fixed;
@@ -42,6 +45,7 @@ body {
     z-index: -1;
     overflow: hidden;
 }
+
 .shape {
     position: absolute;
     background: rgba(160, 200, 80, 0.12);
@@ -49,6 +53,7 @@ body {
     box-shadow: 0 4px 20px rgba(160, 200, 80, 0.08);
     border-radius: 80% 0 55% 0;
 }
+
 .shape:nth-child(1) {
     width: 50px;
     height: 90px;
@@ -57,6 +62,7 @@ body {
     animation-delay: 0s;
     transform: rotate(15deg);
 }
+
 .shape:nth-child(2) {
     width: 40px;
     height: 70px;
@@ -65,6 +71,7 @@ body {
     animation-delay: 2s;
     transform: rotate(-20deg);
 }
+
 .shape:nth-child(3) {
     width: 45px;
     height: 80px;
@@ -73,6 +80,7 @@ body {
     animation-delay: 4s;
     transform: rotate(25deg);
 }
+
 .shape:nth-child(4) {
     width: 35px;
     height: 65px;
@@ -81,6 +89,7 @@ body {
     animation-delay: 1s;
     transform: rotate(-10deg);
 }
+
 .shape:nth-child(5) {
     width: 55px;
     height: 95px;
@@ -89,6 +98,7 @@ body {
     animation-delay: 3s;
     transform: rotate(30deg);
 }
+
 .shape:nth-child(6) {
     width: 42px;
     height: 75px;
@@ -97,16 +107,19 @@ body {
     animation-delay: 5s;
     transform: rotate(-15deg);
 }
+
 @keyframes float {
     0%,
     100% {
         transform: translateY(0px) rotate(var(--start-rotation, 0deg));
     }
+
     50% {
         transform: translateY(-20px)
             rotate(calc(var(--start-rotation, 0deg) + 180deg));
     }
 }
+
 /* Glass container styles */
 .glass {
     background: rgba(255, 255, 255, 0.15);
@@ -118,6 +131,7 @@ body {
     position: relative;
     overflow: hidden;
 }
+
 /* Only clickable boxes get hover effects */
 .feature-card.glass:hover,
 .service-card.glass:hover {
@@ -126,14 +140,17 @@ body {
     box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15);
     cursor: pointer;
 }
+
 /* Header styles */
 header {
     padding: 20px;
 }
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
 }
+
 /* Navigation styles */
 nav {
     display: flex;
@@ -141,6 +158,7 @@ nav {
     align-items: center;
     padding: 30px 45px;
 }
+
 .logo {
     font-size: 32px;
     font-weight: bold;
@@ -151,6 +169,7 @@ nav {
     gap: 15px;
     cursor: pointer;
 }
+
 .logo-icon {
     width: 64px;
     height: 64px;
@@ -158,20 +177,24 @@ nav {
     align-items: center;
     justify-content: center;
 }
+
 .logo-icon svg {
     width: 100%;
     height: 100%;
     filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
     transition: all 0.3s ease;
 }
+
 .logo:hover .logo-icon svg {
     transform: scale(1.1) translateY(-2px);
     filter: drop-shadow(0 4px 12px rgba(255, 255, 255, 0.4));
 }
+
 .nav-links {
     display: flex;
     gap: 30px;
 }
+
 .nav-links a {
     color: rgba(255, 255, 255, 0.9);
     text-decoration: none;
@@ -181,27 +204,32 @@ nav {
     border-radius: 10px;
     cursor: pointer;
     font-size: 16px;
-	border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.6);
 }
+
 .nav-links a:hover,
 .nav-links a.active {
     color: white;
     background: rgba(255, 255, 255, 0.1);
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
+
 /* Page system */
 .page {
     display: none;
     min-height: 100vh;
     padding: 40px 20px 20px;
 }
+
 .page.active {
     display: block;
 }
+
 /* Content wrapper to contain page content */
 .content-wrapper {
     min-height: calc(100vh - 300px);
 }
+
 /* Home page styles */
 .hero {
     display: grid;
@@ -211,11 +239,13 @@ nav {
     padding: 60px 40px;
     margin-bottom: 40px;
 }
+
 .hero-image {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .hero-image img {
     width: 100%;
     max-width: 440px;
@@ -223,9 +253,11 @@ nav {
     border-radius: 20px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
 }
+
 .hero-content {
     text-align: left;
 }
+
 .hero h1 {
     font-size: 2.8rem;
     color: white;
@@ -233,12 +265,14 @@ nav {
     text-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     line-height: 1.2;
 }
+
 .hero p {
     font-size: 1.2rem;
     color: rgba(255, 255, 255, 0.9);
     margin-bottom: 30px;
     line-height: 1.6;
 }
+
 .cta-button {
     display: inline-block;
     padding: 15px 40px;
@@ -252,26 +286,26 @@ nav {
     border: 2px solid rgba(255, 255, 255, 0.3);
     cursor: pointer;
 }
+
 .cta-button:hover {
     background: rgba(255, 255, 255, 0.3);
     transform: translateY(-3px);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
-button[type="submit"] {
-    font-family: inherit;
-    font-size: 16px;
-}
+
 .features {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
     margin-bottom: 40px;
 }
+
 .feature-card {
     padding: 40px 30px;
     text-align: center;
     color: white;
 }
+
 .feature-icon {
     width: 60px;
     height: 60px;
@@ -283,15 +317,18 @@ button[type="submit"] {
     justify-content: center;
     font-size: 24px;
 }
+
 .feature-card h3 {
     font-size: 1.5rem;
     margin-bottom: 15px;
     color: white;
 }
+
 .feature-card p {
     color: rgba(255, 255, 255, 0.8);
     line-height: 1.6;
 }
+
 /* About page styles */
 .about-content {
     display: grid;
@@ -300,47 +337,56 @@ button[type="submit"] {
     margin-bottom: 40px;
     align-items: center;
 }
+
 .about-text {
     padding: 40px;
     color: white;
 }
+
 .about-text h2 {
     font-size: 2.5rem;
     margin-bottom: 20px;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
+
 .about-text p {
     font-size: 1.1rem;
     line-height: 1.8;
     color: rgba(255, 255, 255, 0.9);
     margin-bottom: 20px;
 }
+
 .stats {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 30px;
     margin-bottom: 60px;
 }
+
 .stat-card {
     text-align: center;
     padding: 30px;
     color: white;
 }
+
 .stat-number {
     font-size: 3rem;
     font-weight: bold;
     color: white;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
+
 .stat-label {
     font-size: 1.1rem;
     color: rgba(255, 255, 255, 0.8);
     margin-top: 10px;
 }
+
 /* Team section styles */
 .team-section {
     margin-bottom: 60px;
 }
+
 .team-section h2 {
     font-size: 2.5rem;
     color: white;
@@ -348,20 +394,24 @@ button[type="submit"] {
     margin-bottom: 50px;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
+
 .team-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
 }
+
 .team-member {
     padding: 40px 30px;
     text-align: center;
     color: white;
     transition: all 0.3s ease;
 }
+
 .team-member:hover {
     transform: none;
 }
+
 .team-avatar {
     width: 120px;
     height: 120px;
@@ -376,32 +426,38 @@ button[type="submit"] {
     border: 3px solid rgba(255, 255, 255, 0.3);
     transition: all 0.3s ease;
 }
+
 .team-member:hover .team-avatar {
     border-color: rgba(255, 255, 255, 0.3);
     transform: none;
     background: rgba(255, 255, 255, 0.2);
 }
+
 .team-member h3 {
     font-size: 1.4rem;
     margin-bottom: 8px;
     color: white;
 }
+
 .team-member .role {
     font-size: 1rem;
     color: rgba(255, 255, 255, 0.7);
     margin-bottom: 15px;
 }
+
 .team-member .bio {
     font-size: 0.9rem;
     line-height: 1.6;
     color: rgba(255, 255, 255, 0.8);
     margin-bottom: 20px;
 }
+
 .team-social {
     display: flex;
     justify-content: center;
     gap: 15px;
 }
+
 .team-social a {
     width: 36px;
     height: 36px;
@@ -416,11 +472,13 @@ button[type="submit"] {
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
+
 .team-social a:hover {
     background: rgba(255, 255, 255, 0.2);
     transform: translateY(-3px);
     color: white;
 }
+
 /* Services page styles */
 .services-grid {
     display: grid;
@@ -428,16 +486,19 @@ button[type="submit"] {
     gap: 30px;
     margin-bottom: 40px;
 }
+
 .service-card {
     padding: 40px 30px;
     color: white;
     text-align: left;
 }
+
 .service-header {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
 }
+
 .service-icon {
     width: 50px;
     height: 50px;
@@ -449,30 +510,81 @@ button[type="submit"] {
     font-size: 20px;
     margin-right: 15px;
 }
+
 .service-card h3 {
     font-size: 1.4rem;
     color: white;
 }
+
 .service-card p {
     color: rgba(255, 255, 255, 0.8);
     line-height: 1.6;
     margin-bottom: 20px;
 }
+
 .service-features {
     list-style: none;
 }
+
 .service-features li {
     color: rgba(255, 255, 255, 0.7);
     margin-bottom: 8px;
     padding-left: 20px;
     position: relative;
 }
+
 .service-features li:before {
     content: "✓";
     position: absolute;
     left: 0;
     color: rgba(255, 255, 255, 0.9);
 }
+
+/* Technologies and skills equal card sizing */
+.technology-grid,
+.technologies-grid,
+.skills-grid,
+.skill-grid,
+.tech-grid,
+.tools-grid,
+.technology-skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
+    align-items: stretch;
+}
+
+.technology-card,
+.technologies-card,
+.skill-card,
+.tech-card,
+.tool-card,
+.technology-skills-card {
+    height: 100%;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.technology-card p,
+.technologies-card p,
+.skill-card p,
+.tech-card p,
+.tool-card p,
+.technology-skills-card p {
+    flex-grow: 1;
+}
+
+.technology-card ul,
+.technologies-card ul,
+.skill-card ul,
+.tech-card ul,
+.tool-card ul,
+.technology-skills-card ul {
+    margin-top: auto;
+}
+
 /* Contact page styles */
 .contact-grid {
     display: grid;
@@ -480,27 +592,33 @@ button[type="submit"] {
     gap: 40px;
     margin-bottom: 40px;
 }
+
 .contact-map-section {
     margin-top: 40px;
 }
+
 .contact-form {
     padding: 40px;
 }
+
 .contact-form h2 {
     color: white;
     font-size: 2rem;
     margin-bottom: 30px;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
+
 .form-group {
     margin-bottom: 20px;
 }
+
 .form-group label {
     display: block;
     color: rgba(255, 255, 255, 0.9);
     margin-bottom: 8px;
     font-weight: 500;
 }
+
 .form-group input,
 .form-group textarea {
     width: 100%;
@@ -514,6 +632,7 @@ button[type="submit"] {
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;
 }
+
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
@@ -521,29 +640,35 @@ button[type="submit"] {
     border-color: rgba(255, 255, 255, 0.4);
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
 }
+
 .form-group input::placeholder,
 .form-group textarea::placeholder {
     color: rgba(255, 255, 255, 0.6);
 }
+
 .form-group textarea {
     height: 120px;
     resize: vertical;
     line-height: 1.5;
 }
+
 .contact-info {
     padding: 40px;
     color: white;
 }
+
 .contact-info h2 {
     font-size: 2rem;
     margin-bottom: 30px;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
+
 .contact-item {
     display: flex;
     align-items: center;
     margin-bottom: 25px;
 }
+
 .contact-item-icon {
     width: 40px;
     height: 40px;
@@ -555,24 +680,29 @@ button[type="submit"] {
     margin-right: 15px;
     font-size: 18px;
 }
+
 .contact-item-text h4 {
     color: white;
     margin-bottom: 5px;
 }
+
 .contact-item-text p {
     color: rgba(255, 255, 255, 0.8);
 }
+
 .contact-map {
     padding: 40px;
     color: white;
     width: 100%;
 }
+
 .contact-map h2 {
     font-size: 2rem;
     margin-bottom: 30px;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     text-align: center;
 }
+
 .map-container {
     width: 100%;
     height: 500px;
@@ -583,6 +713,7 @@ button[type="submit"] {
     position: relative;
     backdrop-filter: blur(10px);
 }
+
 .map-placeholder {
     width: 100%;
     height: 100%;
@@ -593,35 +724,42 @@ button[type="submit"] {
     color: rgba(255, 255, 255, 0.8);
     text-align: center;
 }
+
 .map-placeholder-icon {
     font-size: 64px;
     margin-bottom: 20px;
     opacity: 0.7;
 }
+
 .map-placeholder p {
     margin: 8px 0;
     font-size: 16px;
 }
+
 .map-placeholder .address {
     font-size: 18px;
     font-weight: 600;
     margin-bottom: 20px;
 }
+
 .map-placeholder .integration-note {
     font-size: 14px;
     opacity: 0.6;
     margin-top: 20px;
 }
+
 /* Footer styles */
 #footer {
     margin-top: 60px;
     padding: 30px 0;
 }
+
 .footer-content {
     padding: 30px;
     text-align: center;
     color: rgba(255, 255, 255, 0.8);
 }
+
 .footer-links {
     display: flex;
     justify-content: center;
@@ -629,6 +767,7 @@ button[type="submit"] {
     margin-bottom: 20px;
     flex-wrap: wrap;
 }
+
 .footer-links a {
     color: rgba(255, 255, 255, 0.7);
     text-decoration: none;
@@ -636,56 +775,67 @@ button[type="submit"] {
     transition: color 0.3s ease;
     padding: 5px 10px;
 }
+
 .footer-links a:hover {
     color: white;
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
+
 .copyright {
     font-size: 14px;
     color: rgba(255, 255, 255, 0.6);
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding-top: 20px;
 }
+
 .copyright a {
-	color: rgba(255, 255, 255, 0.6);
-	text-decoration: none;
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
 }
+
 /* Responsive design */
 @media (max-width: 1024px) {
     .team-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
+
 @media (max-width: 768px) {
-    /* Adjust padding for mobile */
     .page {
         padding: 30px 20px 20px;
     }
+
     .content-wrapper {
         min-height: auto;
     }
+
     .hero {
         grid-template-columns: 1fr;
         text-align: center;
         gap: 20px;
     }
+
     .hero-content {
         text-align: center;
     }
+
     .hero h1 {
         font-size: 2.5rem;
     }
+
     nav {
         flex-direction: column;
         gap: 20px;
         padding: 20px 30px;
     }
+
     .nav-links {
         gap: 15px;
         justify-content: center;
         flex-direction: column;
         align-items: center;
     }
+
     .nav-links a {
         display: block;
         text-align: center;
@@ -694,35 +844,63 @@ button[type="submit"] {
         font-size: 14px;
         padding: 10px 20px;
     }
+
     .about-content,
     .contact-grid {
         grid-template-columns: 1fr;
     }
+
     .services-grid {
         grid-template-columns: 1fr;
     }
+
     .team-grid {
         grid-template-columns: 1fr;
         gap: 20px;
     }
+
+    .technology-grid,
+    .technologies-grid,
+    .skills-grid,
+    .skill-grid,
+    .tech-grid,
+    .tools-grid,
+    .technology-skills-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .technology-card,
+    .technologies-card,
+    .skill-card,
+    .tech-card,
+    .tool-card,
+    .technology-skills-card {
+        min-height: auto;
+    }
+
     .footer-links {
         gap: 15px;
         flex-direction: column;
     }
+
     .footer-links a {
         display: block;
         text-align: center;
     }
+
     button[type="submit"] {
         width: 100%;
     }
+
     .map-container {
         height: 350px;
     }
+
     .logo-icon {
         width: 40px;
         height: 40px;
     }
+
     .logo {
         font-size: 22px;
     }
@@ -735,10 +913,12 @@ button[type="submit"] {
         text-align: center;
         gap: 6px;
     }
+
     .csun-left {
         flex-wrap: wrap;
         justify-content: center;
     }
+
     .csun-social {
         flex-wrap: wrap;
         justify-content: center;
