@@ -120,14 +120,6 @@
     font-size: 0.9rem;
 }
 
-.output-box {
-    background: rgba(255,255,255,0.08);
-    border-left: 4px solid rgba(255,255,255,0.35);
-    border-radius: 14px;
-    padding: 18px;
-    margin-top: 18px;
-}
-
 .back-link {
     display: inline-block;
     color: white;
@@ -210,9 +202,9 @@
 
             <div class="image-card">
                 <img
-                    src="./images/vog1_plot.png"
+                    src="./images/vog1_temporal_evolution.png"
                     alt="Temporal evolution of VOG1"
-                    data-fallbacks="./images/vog1_plot.png,./images/vog1_plot.png,./images/vog1_plot.png,./images/vog1_plot.png"
+                    data-fallbacks="./images/vog1_temporal_evolution.jpg,./images/vog1_temporal_evolution.jpeg,./images/vog1_temporal_evolution.PNG,./images/vog1_temporal_evolution.JPG"
                     onerror="loadImageFallback(this)"
                 >
 
@@ -320,13 +312,15 @@
             mode: "lines+markers",
             name: "VOG1",
             line: {
-                width: 3,
-                shape: "spline"
+                width: 4,
+                shape: "spline",
+                color: "#1f77b4"
             },
             marker: {
-                size: 8
+                size: 9,
+                color: "#1f77b4"
             },
-            hovertemplate: "Date: %{x}<br>VOG1: %{y:.4f}<extra></extra>"
+            hovertemplate: "<b>Date:</b> %{x}<br><b>VOG1:</b> %{y:.4f}<extra></extra>"
         };
 
         const ndviTrace = {
@@ -336,164 +330,81 @@
             mode: "lines+markers",
             name: "NDVI",
             line: {
-                width: 3,
-                shape: "spline"
+                width: 4,
+                shape: "spline",
+                color: "#ff7f0e"
             },
             marker: {
-                size: 8
+                size: 9,
+                color: "#ff7f0e"
             },
-            hovertemplate: "Date: %{x}<br>NDVI: %{y:.4f}<extra></extra>"
+            hovertemplate: "<b>Date:</b> %{x}<br><b>NDVI:</b> %{y:.4f}<extra></extra>"
         };
 
-        <script>
-    const dates = [
-        "2026-01-31",
-        "2026-02-01",
-        "2026-02-07",
-        "2026-02-08",
-        "2026-02-09",
-        "2026-02-10",
-        "2026-02-11",
-        "2026-02-12",
-        "2026-02-13"
-    ];
-
-    const vog1Values = [
-        0.9892,
-        0.9832,
-        0.9719,
-        0.9129,
-        0.9241,
-        0.9495,
-        0.7908,
-        0.7767,
-        0.8244
-    ];
-
-    const ndviValues = [
-        0.5020,
-        0.4709,
-        0.4461,
-        0.4384,
-        0.4229,
-        0.4273,
-        0.4475,
-        0.4480,
-        0.4343
-    ];
-
-    const vog1Trace = {
-        x: dates,
-        y: vog1Values,
-        type: "scatter",
-        mode: "lines+markers",
-        name: "VOG1",
-        line: {
-            width: 4,
-            shape: "spline",
-            color: "#1f77b4"
-        },
-        marker: {
-            size: 9,
-            color: "#1f77b4"
-        },
-        hovertemplate: "<b>Date:</b> %{x}<br><b>VOG1:</b> %{y:.4f}<extra></extra>"
-    };
-
-    const ndviTrace = {
-        x: dates,
-        y: ndviValues,
-        type: "scatter",
-        mode: "lines+markers",
-        name: "NDVI",
-        line: {
-            width: 4,
-            shape: "spline",
-            color: "#ff7f0e"
-        },
-        marker: {
-            size: 9,
-            color: "#ff7f0e"
-        },
-        hovertemplate: "<b>Date:</b> %{x}<br><b>NDVI:</b> %{y:.4f}<extra></extra>"
-    };
-
-    const chartLayout = {
-        title: {
-            text: "Hyperspectral Temporal Index Trends",
+        const chartLayout = {
+            title: {
+                text: "Hyperspectral Temporal Index Trends",
+                font: {
+                    color: "white",
+                    size: 24
+                }
+            },
+            paper_bgcolor: "rgba(0,0,0,0)",
+            plot_bgcolor: "rgba(255,255,255,0.04)",
             font: {
-                color: "white",
-                size: 24
+                color: "rgba(255,255,255,0.9)"
+            },
+            xaxis: {
+                title: "Date",
+                gridcolor: "rgba(255,255,255,0.14)",
+                tickangle: -30
+            },
+            yaxis: {
+                title: "Index Value",
+                gridcolor: "rgba(255,255,255,0.14)",
+                range: [0.35, 1.05]
+            },
+            legend: {
+                orientation: "h",
+                x: 0.5,
+                xanchor: "center",
+                y: 1.12,
+                font: {
+                    color: "white",
+                    size: 16
+                }
+            },
+            margin: {
+                l: 80,
+                r: 40,
+                t: 95,
+                b: 95
+            },
+            hovermode: "closest",
+            hoverlabel: {
+                bgcolor: "rgba(20, 45, 30, 0.96)",
+                bordercolor: "rgba(255,255,255,0.35)",
+                font: {
+                    color: "white",
+                    size: 14
+                }
             }
-        },
-        paper_bgcolor: "rgba(0,0,0,0)",
-        plot_bgcolor: "rgba(255,255,255,0.04)",
-        font: {
-            color: "rgba(255,255,255,0.9)"
-        },
-        xaxis: {
-            title: "Date",
-            gridcolor: "rgba(255,255,255,0.14)",
-            tickangle: -30
-        },
-        yaxis: {
-            title: "Index Value",
-            gridcolor: "rgba(255,255,255,0.14)",
-            range: [0.35, 1.05]
-        },
-        legend: {
-            orientation: "h",
-            x: 0.5,
-            xanchor: "center",
-            y: 1.12,
-            font: {
-                color: "white",
-                size: 16
-            }
-        },
-        margin: {
-            l: 80,
-            r: 40,
-            t: 95,
-            b: 95
-        },
-        hovermode: "closest",
-        hoverlabel: {
-            bgcolor: "rgba(20, 45, 30, 0.96)",
-            bordercolor: "rgba(255,255,255,0.35)",
-            font: {
-                color: "white",
-                size: 14
-            }
-        }
-    };
-
-    const chartConfig = {
-        responsive: true,
-        displayModeBar: false,
-        displaylogo: false
-    };
-
-    Plotly.newPlot(
-        "hsTemporalChart",
-        [vog1Trace, ndviTrace],
-        chartLayout,
-        chartConfig
-    );
-</script>
+        };
 
         const chartConfig = {
             responsive: true,
-            displayModeBar: true,
+            displayModeBar: false,
             displaylogo: false
         };
 
-        Plotly.newPlot(
-            "hsTemporalChart",
-            [vog1Trace, ndviTrace],
-            chartLayout,
-            chartConfig
-        );
+        window.addEventListener("load", function () {
+            Plotly.newPlot(
+                "hsTemporalChart",
+                [vog1Trace, ndviTrace],
+                chartLayout,
+                chartConfig
+            );
+        });
 
         function loadImageFallback(img) {
             const fallbackString = img.getAttribute("data-fallbacks");
