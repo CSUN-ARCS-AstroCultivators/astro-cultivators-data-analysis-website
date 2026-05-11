@@ -69,6 +69,11 @@
     background: #0f0f1a;
 }
 
+.frame-card.hs-dashboard iframe {
+    height: 720px;
+    background: #f7faf7;
+}
+
 .frame-caption {
     padding: 18px 22px;
     text-align: center;
@@ -134,6 +139,10 @@
     .frame-card iframe {
         height: 650px;
     }
+
+    .frame-card.hs-dashboard iframe {
+        height: 760px;
+    }
 }
 </style>
 </head>
@@ -151,12 +160,12 @@
     <div class="container page-wrap">
         <section class="glass page-header">
             <h1>Output and Visualization</h1>
-            <p>This page presents the final RealSense visualization output from the Astro Cultivators project, including image based monitoring, segmentation overlays, feature trends, and stress detection results.</p>
+            <p>This page presents the final visualization outputs from the Astro Cultivators project, including the RealSense stress detection dashboard and the hyperspectral vegetation index tracker.</p>
         </section>
 
         <section class="glass content-card">
             <h2>Final Output Overview</h2>
-            <p>The output system was designed to make the RealSense pipeline easier to understand visually. Instead of only showing raw data or CSV files, the dashboard connects image outputs, extracted features, and stress detection results in one interactive view.</p>
+            <p>The output system was designed to make the project easier to understand visually. Instead of only showing raw data or CSV files, the dashboards connect images, extracted features, spectral trends, and model results in interactive views.</p>
 
             <div class="output-grid">
                 <div class="output-card">
@@ -165,13 +174,13 @@
                 </div>
 
                 <div class="output-card">
-                    <h3>Image Based Monitoring</h3>
-                    <p>Displays the original plant image and segmentation overlay so users can visually compare the control and drought plants.</p>
+                    <h3>Hyperspectral Tracker</h3>
+                    <p>Shows VOG1 and NDVI temporal trends from the Cubert hyperspectral workflow.</p>
                 </div>
 
                 <div class="output-card">
-                    <h3>Feature Trends</h3>
-                    <p>Visualizes how plant features such as VARI and canopy area change across the experiment timeline.</p>
+                    <h3>Visual Monitoring Outputs</h3>
+                    <p>Combines image outputs, feature summaries, trend charts, and model ready information for project presentation and future digital twin use.</p>
                 </div>
             </div>
         </section>
@@ -194,13 +203,35 @@
             </div>
 
             <div class="button-row">
-                <a class="page-button" href="./realtime_dashboard.html" target="_blank">Open Full Dashboard</a>
+                <a class="page-button" href="./realtime_dashboard.html" target="_blank">Open Full RealSense Dashboard</a>
+            </div>
+        </section>
+
+        <section class="glass content-card">
+            <h2>Interactive Hyperspectral Vegetation Index Tracker</h2>
+            <p>This dashboard visualizes Lia’s hyperspectral temporal outputs using VOG1 and NDVI. It summarizes the latest values, index ranges, and daily trends from Set 2 Cubert hyperspectral data.</p>
+
+            <div class="frame-card hs-dashboard">
+                <iframe
+                    src="./lia_hs_dashboard.html"
+                    title="Hyperspectral vegetation index tracker"
+                    loading="lazy">
+                </iframe>
+
+                <div class="frame-caption">
+                    <h3>Hyperspectral Dashboard Output</h3>
+                    <p>The tracker shows how VOG1 and NDVI changed across the selected experiment dates using an interactive dashboard style layout.</p>
+                </div>
+            </div>
+
+            <div class="button-row">
+                <a class="page-button" href="./lia_hs_dashboard.html" target="_blank">Open Full HS Dashboard</a>
             </div>
         </section>
 
         <section class="glass content-card">
             <h2>Generated Outputs</h2>
-            <p>The RealSense workflow produced visual and structured outputs that can be used for project reporting, dashboard display, and future digital twin integration.</p>
+            <p>The workflows produced visual and structured outputs that can be used for reporting, dashboard display, and future digital twin integration.</p>
 
             <div class="tag-row">
                 <span class="tag">RGB Frames</span>
@@ -209,18 +240,20 @@
                 <span class="tag">Daily Aggregates</span>
                 <span class="tag">VARI Trends</span>
                 <span class="tag">Canopy Area Trends</span>
+                <span class="tag">VOG1 Trends</span>
+                <span class="tag">NDVI Trends</span>
                 <span class="tag">Model Confidence</span>
-                <span class="tag">Dashboard View</span>
+                <span class="tag">Dashboard Views</span>
             </div>
 
             <div class="output-box">
-                <p>These outputs help turn raw RealSense images into interpretable visual information for soybean growth monitoring and drought stress detection.</p>
+                <p>These outputs help turn raw RealSense and hyperspectral data into interpretable visual information for soybean growth monitoring and drought stress detection.</p>
             </div>
         </section>
 
         <section class="glass content-card">
             <h2>Why Visualization Matters</h2>
-            <p>Visualization makes the pipeline easier to explain because it connects the raw plant images, segmentation results, extracted features, and model prediction. This helps users see both the final output and the visual evidence behind it.</p>
+            <p>Visualization makes the pipeline easier to explain because it connects raw plant images, segmentation results, extracted features, hyperspectral trends, and model predictions. This helps users see both the final outputs and the visual evidence behind them.</p>
 
             <a class="back-link" href="index.html">← Back to Home</a>
         </section>
