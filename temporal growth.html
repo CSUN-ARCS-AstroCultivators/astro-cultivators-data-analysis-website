@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Astro Cultivators | Temporal Growth Analysis</title>
-    <link rel="icon" type="image/png" href="images/icon3-modified.png">
-    <link rel="stylesheet" href="templatemo-glossy-touch.css">
+    <link rel="icon" type="image/png" href="./images/icon3-modified.png">
+    <link rel="stylesheet" href="./templatemo-glossy-touch.css">
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
 
     <style>
 .page-wrap {
@@ -24,28 +25,107 @@
 }
 
 .page-header h1,
-.content-card h2 {
+.content-card h2,
+.metric-card h3,
+.analysis-card h3,
+.chart-caption h3,
+.image-caption h3 {
     color: white;
 }
 
 .page-header p,
-.content-card p {
+.content-card p,
+.content-card li,
+.metric-card p,
+.analysis-card p,
+.chart-caption p,
+.image-caption p {
     color: rgba(255,255,255,0.84);
     line-height: 1.7;
 }
 
-.placeholder-card {
-    min-height: 280px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.metric-grid,
+.analysis-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px;
+    margin-top: 18px;
+}
+
+.metric-card,
+.analysis-card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 18px;
+    padding: 22px;
+}
+
+.metric-number {
+    color: white;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.chart-card,
+.image-card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 18px;
+    overflow: hidden;
+    margin-top: 18px;
+}
+
+.chart-area {
+    height: 560px;
+    padding: 18px;
+}
+
+.image-card img {
+    width: 100%;
+    display: block;
+    background: rgba(255,255,255,0.05);
+}
+
+.chart-caption,
+.image-caption {
+    padding: 18px 22px;
     text-align: center;
 }
 
-.placeholder-card p {
-    font-size: 1.05rem;
-    max-width: 650px;
+.chart-caption h3,
+.image-caption h3 {
+    margin-bottom: 6px;
+}
+
+.chart-caption p,
+.image-caption p {
     margin: 0 auto;
+    max-width: 950px;
+}
+
+.tag-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.tag {
+    color: white;
+    background: rgba(255,255,255,0.09);
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-size: 0.9rem;
+}
+
+.output-box {
+    background: rgba(255,255,255,0.08);
+    border-left: 4px solid rgba(255,255,255,0.35);
+    border-radius: 14px;
+    padding: 18px;
+    margin-top: 18px;
 }
 
 .back-link {
@@ -61,6 +141,13 @@
 
 .back-link:hover {
     background: rgba(255,255,255,0.18);
+}
+
+@media (max-width: 900px) {
+    .chart-area {
+        height: 460px;
+        padding: 8px;
+    }
 }
 </style>
 </head>
@@ -78,19 +165,270 @@
     <div class="container page-wrap">
         <section class="glass page-header">
             <h1>Temporal Growth Analysis</h1>
-            <p>This page is reserved for Lia's content.</p>
+            <p>This page visualizes hyperspectral vegetation index changes over time to support growth monitoring and early stress pattern analysis.</p>
         </section>
 
-        <section class="glass content-card placeholder-card">
-            <div>
-                <h2>Coming Soon</h2>
-                <p>Temporal growth analysis content will be added here.</p>
+        <section class="glass content-card">
+            <h2>Temporal Analysis Goal</h2>
+            <p>The goal of this analysis is to track how hyperspectral plant features change across dates. Instead of looking at one image at a time, temporal analysis helps show how vegetation indices move through the experiment timeline.</p>
+
+            <div class="analysis-grid">
+                <div class="analysis-card">
+                    <h3>Time Based Tracking</h3>
+                    <p>Vegetation index values are compared across multiple dates to observe plant response over time.</p>
+                </div>
+
+                <div class="analysis-card">
+                    <h3>Hyperspectral Features</h3>
+                    <p>The analysis focuses on VOG1 and NDVI, two indices used to summarize spectral plant response.</p>
+                </div>
+
+                <div class="analysis-card">
+                    <h3>Growth and Stress Patterns</h3>
+                    <p>Tracking values across days helps reveal patterns that may not be obvious from a single image.</p>
+                </div>
             </div>
         </section>
 
         <section class="glass content-card">
+            <h2>Interactive Hyperspectral Trends</h2>
+            <p>This interactive chart shows Lia’s temporal hyperspectral outputs for VOG1 and NDVI across selected experiment dates.</p>
+
+            <div class="chart-card">
+                <div id="hsTemporalChart" class="chart-area"></div>
+
+                <div class="chart-caption">
+                    <h3>VOG1 and NDVI Over Time</h3>
+                    <p>The chart allows users to hover over each date and compare how both hyperspectral indices changed through the timeline.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="glass content-card">
+            <h2>VOG1 Temporal Evolution</h2>
+            <p>This plot shows the raw daily VOG1 mean, variation range, and smoothed mean. It gives a clearer view of how VOG1 changed over the selected dates.</p>
+
+            <div class="image-card">
+                <img
+                    src="./images/vog1_temporal_evolution.png"
+                    alt="Temporal evolution of VOG1"
+                    data-fallbacks="./images/vog1_temporal_evolution.jpg,./images/vog1_temporal_evolution.jpeg,./images/vog1_temporal_evolution.PNG,./images/vog1_temporal_evolution.JPG"
+                    onerror="loadImageFallback(this)"
+                >
+
+                <div class="image-caption">
+                    <h3>Temporal Evolution of VOG1</h3>
+                    <p>The VOG1 plot shows raw daily mean values, standard deviation range, and a smoothed trend line across the experiment dates.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="glass content-card">
+            <h2>Summary Metrics</h2>
+            <p>These summary values give a quick view of how much each index changed over the selected temporal window.</p>
+
+            <div class="metric-grid">
+                <div class="metric-card">
+                    <div class="metric-number">0.9892</div>
+                    <h3>Highest VOG1</h3>
+                    <p>Highest VOG1 value occurred on January 31, 2026.</p>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-number">0.7767</div>
+                    <h3>Lowest VOG1</h3>
+                    <p>Lowest VOG1 value occurred on February 12, 2026.</p>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-number">0.5020</div>
+                    <h3>Highest NDVI</h3>
+                    <p>Highest NDVI value occurred on January 31, 2026.</p>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-number">0.4229</div>
+                    <h3>Lowest NDVI</h3>
+                    <p>Lowest NDVI value occurred on February 9, 2026.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="glass content-card">
+            <h2>Observed Temporal Pattern</h2>
+            <p>Both VOG1 and NDVI start higher at the beginning of the selected window and then generally decrease over time, with small recoveries or fluctuations on some dates. This supports the idea that temporal hyperspectral features can help summarize changes in plant condition across the experiment.</p>
+
+            <div class="tag-row">
+                <span class="tag">VOG1</span>
+                <span class="tag">NDVI</span>
+                <span class="tag">Temporal Trends</span>
+                <span class="tag">Hyperspectral Features</span>
+                <span class="tag">Plant Response</span>
+                <span class="tag">Growth Monitoring</span>
+            </div>
+        </section>
+
+        <section class="glass content-card">
+            <h2>Why Temporal Analysis Matters</h2>
+            <p>A single image can show plant condition at one moment, but temporal analysis shows how the plant changes across days. This makes it easier to observe gradual changes in vegetation index values and connect those changes to growth or stress progression.</p>
+
+            <div class="output-box">
+                <p>This page focuses on hyperspectral temporal trends. RealSense dashboard outputs are shown separately on the Output and Visualization page.</p>
+            </div>
+
             <a class="back-link" href="index.html">← Back to Home</a>
         </section>
     </div>
+
+    <script>
+        const dates = [
+            "2026-01-31",
+            "2026-02-01",
+            "2026-02-07",
+            "2026-02-08",
+            "2026-02-09",
+            "2026-02-10",
+            "2026-02-11",
+            "2026-02-12",
+            "2026-02-13"
+        ];
+
+        const vog1Values = [
+            0.9892,
+            0.9832,
+            0.9719,
+            0.9129,
+            0.9241,
+            0.9495,
+            0.7908,
+            0.7767,
+            0.8244
+        ];
+
+        const ndviValues = [
+            0.5020,
+            0.4709,
+            0.4461,
+            0.4384,
+            0.4229,
+            0.4273,
+            0.4475,
+            0.4480,
+            0.4343
+        ];
+
+        const vog1Trace = {
+            x: dates,
+            y: vog1Values,
+            type: "scatter",
+            mode: "lines+markers",
+            name: "VOG1",
+            line: {
+                width: 3,
+                shape: "spline"
+            },
+            marker: {
+                size: 8
+            },
+            hovertemplate: "Date: %{x}<br>VOG1: %{y:.4f}<extra></extra>"
+        };
+
+        const ndviTrace = {
+            x: dates,
+            y: ndviValues,
+            type: "scatter",
+            mode: "lines+markers",
+            name: "NDVI",
+            line: {
+                width: 3,
+                shape: "spline"
+            },
+            marker: {
+                size: 8
+            },
+            hovertemplate: "Date: %{x}<br>NDVI: %{y:.4f}<extra></extra>"
+        };
+
+        const chartLayout = {
+            title: {
+                text: "Hyperspectral Temporal Index Trends",
+                font: {
+                    color: "white",
+                    size: 20
+                }
+            },
+            paper_bgcolor: "rgba(0,0,0,0)",
+            plot_bgcolor: "rgba(255,255,255,0.04)",
+            font: {
+                color: "rgba(255,255,255,0.86)"
+            },
+            xaxis: {
+                title: "Date",
+                gridcolor: "rgba(255,255,255,0.12)",
+                tickangle: -30
+            },
+            yaxis: {
+                title: "Index Value",
+                gridcolor: "rgba(255,255,255,0.12)",
+                range: [0.35, 1.05]
+            },
+            legend: {
+                orientation: "h",
+                x: 0.5,
+                xanchor: "center",
+                y: 1.12,
+                font: {
+                    color: "white"
+                }
+            },
+            margin: {
+                l: 70,
+                r: 30,
+                t: 90,
+                b: 90
+            },
+            hovermode: "x unified"
+        };
+
+        const chartConfig = {
+            responsive: true,
+            displayModeBar: true,
+            displaylogo: false
+        };
+
+        Plotly.newPlot(
+            "hsTemporalChart",
+            [vog1Trace, ndviTrace],
+            chartLayout,
+            chartConfig
+        );
+
+        function loadImageFallback(img) {
+            const fallbackString = img.getAttribute("data-fallbacks");
+
+            if (!fallbackString) {
+                return;
+            }
+
+            const fallbacks = fallbackString.split(",").map(path => path.trim()).filter(Boolean);
+            const currentIndex = Number(img.getAttribute("data-fallback-index") || "0");
+
+            if (currentIndex < fallbacks.length) {
+                img.setAttribute("data-fallback-index", String(currentIndex + 1));
+                img.src = fallbacks[currentIndex];
+            } else {
+                img.onerror = null;
+                img.style.display = "none";
+
+                const warning = document.createElement("p");
+                warning.textContent = "Image not found. Please upload vog1_temporal_evolution.png to the website images folder.";
+                warning.style.color = "rgba(255,255,255,0.85)";
+                warning.style.textAlign = "center";
+                warning.style.padding = "24px";
+
+                img.parentNode.insertBefore(warning, img.nextSibling);
+            }
+        }
+    </script>
 </body>
 </html>
